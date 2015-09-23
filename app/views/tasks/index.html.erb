@@ -9,6 +9,7 @@
       <th><%= model_class.human_attribute_name(:title) %></th>
       <th><%= model_class.human_attribute_name(:description) %></th>
       <th><%= model_class.human_attribute_name(:status) %></th>
+      <th><%= model_class.human_attribute_name(:list_id) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -20,6 +21,7 @@
         <td><%= task.title %></td>
         <td><%= task.description %></td>
         <td><%= task.status %></td>
+        <td><%= task.list_id %></td>
         <td><%=l task.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
