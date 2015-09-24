@@ -1,12 +1,17 @@
-%p#notice= notice
+- model_class = Plan
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.titleize
 
 %p
-  %b Title:
+  %strong= model_class.human_attribute_name(:title) + ':'
+  %br
   = @plan.title
 %p
-  %b Description:
+  %strong= model_class.human_attribute_name(:description) + ':'
+  %br
   = @plan.description
 
-= link_to 'Edit', edit_plan_path(@plan)
-\|
-= link_to 'Back', plans_path
+
+= link_to t('.back', :default => t("helpers.links.back")), plans_path, :class => 'btn btn-default'
+= link_to t('.edit', :default => t("helpers.links.edit")), edit_plan_path(@plan), :class => 'btn btn-default'
+= link_to t('.destroy', :default => t("helpers.links.destroy")), plan_path(@plan), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
