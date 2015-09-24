@@ -1,0 +1,18 @@
+%p#notice= notice
+%h1 Listing Lists
+%table
+  %thead
+    %tr
+      %th Title
+      %th Plan
+      %th{:colspan => "3"}
+  %tbody
+    - @lists.each do |list|
+      %tr
+        %td= list.title
+        %td= list.plan_id
+        %td= link_to 'Show', list
+        %td= link_to 'Edit', edit_list_path(list)
+        %td= link_to 'Destroy', list, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New List', new_list_path
