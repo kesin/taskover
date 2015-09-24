@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :plans
   resources :lists
   resources :tasks
   # The priority is based upon order of creation: first created -> highest priority.
