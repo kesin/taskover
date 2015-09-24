@@ -30,5 +30,5 @@
       = f.text_field :list_id, :class => 'form-control'
     = error_span(@task[:list_id])
   = f.submit nil, :class => 'btn btn-primary'
-  = link_to t('.cancel', :default => t("helpers.links.cancel")), |
-    tasks_path, :class => 'btn btn-default'                      |
+  = link_to t('.cancel', :default => t("helpers.links.cancel")),
+    tasks_path, :class => 'btn btn-default'
