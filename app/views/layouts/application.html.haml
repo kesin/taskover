@@ -30,16 +30,21 @@
   %body
     .navbar.navbar-default.navbar-static-top
       .container
-        %button.navbar-toggle{"data-target" => ".navbar-responsive-collapse", "data-toggle" => "collapse", :type => "button"}
-          %span.icon-bar
-          %span.icon-bar
-          %span.icon-bar
-        %a.navbar-brand{:href => "#"} OhMyTask
-        .navbar-collapse.collapse.navbar-responsive-collapse
-          %ul.nav.navbar-nav
-            %li= link_to "Link1", "/path1"
-            %li= link_to "Link2", "/path2"
-            %li= link_to "Link3", "/path3"
+        .navbar-header
+          %button.navbar-toggle.collapsed{"aria-controls" => "navbar", "aria-expanded" => "false", "data-target" => "#navbar", "data-toggle" => "collapse", :type => "button"}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand{:href => "/"} OhMyTask
+        #navbar.navbar-collapse.collapse{"aria-expanded" => "false", :style => "height: 1px;"}
+          %form.navbar-form.navbar-right
+            .form-group
+              %input.form-control{:placeholder => "Email", :type => "text"}
+            .form-group
+              %input.form-control{:placeholder => "Password", :type => "password"}
+            %button.btn.btn-success{:type => "submit"} 登录
+            %button.btn.btn-default{:type => "submit"} 注册
     .container
       = bootstrap_flash
       = yield
