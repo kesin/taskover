@@ -1,17 +1,28 @@
 .navbar.navbar-default.navbar-static-top
   .container
-    .navbar-header
-      %button.navbar-toggle.collapsed{"aria-controls" => "navbar", "aria-expanded" => "false", "data-target" => "#navbar", "data-toggle" => "collapse", :type => "button"}
-        %span.sr-only Toggle navigation
-        %span.icon-bar
-        %span.icon-bar
-        %span.icon-bar
-      %a.navbar-brand{:href => "/"} Taskile
-    #navbar.navbar-collapse.collapse{"aria-expanded" => "false", :style => "height: 1px;"}
-      %form.navbar-form.navbar-right
-        .form-group
-          %input.form-control{:placeholder => "Email", :type => "text"}
-        .form-group
-          %input.form-control{:placeholder => "Password", :type => "password"}
-        %button.btn.btn-success{:type => "submit"} 登录
-        %button.btn.btn-default{:type => "submit"} 注册
+    .row
+      .navbar-header.col-md-2
+        %button.navbar-toggle.collapsed{"aria-controls" => "navbar", "aria-expanded" => "false", "data-target" => "#sign-form", "data-toggle" => "collapse", :type => "button"}
+          %span.sr-only Toggle navigation
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+        %a.navbar-brand{:href => "/"} Taskile
+      #color_tag_field.col-md-5.navbar-collapse.collapse{"aria-expanded" => "false", :style => "height: 1px;"}
+        .navbar-form.navbar-left.color_tag_filed
+          %i.fa.fa-circle.color_tag_gray
+          %i.fa.fa-circle.color_tag_blue
+          %i.fa.fa-circle.color_tag_green
+          %i.fa.fa-circle.color_tag_red
+          %i.fa.fa-circle.color_tag_yellow
+          %i.fa.fa-circle.color_tag_qing
+      #sign-form.col-md-5.navbar-right.navbar-collapse.collapse{"aria-expanded" => "false", :style => "height: 1px;"}
+        %ul.nav.navbar-nav
+          %li
+            %a{:href => "#"} 客户端
+          %li
+            %a{:href => "#"} 反馈
+          %li
+            %a{:href => "#"} 登录
+          %li
+            %a{:href => "#"} 注册

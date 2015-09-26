@@ -31,3 +31,40 @@
     color: #bbbbbb;
   }
 }
+
+#color_tag_field{
+  padding-top: 8px;
+  .color_tag_filed{
+    $ColorTagMarginLeft: 15px;
+    font-size: 20px;
+    &>.color_tag_gray{
+      color: #777;
+      margin-left: $ColorTagMarginLeft;
+    }
+    &>.color_tag_blue{
+      color: #428bca;
+      margin-left: $ColorTagMarginLeft;
+    }
+    &>.color_tag_green{
+      color: #5cb85c;
+      margin-left: $ColorTagMarginLeft;
+    }
+    &>.color_tag_red{
+      color: #d9534f;
+      margin-left: $ColorTagMarginLeft;
+    }
+    &>.color_tag_yellow{
+      color: #f0ad4e;
+      margin-left: $ColorTagMarginLeft;
+    }
+    &>.color_tag_qing{
+      color: #5bc0de;
+      margin-left: $ColorTagMarginLeft;
+    }
+  }
+}
+
+#sign-form{
+  padding-left: 15px;
+  padding-right: 15px;
+}
