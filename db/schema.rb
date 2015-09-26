@@ -14,27 +14,27 @@
 ActiveRecord::Schema.define(version: 20150925104424) do
 
   create_table "lists", force: :cascade do |t|
-    t.text     "title"
-    t.integer  "plan_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text     "title",      limit: 65535
+    t.integer  "plan_id",    limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "plans", force: :cascade do |t|
-    t.text     "title"
-    t.text     "description"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.integer  "color_tag",   default: 1
+    t.text     "title",       limit: 65535
+    t.text     "description", limit: 65535
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "color_tag",   limit: 4,     default: 1
   end
 
   create_table "tasks", force: :cascade do |t|
-    t.text     "title"
-    t.text     "description"
-    t.integer  "status",      default: 1
-    t.integer  "list_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.text     "title",       limit: 65535
+    t.text     "description", limit: 65535
+    t.integer  "status",      limit: 4,     default: 1
+    t.integer  "list_id",     limit: 4
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
   end
 
 end
