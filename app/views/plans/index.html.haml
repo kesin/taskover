@@ -1,4 +1,4 @@
-.row
+.row#index-tasks
   - @plans.each do |p|
     .col-md-3
       = link_to p do
@@ -11,4 +11,4 @@
   .col-md-3
     = link_to new_plan_path, title: '添加一个计划' do
       .bs-callout.bs-callout-add#callout-helper-pull-navbar
-        %i.glyphicon.glyphicon-plus.bs-callout-add-icon
+        %i.fa.fa-plus.bs-callout-add-icon

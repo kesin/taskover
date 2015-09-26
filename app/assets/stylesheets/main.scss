@@ -10,7 +10,6 @@ footer{
 /* Side notes for calling out things */
 
 .bs-callout {
-  height: 100px;
   padding: 20px;
   margin: 20px 0;
   border: 1px solid #eee;
@@ -22,6 +21,7 @@ footer{
   margin-bottom: 5px;
 }
 .bs-callout p:last-child {
+  padding-top: 5px;
   margin-bottom: 0;
   word-wrap: break-word;
 }
