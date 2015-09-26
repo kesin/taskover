@@ -42,7 +42,7 @@ class PlansController < ApplicationController
   def update
     respond_to do |format|
       if @plan.update(plan_params)
-        format.html { redirect_to @plan, notice: 'Plan was successfully updated.' }
+        format.html { redirect_to root_url, notice: 'Plan was successfully updated.' }
         format.json { render :show, status: :ok, location: @plan }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class PlansController < ApplicationController
   def destroy
     @plan.destroy
     respond_to do |format|
-      format.html { redirect_to plans_url, notice: 'Plan was successfully destroyed.' }
+      format.html { redirect_to root_url, notice: 'Plan was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
