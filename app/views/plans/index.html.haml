@@ -2,7 +2,7 @@
   - @plans.each do |p|
     .col-md-3
       = link_to p do
-        .bs-callout.bs-callout-warning#callout-helper-pull-navbar
+        .bs-callout#callout-helper-pull-navbar{class: "#{}"}
           %h4
             = p.title
           %p
