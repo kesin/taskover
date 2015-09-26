@@ -4,9 +4,16 @@
 
 // index styles
 
-#index-tasks{
+#task-list{
+  a:hover{
+    color: #666;
+    text-decoration: none;
+  }
   .bs-callout{
     height: 100px;
+    &:hover{
+      background-color: #f9f9f9;
+    }
   }
 
   .bs-callout-add {
