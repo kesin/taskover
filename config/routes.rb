@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   root 'plans#index'
-  resources :plans
+  resources :plans, except: [:index]
   resources :lists
   resources :tasks
   # The priority is based upon order of creation: first created -> highest priority.
