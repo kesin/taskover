@@ -1,46 +1,14 @@
 .row
-  .col-md-3
-    .bs-callout.bs-callout-warning#callout-helper-pull-navbar
-      %h4
-        Title
-      %p
-        这是介绍这时介绍这是介绍这时介绍这是介绍这时介绍这是介
+  - @plans.each do |p|
+    .col-md-3
+      = link_to p do
+        .bs-callout.bs-callout-warning#callout-helper-pull-navbar
+          %h4
+            = p.title
+          %p
+            = p.description
 
   .col-md-3
-    .bs-callout.bs-callout-default#callout-helper-pull-navbar
-      %h4
-        Title
-      %p
-        这是介绍这时介绍这是
-  .col-md-3
-    .bs-callout.bs-callout-success#callout-helper-pull-navbar
-      %h4
-        Title
-      %p
-        这是介绍这时介绍这是介绍这时介绍这是介绍这时介绍这是介
-  .col-md-3
-    .bs-callout.bs-callout-warning#callout-helper-pull-navbar
-      %h4
-        Title
-      %p
-        这是介绍这时介绍这是介绍这时介绍这是介绍这时介绍这是介
-  .col-md-3
-    .bs-callout.bs-callout-danger#callout-helper-pull-navbar
-      %h4
-        Title
-      %p
-        这是介绍这时介绍这是介绍这时
-
--#%table.table.table-striped
--#  %tbody
--#    - @plans.each do |plan|
--#      %tr
--#        %td= link_to plan.id, plan_path(plan)
--#        %td= plan.title
--#        %td= plan.description
--#        %td=l plan.created_at
--#        %td
--#          = link_to t('.edit', :default => t("helpers.links.edit")), edit_plan_path(plan), :class => 'btn btn-default btn-xs'
--#          = link_to t('.destroy', :default => t("helpers.links.destroy")), plan_path(plan), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'
--#
--#= link_to t('.new', :default => t("helpers.links.new")), new_plan_path, :class => 'btn btn-primary'
+    = link_to new_plan_path, title: '添加一个计划' do
+      .bs-callout.bs-callout-add#callout-helper-pull-navbar
+        %i.glyphicon.glyphicon-plus.bs-callout-add-icon
