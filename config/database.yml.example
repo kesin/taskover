@@ -9,7 +9,7 @@ default: &default
   encoding: utf8
   reconnect: false
   pool: 5
-  database: taskil
+  database: taskile
   username: root
   password: ""
   timeout: 5000
@@ -23,8 +23,8 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: taskile
+  database: taskile_test
 
 production:
   <<: *default
-  database: taskil_production
+  database: taskile_production
