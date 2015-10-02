@@ -1,4 +1,4 @@
 ### Taskile
 
-Personal Task Trace, manage your own tasks.
+Personal Task Trace, manage your tasks.
 
