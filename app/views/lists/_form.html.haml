@@ -1,19 +1,19 @@
-= form_for(@list) do |f|
+= form_for @list, :html => { :class => "form-horizontal list" } do |f|
   - if @list.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@list.errors.count, "error")
-        prohibited this list from being saved:
-      %ul
-        - @list.errors.full_messages.each do |message|
-          %li= message
-  .field
-    = f.label :title
-    %br/
-    = f.text_area :title
-  .field
-    = f.label :plan_id
-    %br/
-    = f.text_field :plan_id
-  .actions
-    = f.submit
+    #error_expl.panel.panel-danger
+      .panel-heading
+        %h3.panel-title
+          = pluralize(@list.errors.count, "error")
+          prohibited this task from being saved:
+      .panel-body
+        %ul
+          - @list.errors.full_messages.each do |msg|
+            %li= msg
+  .control-group
+    = f.label :title, :class => 'control-label'
+    .controls
+      = f.text_field :title, :class => 'form-control'
+    = error_span(@list[:title])
+  = f.submit nil, :class => 'btn btn-primary'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")),
+    lists_path, :class => 'btn btn-default'
