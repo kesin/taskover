@@ -1,3 +1,9 @@
+// Turbolinks 进度条
+html.turbolinks-progress-bar::before {
+  background-color: red !important;
+  height: 2px !important;
+}
+
 // 保证footer处于底部
 footer{
   width: 100%;
