@@ -77,3 +77,49 @@ footer{
 #navbar-area{
   margin-bottom: 15px;
 }
+
+// panel used in plans#show
+
+$panel-lists: panel-gray, panel-green, panel-blue, panel-red, panel-yellow, panel-qing;
+@each $panel in $panel-lists {
+  $Color: #777;
+  $Font: #f5f5f5;
+  @if $panel == panel-gray {
+    $Color: #777;
+    $Font: #f5f5f5;
+  } @else if $panel == panel-green {
+    $Color: #5cb85c;
+    $Font: #f5f5f5;
+  } @else if $panel == panel-blue {
+    $Color: #428bca;
+    $Font: #f5f5f5;
+  } @else if $panel == panel-red {
+    $Color: #d9534f;
+    $Font: #f5f5f5;
+  } @else if $panel == panel-yellow {
+    $Color: #f0ad4e;
+    $Font: #f5f5f5;
+  } @else if $panel == panel-qing {
+    $Color: #5bc0de;
+    $Font: #f5f5f5;
+  }
+  .#{$panel} {
+    border-color: $Color;
+  }
+  .#{$panel} > .panel-heading {
+    color: $Font;
+    font-weight: bold;
+    background-color: $Color;
+    border-color: $Color;
+  }
+  .#{$panel} > .panel-heading + .panel-collapse > .panel-body {
+    border-top-color: $Color;
+  }
+  .#{$panel} > .panel-heading .badge {
+    color: $Color;
+    background-color: $Font;
+  }
+  .#{$panel} > .panel-footer + .panel-collapse > .panel-body {
+    border-bottom-color: $Color;
+  }
+}
