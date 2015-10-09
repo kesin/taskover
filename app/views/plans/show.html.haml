@@ -7,6 +7,33 @@
         = @plan.description
 .page-content#plan-page-content
   .row
-    .col-md-3
-      .bs-callout.bs-callout-gray
+    - 4.times do |i|
+      .col-md-3
+        .panel{class:"panel-#{['gray','green','red','qing'][i]}"}
+          .panel-heading
+            = ['未分组','Turbolinks 学习计划','Rails 进阶','时间管理的项目'][i]
+          .panel-body
+            %br
+            %br
+            %br
+            %br
+            %br
+            %br
+            %br
+            %br
+            %br
+            %br
+            %br
+            %br
+            %br
+            %br
+            %br
+            %br
+            %br
+            %br
+            %br
+            %br
+            %br
+            %br
+            %br
 
