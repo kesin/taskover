@@ -7,33 +7,16 @@
         = @plan.description
 .page-content#plan-page-content
   .row
-    - 4.times do |i|
-      .col-md-3
-        .panel{class:"panel-#{['gray','green','red','qing'][i]}"}
-          .panel-heading
-            = ['未分组','Turbolinks 学习计划','Rails 进阶','时间管理的项目'][i]
-          .panel-body
-            %br
-            %br
-            %br
-            %br
-            %br
-            %br
-            %br
-            %br
-            %br
-            %br
-            %br
-            %br
-            %br
-            %br
-            %br
-            %br
-            %br
-            %br
-            %br
-            %br
-            %br
-            %br
-            %br
-
+    .col-md-3
+      .panel.panel-gray
+        .panel-heading
+          未分组
+        .panel-body
+          - 15.times do |i|
+            %p
+              任务#{i}
+    .col-md-3
+      = link_to new_plan_path, title: '添加一个计划' do
+        .plan-list-add
+          %i.fa.fa-plus
+          添加一个列表
