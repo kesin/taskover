@@ -29,69 +29,38 @@ html.turbolinks-progress-bar::before {
   margin-top: -5px;
 }
 
-$callout-lists: -gray, -green, -blue, -red, -yellow, -qing;
-@each $callout in $callout-lists {
-  $Color: #777;
-  @if $callout == -gray {
-    $Color: #777;
-  } @else if $callout == -green {
-    $Color: #5cb85c;
-  } @else if $callout == -blue {
-    $Color: #428bca;
-  } @else if $callout == -red {
-    $Color: #d9534f;
-  } @else if $callout == -yellow {
-    $Color: #f0ad4e;
-  } @else if $callout == -qing {
-    $Color: #5bc0de;
-  }
-  .bs-callout#{$callout} {
+$callout-lists: (-gray: #777, -green: #5cb85c, -blue: #428bca, -red: #d9534f, -yellow: #f0ad4e, -qing: #f0ad4e );
+@each $color-key, $Color in $callout-lists {
+  // bs-callout field
+  .bs-callout#{$color-key} {
     border-left-color: $Color;
   }
-  .bs-callout#{$callout} h4 {
+  .bs-callout#{$color-key} h4 {
     color: $Color;
   }
-}
 
-// panel used in plans#show
-
-$panel-lists: panel-gray, panel-green, panel-blue, panel-red, panel-yellow, panel-qing;
-@each $panel in $panel-lists {
-  $Color: #777;
+  // panel field, used in plans#show
   $Font: #333;
   $NormalBorderColor: #eee;
-  @if $panel == panel-gray {
-    $Color: #777;
-  } @else if $panel == panel-green {
-    $Color: #5cb85c;
-  } @else if $panel == panel-blue {
-    $Color: #428bca;
-  } @else if $panel == panel-red {
-    $Color: #d9534f;
-  } @else if $panel == panel-yellow {
-    $Color: #f0ad4e;
-  } @else if $panel == panel-qing {
-    $Color: #5bc0de;
-  }
-  .#{$panel} {
+  .panel#{$color-key} {
     border-color: $NormalBorderColor;
     border-top-color: $Color;
     border-top-width: 5px;
   }
-  .#{$panel} > .panel-heading {
+  .panel#{$color-key} > .panel-heading {
     color: $Font;
     font-weight: bold;
     background-color: #f8f8f8;
     border-color: #f8f8f8;
   }
-  .#{$panel} > .panel-heading .badge {
+  .panel#{$color-key} > .panel-heading .badge {
     color: $Font;
     background-color: $Color;
   }
-  .#{$panel} > .panel-body {
+  .panel#{$color-key} > .panel-body {
     border-top-color: $NormalBorderColor;
   }
-  .#{$panel} > .panel-footer {
+  .panel#{$color-key} > .panel-footer {
     border-bottom-color: $NormalBorderColor;
   }
 }
