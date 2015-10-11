@@ -4,15 +4,6 @@ html.turbolinks-progress-bar::before {
   height: 3px !important;
 }
 
-// 保证footer处于底部
-footer{
-  width: 100%;
-  height: auto;
-  position: fixed;
-  bottom: 0px;
-  left: 0px;
-}
-
 /* Side notes for calling out things */
 
 .bs-callout {
@@ -37,45 +28,29 @@ footer{
 .bs-callout+.bs-callout {
   margin-top: -5px;
 }
-.bs-callout-gray {
-  border-left-color: #777;
-}
-.bs-callout-gray h4 {
-  color: #777;
-}
-.bs-callout-blue {
-  border-left-color: #428bca;
-}
-.bs-callout-blue h4 {
-  color: #428bca;
-}
-.bs-callout-green {
-  border-left-color: #5cb85c;
-}
-.bs-callout-green h4 {
-  color: #5cb85c;
-}
-.bs-callout-red {
-  border-left-color: #d9534f;
-}
-.bs-callout-red h4 {
-  color: #d9534f;
-}
-.bs-callout-yellow {
-  border-left-color: #f0ad4e;
-}
-.bs-callout-yellow h4 {
-  color: #f0ad4e;
-}
-.bs-callout-qing {
-  border-left-color: #5bc0de;
-}
-.bs-callout-qing h4 {
-  color: #5bc0de;
-}
 
-#navbar-area{
-  margin-bottom: 15px;
+$callout-lists: -gray, -green, -blue, -red, -yellow, -qing;
+@each $callout in $callout-lists {
+  $Color: #777;
+  @if $callout == -gray {
+    $Color: #777;
+  } @else if $callout == -green {
+    $Color: #5cb85c;
+  } @else if $callout == -blue {
+    $Color: #428bca;
+  } @else if $callout == -red {
+    $Color: #d9534f;
+  } @else if $callout == -yellow {
+    $Color: #f0ad4e;
+  } @else if $callout == -qing {
+    $Color: #5bc0de;
+  }
+  .bs-callout#{$callout} {
+    border-left-color: $Color;
+  }
+  .bs-callout#{$callout} h4 {
+    color: $Color;
+  }
 }
 
 // panel used in plans#show
@@ -119,4 +94,10 @@ $panel-lists: panel-gray, panel-green, panel-blue, panel-red, panel-yellow, pane
   .#{$panel} > .panel-footer {
     border-bottom-color: $NormalBorderColor;
   }
+}
+
+// Site Header
+
+#navbar-area{
+  margin-bottom: 15px;
 }
