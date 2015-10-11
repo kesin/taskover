@@ -4,6 +4,13 @@ html.turbolinks-progress-bar::before {
   height: 3px !important;
 }
 
+// Site Header
+
+#navbar-area{
+  margin-bottom: 15px;
+}
+
+
 /* Side notes for calling out things */
 
 .bs-callout {
@@ -38,35 +45,4 @@ $callout-lists: (-gray: #777, -green: #5cb85c, -blue: #428bca, -red: #d9534f, -y
   .bs-callout#{$color-key} h4 {
     color: $Color;
   }
-
-  // panel field, used in plans#show
-  $Font: #333;
-  $NormalBorderColor: #eee;
-  .panel#{$color-key} {
-    border-color: $NormalBorderColor;
-    border-top-color: $Color;
-    border-top-width: 5px;
-  }
-  .panel#{$color-key} > .panel-heading {
-    color: $Font;
-    font-weight: bold;
-    background-color: #f8f8f8;
-    border-color: #f8f8f8;
-  }
-  .panel#{$color-key} > .panel-heading .badge {
-    color: $Font;
-    background-color: $Color;
-  }
-  .panel#{$color-key} > .panel-body {
-    border-top-color: $NormalBorderColor;
-  }
-  .panel#{$color-key} > .panel-footer {
-    border-bottom-color: $NormalBorderColor;
-  }
-}
-
-// Site Header
-
-#navbar-area{
-  margin-bottom: 15px;
 }
