@@ -37,29 +37,26 @@
   .color_tag_filed{
     $ColorTagMarginLeft: 15px;
     font-size: 20px;
-    &>.color_tag_gray{
-      color: #777;
-      margin-left: $ColorTagMarginLeft;
-    }
-    &>.color_tag_blue{
-      color: #428bca;
-      margin-left: $ColorTagMarginLeft;
-    }
-    &>.color_tag_green{
-      color: #5cb85c;
-      margin-left: $ColorTagMarginLeft;
-    }
-    &>.color_tag_red{
-      color: #d9534f;
-      margin-left: $ColorTagMarginLeft;
-    }
-    &>.color_tag_yellow{
-      color: #f0ad4e;
-      margin-left: $ColorTagMarginLeft;
-    }
-    &>.color_tag_qing{
-      color: #5bc0de;
-      margin-left: $ColorTagMarginLeft;
+    $color-tag-lists: -gray, -green, -blue, -red, -yellow, -qing;
+    @each $color-tag in $color-tag-lists {
+      $Color: #777;
+      @if $color-tag == -gray {
+        $Color: #777;
+      } @else if $color-tag == -green {
+        $Color: #5cb85c;
+      } @else if $color-tag == -blue {
+        $Color: #428bca;
+      } @else if $color-tag == -red {
+        $Color: #d9534f;
+      } @else if $color-tag == -yellow {
+        $Color: #f0ad4e;
+      } @else if $color-tag == -qing {
+        $Color: #5bc0de;
+      }
+      &>.color-tag#{$color-tag}{
+        color: $Color;
+        margin-left: $ColorTagMarginLeft;
+      }
     }
     &>.reset-icon{
       color: #a9a3a5;
