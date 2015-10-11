@@ -5,9 +5,32 @@ html.turbolinks-progress-bar::before {
 }
 
 // Site Header
-
 #navbar-area{
   margin-bottom: 15px;
+  #color_tag_field{
+    padding-top: 8px;
+    .color_tag_filed{
+      $ColorTagMarginLeft: 15px;
+      font-size: 20px;
+      $color-tag-lists: (-gray: #777, -green: #5cb85c, -blue: #428bca, -red: #d9534f, -yellow: #f0ad4e, -qing: #5bc0de );
+      @each $color-key, $Color in $color-tag-lists {
+        &>.color-tag#{$color-key}{
+          color: $Color;
+          margin-left: $ColorTagMarginLeft;
+        }
+      }
+      &>.reset-icon{
+        color: #a9a3a5;
+        margin-left: $ColorTagMarginLeft;
+      }
+    }
+  }
+
+  #sign-form{
+    float:right;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 }
 
 
@@ -36,7 +59,7 @@ html.turbolinks-progress-bar::before {
   margin-top: -5px;
 }
 
-$callout-lists: (-gray: #777, -green: #5cb85c, -blue: #428bca, -red: #d9534f, -yellow: #f0ad4e, -qing: #f0ad4e );
+$callout-lists: (-gray: #777, -green: #5cb85c, -blue: #428bca, -red: #d9534f, -yellow: #f0ad4e, -qing: #5bc0de );
 @each $color-key, $Color in $callout-lists {
   // bs-callout field
   .bs-callout#{$color-key} {
