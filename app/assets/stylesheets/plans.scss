@@ -48,31 +48,31 @@
 
 #plan-page-content{
   // panel block
+  $Font: #333;
+  $NormalBorderColor: #eee;
   $panel-lists: (panel-gray: #777, panel-green: #5cb85c, panel-blue: #428bca, panel-red: #d9534f, panel-yellow: #f0ad4e, panel-qing: #5bc0de );
   @each $color-key, $Color in $panel-lists {
-    $Font: #333;
-    $NormalBorderColor: #eee;
     .#{$color-key} {
       border-color: $NormalBorderColor;
       border-top-color: $Color;
       border-top-width: 5px;
     }
-    .#{$color-key} > .panel-heading {
-      color: $Font;
-      font-weight: bold;
-      background-color: #f8f8f8;
-      border-color: #f8f8f8;
-    }
-    .#{$color-key} > .panel-heading .badge {
-      color: $Font;
-      background-color: $Color;
-    }
-    .#{$color-key} > .panel-body {
-      border-top-color: $NormalBorderColor;
-    }
-    .#{$color-key} > .panel-footer {
-      border-bottom-color: $NormalBorderColor;
-    }
+  }
+  .panel-heading {
+    color: $Font;
+    font-weight: bold;
+    background-color: #f8f8f8;
+    border-color: #f8f8f8;
+  }
+  .panel-heading .badge {
+    color: #999;
+    background-color: #ddd;
+  }
+  .panel-body {
+    border-top-color: $NormalBorderColor;
+  }
+  .panel-footer {
+    border-bottom-color: $NormalBorderColor;
   }
 
   a:hover{
