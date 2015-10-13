@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
 
   root 'plans#index'
-  resources :plans, except: [:index] do
+  resources :plans, only: [:new, :show, :create, :update] do
     member do
       post :new_list
       post :new_task
     end
   end
-  resources :lists do
+  resources :lists, only: [:update] do
     member do
       post :new_task
     end
