@@ -1,17 +1,16 @@
 Rails.application.routes.draw do
 
   root 'plans#index'
-  resources :plans, only: [:new, :show, :create, :update] do
-    member do
-      post :new_list
-      post :new_task
+
+  resources :plans, only: [:new, :show, :create, :update, :destroy] do
+    resources :lists, only: [:create] do
+      resources :tasks, only: [:create]
     end
+    resources :tasks, only: [:create]
   end
-  resources :lists, only: [:update] do
-    member do
-      post :new_task
-    end
-  end
+
+  resources :lists, only: [:update, :destroy]
+  resources :tasks, only: [:update, :destroy]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
