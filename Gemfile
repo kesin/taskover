@@ -24,8 +24,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use turbolinks
-gem 'turbolinks', github: 'rails/turbolinks'
-gem 'jquery-turbolinks'
+# gem 'turbolinks', github: 'rails/turbolinks'
+# gem 'jquery-turbolinks'
 
 # Use BootStrap
 gem 'therubyracer'
