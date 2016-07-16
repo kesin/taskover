@@ -21,8 +21,7 @@ gem 'jquery-rails'
 gem 'jbuilder'
 
 # Use turbolinks
-# gem 'turbolinks', github: 'rails/turbolinks'
-# gem 'jquery-turbolinks'
+gem 'turbolinks', '~> 5.0.0'
 
 # Use BootStrap
 gem 'therubyracer'
