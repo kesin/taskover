@@ -101,5 +101,11 @@
     white-space:normal;
     vertical-align:top;
   }
+  .closed_task{
+    text-decoration: line-through;
+  }
+  .task_operation{
+    float: right;
+  }
 
 }

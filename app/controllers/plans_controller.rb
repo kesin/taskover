@@ -10,6 +10,7 @@ class PlansController < ApplicationController
   # GET /plans/1
   # GET /plans/1.json
   def show
+    # TODO sort task by status
     @lists = @plan.lists.includes(:tasks)
   end
 

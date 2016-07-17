@@ -16,4 +16,12 @@ class Task < ActiveRecord::Base
   belongs_to :plan
   belongs_to :list
 
+  def closed?
+    self.status == 0
+  end
+
+  def opened?
+    self.status == 1
+  end
+
 end

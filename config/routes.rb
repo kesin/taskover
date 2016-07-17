@@ -4,7 +4,11 @@ Rails.application.routes.draw do
 
   resources :plans, only: [:new, :show, :create, :update, :destroy] do
     resources :lists, only: [:new, :create] do
-      resources :tasks, only: [:new, :create]
+      resources :tasks, only: [:new, :create, :update] do
+        member do
+          put 'update_status'
+        end
+      end
     end
     resources :tasks, only: [:create]
   end

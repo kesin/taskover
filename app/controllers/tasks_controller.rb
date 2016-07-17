@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update, :update_status, :destroy]
 
   # GET /tasks
   # GET /tasks.json
@@ -41,6 +41,19 @@ class TasksController < ApplicationController
     end
   end
 
+  def update_status
+    return redirect_to :back, notice: 'Update status failed.' if ![0, 1].include?(params[:status].to_i)
+    respond_to do |format|
+      if @task.update_column(:status, params[:status].to_i)
+        format.html { redirect_to :back, notice: 'Task was successfully updated.' }
+        format.json { render :show, status: :ok, location: @task }
+      else
+        format.html { render :edit }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
@@ -73,6 +86,6 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:title, :description)
+      params.require(:task).permit(:title, :description, :status)
     end
 end
