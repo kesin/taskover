@@ -89,4 +89,15 @@
       text-decoration: none;
     }
   }
+  &> .row {
+    overflow-x:scroll;
+    overflow-y:hidden;
+    white-space:nowrap;
+  }
+  &> .row [class*="col-lg"], &> .row [class*="col-md"], &> .row [class*="col-sm"] {
+    float:none;
+    display:inline-block;
+    white-space:normal;
+    vertical-align:top;
+  }
 }
