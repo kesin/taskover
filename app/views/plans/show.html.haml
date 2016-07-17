@@ -17,7 +17,7 @@
               %p
                 %span{class: "#{task.closed? ? 'closed_task':''}"}
                   = task.title
-                = link_to "#{task.closed? ? '开启':'关闭'}", update_status_plan_list_task_path(@plan, list, task, status: (task.closed? ? 1 : 0)), method: :put, class: 'task_operation'
+                = link_to "#{task.closed? ? '开启':'关闭'}",  action_plan_list_task_path(@plan, list, task, type: (task.closed? ? 'open' : 'close')), method: :put, class: 'task_operation'
             %p
               = link_to '添加任务...', new_plan_list_task_path(@plan, list)
     .col-md-3

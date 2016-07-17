@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :lists, only: [:new, :create] do
       resources :tasks, only: [:new, :create, :update] do
         member do
-          put 'update_status'
+          put 'action'
         end
       end
     end

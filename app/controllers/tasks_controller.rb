@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :update_status, :destroy]
+  before_action :set_task, only: [:show, :edit, :update, :action, :destroy]
 
   # GET /tasks
   # GET /tasks.json
@@ -41,16 +41,18 @@ class TasksController < ApplicationController
     end
   end
 
-  def update_status
-    return redirect_to :back, notice: 'Update status failed.' if ![0, 1].include?(params[:status].to_i)
-    respond_to do |format|
-      if @task.update_column(:status, params[:status].to_i)
-        format.html { redirect_to :back, notice: 'Task was successfully updated.' }
-        format.json { render :show, status: :ok, location: @task }
+  def action
+    case params[:type]
+      when 'close'
+        @task.close!
+      when 'open'
+        @task.open!
       else
-        format.html { render :edit }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
+        return redirect_to :back, notice: 'Update status failed.'
+    end
+    respond_to do |format|
+      format.html { redirect_to :back, notice: 'Task was successfully updated.' }
+      format.json { render :show, status: :ok, location: @task }
     end
   end
 
