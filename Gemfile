@@ -11,8 +11,6 @@ gem 'sass-rails'
 gem 'uglifier'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails'
-# See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -23,10 +21,8 @@ gem 'jbuilder'
 # Use turbolinks
 gem 'turbolinks', '~> 5.0.0'
 
-# Use BootStrap
+# Use therubyracer
 gem 'therubyracer'
-gem 'less-rails'
-gem 'twitter-bootstrap-rails'
 
 gem 'haml'
 gem 'haml-rails'
