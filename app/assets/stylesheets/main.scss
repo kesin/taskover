@@ -21,7 +21,7 @@
   }
 
   #sign-form{
-    float:right;
+    float: right;
     padding-left: 15px;
     padding-right: 15px;
   }
@@ -63,3 +63,12 @@ $callout-lists: (-gray: #777, -green: #5cb85c, -blue: #428bca, -red: #d9534f, -y
     color: $Color;
   }
 }
+
+// flash area
+#taskile_alert{
+  cursor: pointer;
+  .flash-remove{
+    float: right;
+  }
+}
+
