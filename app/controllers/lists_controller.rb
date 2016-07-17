@@ -14,7 +14,8 @@ class ListsController < ApplicationController
 
   # GET /lists/new
   def new
-    @list = List.new
+    @plan = Plan.find_by_id(params[:plan_id])
+    @list = @plan.lists.build
   end
 
   # GET /lists/1/edit
@@ -24,11 +25,12 @@ class ListsController < ApplicationController
   # POST /lists
   # POST /lists.json
   def create
-    @list = List.new(list_params)
+    @plan = Plan.find_by_id(params[:plan_id])
+    @list = @plan.lists.new(list_params)
 
     respond_to do |format|
       if @list.save
-        format.html { redirect_to @list, notice: 'List was successfully created.' }
+        format.html { redirect_to @plan, notice: 'List was successfully created.' }
         format.json { render :show, status: :created, location: @list }
       else
         format.html { render :new }
@@ -69,6 +71,6 @@ class ListsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def list_params
-      params.require(:list).permit(:title, :plan_id)
+      params.require(:list).permit(:title)
     end
 end

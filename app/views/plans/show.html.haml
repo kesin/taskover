@@ -7,14 +7,15 @@
         = @plan.description
 .page-content#plan-page-content
   .row
-    .col-md-3
-      .panel.panel-gray
-        .panel-heading
-          未分组
-        .panel-body
-          - 15.times do |i|
-            %p
-              任务#{i}
+    - @lists.each do |list|
+      .col-md-3
+        .panel.panel-gray
+          .panel-heading
+            = list.title
+          .panel-body
+            - 15.times do |i|
+              %p
+                任务#{i}
     .col-md-3
       = link_to new_plan_list_path(@plan), title: '添加一个任务组' do
         .plan-list-add

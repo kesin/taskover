@@ -28,7 +28,7 @@
     = favicon_link_tag 'favicon.ico', :rel => 'shortcut icon'
     = javascript_include_tag "application"
   %body
-    = render "layouts/header"
+    = render 'layouts/header'
     .container-fluid
-      = bootstrap_flash
+      = render 'layouts/flash'
       = yield
