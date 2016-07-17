@@ -13,9 +13,11 @@
           .panel-heading
             = list.title
           .panel-body
-            - 20.times do |i|
+            - list.tasks.each do |task|
               %p
-                任务#{i}
+                = task.title
+            %p
+              = link_to '添加任务...', new_plan_list_task_path(@plan, list)
     .col-md-3
       = link_to new_plan_list_path(@plan), title: '添加一个任务组' do
         .plan-list-add

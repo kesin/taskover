@@ -1,4 +1,4 @@
-= form_for @task, :html => { :class => "form-horizontal task" } do |f|
+= form_for [@plan, @list, @task], :html => { :class => "form-horizontal task" } do |f|
   - if @task.errors.any?
     #error_expl.panel.panel-danger
       .panel-heading
@@ -13,22 +13,10 @@
     = f.label :title, :class => 'control-label'
     .controls
       = f.text_field :title, :class => 'form-control'
-    = error_span(@task[:title])
   .control-group
     = f.label :description, :class => 'control-label'
     .controls
       = f.text_field :description, :class => 'form-control'
-    = error_span(@task[:description])
-  .control-group
-    = f.label :status, :class => 'control-label'
-    .controls
-      = f.text_field :status, :class => 'form-control'
-    = error_span(@task[:status])
-  .control-group
-    = f.label :list_id, :class => 'control-label'
-    .controls
-      = f.text_field :list_id, :class => 'form-control'
-    = error_span(@task[:list_id])
   = f.submit nil, :class => 'btn btn-primary'
   = link_to t('.cancel', :default => t("helpers.links.cancel")),
-    tasks_path, :class => 'btn btn-default'
+    :back, :class => 'btn btn-default'
