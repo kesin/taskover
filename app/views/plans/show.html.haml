@@ -15,12 +15,12 @@
           .panel-body
             - list.tasks.each do |task|
               %p
-                %span{class: "#{task.closed? ? 'closed_task':''}"}
+                %span{class: "#{task.closed? ? 'closed-task':''}"}
                   = task.title
                 = link_to "#{task.closed? ? '开启':'关闭'}",  action_plan_list_task_path(@plan, list, task, type: (task.closed? ? 'open' : 'close')), method: :put, class: 'task_operation'
             %p
               = link_to '添加任务...', new_plan_list_task_path(@plan, list)
-    .col-md-3
+    .col-md-3.new-list-button
       = link_to new_plan_list_path(@plan), title: '添加一个任务组' do
         .plan-list-add
           %i.icon-plus

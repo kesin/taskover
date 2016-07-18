@@ -100,8 +100,12 @@
     display:inline-block;
     white-space:normal;
     vertical-align:top;
+    padding-right: 0px;
   }
-  .closed_task{
+  .new-list-button{
+    padding-right: 15px !important;
+  }
+  .closed-task{
     text-decoration: line-through;
   }
   .task_operation{
