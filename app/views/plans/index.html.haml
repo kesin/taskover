@@ -2,7 +2,7 @@
   - @plans.each do |p|
     .col-md-3
       = link_to p do
-        .bs-callout#callout-helper-pull-navbar{class: "#{color_tag_class(p.color_tag)}"}
+        .bs-callout#callout-helper-pull-navbar{class: "#{color_tag_class('bs-callout-' ,p.color_tag)}"}
           %h4
             = p.title
           %p
