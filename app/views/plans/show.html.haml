@@ -9,7 +9,7 @@
   .row
     - @lists.each do |list|
       .col-md-3
-        .panel.panel-gray
+        .panel{class: "#{color_tag_class('panel-' ,list.color_tag)}"}
           .panel-heading
             = list.title
           .panel-body
