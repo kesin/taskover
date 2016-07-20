@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'https://gems.ruby-china.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -26,9 +26,13 @@ gem 'therubyracer'
 
 gem 'haml'
 gem 'haml-rails'
+gem 'html2haml'
 
 # annotate model
 gem 'annotate'
+
+# user system
+gem 'devise'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
