@@ -25,6 +25,7 @@ class Plan < ActiveRecord::Base
     self.ident = random_ident
   end
 
+  # generate a 8 length random ident
   def random_ident
     chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
     result = ''

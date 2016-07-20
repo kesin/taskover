@@ -23,6 +23,7 @@ class PlansController < ApplicationController
   def edit
   end
 
+  # TODO catch uniqueness exception and redo
   # POST /plans
   # POST /plans.json
   def create

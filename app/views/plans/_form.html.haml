@@ -1,4 +1,14 @@
 = form_for @plan, html: { class: "form form-horizontal plan" } do |f|
+  - if @plan.errors.any?
+    #error_expl.panel.panel-danger
+      .panel-heading
+        %h3.panel-title
+          = pluralize(@plan.errors.count, "error")
+          prohibited this task from being saved:
+      .panel-body
+        %ul
+          - @plan.errors.full_messages.each do |msg|
+            %li= msg
   .form-group
     = f.label :title, class: 'control-label'
     .controls
