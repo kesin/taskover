@@ -31,6 +31,9 @@ Rails.application.configure do
   # yet still be able to expire them through the digest params.
   config.assets.digest = true
 
+  # For having correct urls in mails
+  config.action_mailer.default_url_options = { host: 'taskile.org' }
+
   # Adds additional error checking when serving assets at runtime.
   # Checks for improperly declared sprockets dependencies.
   # Raises helpful error messages.

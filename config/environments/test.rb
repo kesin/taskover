@@ -31,6 +31,9 @@ Rails.application.configure do
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
 
+  # For having correct urls in mails
+  config.action_mailer.default_url_options = { host: 'taskile.org' }
+
   # Randomize the order test cases are executed.
   config.active_support.test_order = :random
 
