@@ -13,6 +13,10 @@
     = f.label :title, :class => 'control-label'
     .controls
       = f.text_field :title, :class => 'form-control'
+  .control-group
+    = f.label :color_tag, class: 'control-label'
+    .controls
+      = f.select :color_tag, options_for_select(options_for_color, '灰色(Grey)')
   = f.submit '创建任务组', :class => 'btn btn-primary'
   = link_to '取消',
     :back, :class => 'btn btn-default'

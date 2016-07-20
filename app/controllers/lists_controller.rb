@@ -71,6 +71,6 @@ class ListsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def list_params
-      params.require(:list).permit(:title)
+      params.require(:list).permit(:title, :color_tag)
     end
 end
