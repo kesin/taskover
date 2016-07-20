@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'plans#index'
+  root to: 'plans#index'
 
   resources :plans, only: [:new, :show, :create, :update, :destroy] do
     resources :lists, only: [:new, :create] do
@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     end
     resources :tasks, only: [:create]
   end
+
+  devise_for :users
 
   resources :lists, only: [:update, :destroy]
   resources :tasks, only: [:update, :destroy]
