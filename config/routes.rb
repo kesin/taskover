@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   root to: 'plans#index'
 
-  resources :plans, only: [:new, :show, :create, :update, :destroy] do
+  resources :plans, path: :p, only: [:new, :show, :create, :update, :destroy] do
     resources :lists, only: [:new, :create] do
       resources :tasks, only: [:new, :create, :update] do
         member do
@@ -14,9 +14,6 @@ Rails.application.routes.draw do
   end
 
   devise_for :users
-
-  resources :lists, only: [:update, :destroy]
-  resources :tasks, only: [:update, :destroy]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
