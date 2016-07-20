@@ -26,7 +26,7 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    @plan = Plan.find_by_id(params[:plan_id])
+    @plan = Plan.find_by_ident(params[:plan_id])
     @task = @plan.tasks.new(task_params)
     @task.list_id = params[:list_id]
 

@@ -14,7 +14,7 @@ class ListsController < ApplicationController
 
   # GET /lists/new
   def new
-    @plan = Plan.find_by_id(params[:plan_id])
+    @plan = Plan.find_by_ident(params[:plan_id])
     @list = @plan.lists.build
   end
 
@@ -25,7 +25,7 @@ class ListsController < ApplicationController
   # POST /lists
   # POST /lists.json
   def create
-    @plan = Plan.find_by_id(params[:plan_id])
+    @plan = Plan.find_by_ident(params[:plan_id])
     @list = @plan.lists.new(list_params)
 
     respond_to do |format|

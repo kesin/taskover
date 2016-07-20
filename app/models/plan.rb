@@ -15,4 +15,20 @@ class Plan < ActiveRecord::Base
   has_many :lists
   has_many :tasks
 
+  validates_uniqueness_of :ident
+
+  def to_param
+    ident
+  end
+
+  def add_ident
+    self.ident = random_ident
+  end
+
+  def random_ident
+    chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+    result = ''
+    8.times { result << chars[rand(62)] }
+    result
+  end
 end
