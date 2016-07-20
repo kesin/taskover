@@ -7,6 +7,7 @@
 #  plan_id    :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  color_tag  :integer          default(0)
 #
 
 class List < ActiveRecord::Base

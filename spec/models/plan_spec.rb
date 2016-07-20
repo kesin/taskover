@@ -7,7 +7,7 @@
 #  description :text(65535)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  color_tag   :integer          default(1)
+#  color_tag   :integer          default(0)
 #
 
 require 'rails_helper'
