@@ -19,7 +19,15 @@
             %a{:href => "#"} 帮助
           %li
             %a{:href => "#"} 反馈
-          %li
-            %a{:href => "#"} 登录
-          %li
-            %a{:href => "#"} 注册
+          - if user_signed_in?
+            %li
+              %a{:href => "#"}
+                = current_user.email
+            %li
+              = link_to destroy_user_session_path, method: :delete do
+                %i.icon-signout
+          - else
+            %li
+              = link_to '登录', user_session_path
+            %li
+              = link_to '注册', edit_user_registration_path
