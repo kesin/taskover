@@ -1,6 +1,6 @@
 class PlansController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_plan, only: [:show, :edit, :update, :destroy]
+  before_action :set_plan, only: [:show, :update, :destroy]
 
   # GET /plans
   # GET /plans.json
@@ -18,10 +18,6 @@ class PlansController < ApplicationController
   # GET /plans/new
   def new
     @plan = Plan.new
-  end
-
-  # GET /plans/1/edit
-  def edit
   end
 
   # TODO catch uniqueness exception and redo
@@ -71,6 +67,7 @@ class PlansController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_plan
       @plan = current_user.plans.find_by_ident(params[:id])
+      return redirect_to root_path, alert: '不存在此计划' unless @plan
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
