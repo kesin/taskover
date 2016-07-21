@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160720132936) do
+ActiveRecord::Schema.define(version: 20160721134451) do
 
   create_table "lists", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "title",      limit: 65535
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20160720132936) do
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
     t.integer  "color_tag",                default: 0
+    t.integer  "user_id",                              null: false
   end
 
   create_table "plans", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -27,6 +28,7 @@ ActiveRecord::Schema.define(version: 20160720132936) do
     t.datetime "updated_at",                            null: false
     t.integer  "color_tag",                 default: 0
     t.string   "ident",                                 null: false
+    t.integer  "user_id",                               null: false
   end
 
   create_table "tasks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -37,6 +39,7 @@ ActiveRecord::Schema.define(version: 20160720132936) do
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
     t.integer  "plan_id"
+    t.integer  "user_id",                               null: false
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

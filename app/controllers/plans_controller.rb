@@ -5,7 +5,7 @@ class PlansController < ApplicationController
   # GET /plans
   # GET /plans.json
   def index
-    @plans = Plan.all
+    @plans = current_user.plans
   end
 
   # GET /plans/1
@@ -30,6 +30,7 @@ class PlansController < ApplicationController
   def create
     @plan = Plan.new(plan_params)
     @plan.add_ident
+    @plan.user_id = current_user.id
 
     respond_to do |format|
       if @plan.save
@@ -69,7 +70,7 @@ class PlansController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_plan
-      @plan = Plan.find_by_ident(params[:id])
+      @plan = current_user.plans.find_by_ident(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

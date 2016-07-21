@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resources :plans, path: :p, only: [:new, :show, :create, :update, :destroy] do
-    resources :lists, only: [:new, :create] do
+    resources :lists, only: [:new, :create, :update] do
       resources :tasks, only: [:new, :create, :update] do
         member do
           put 'action'
@@ -17,7 +17,11 @@ Rails.application.routes.draw do
     resources :tasks, only: [:create]
   end
 
-  devise_for :users
+  devise_for :users, path: '', path_names: {
+      sign_in: 'login',
+      sign_out: 'logout',
+      sign_up: 'signup',
+  }
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

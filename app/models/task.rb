@@ -16,6 +16,7 @@ class Task < ActiveRecord::Base
 
   belongs_to :plan
   belongs_to :list
+  belongs_to :user
 
   def closed?
     self.status == 0

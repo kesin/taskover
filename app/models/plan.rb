@@ -14,6 +14,7 @@ class Plan < ActiveRecord::Base
 
   has_many :lists
   has_many :tasks
+  belongs_to :user
 
   validates_uniqueness_of :ident
 

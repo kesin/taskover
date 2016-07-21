@@ -2,32 +2,18 @@ class ListsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_list, only: [:show, :edit, :update, :destroy]
 
-  # GET /lists
-  # GET /lists.json
-  def index
-    @lists = List.all
-  end
-
-  # GET /lists/1
-  # GET /lists/1.json
-  def show
-  end
-
   # GET /lists/new
   def new
-    @plan = Plan.find_by_ident(params[:plan_id])
-    @list = @plan.lists.build
-  end
-
-  # GET /lists/1/edit
-  def edit
+    @plan = current_user.plans.find_by_ident(params[:plan_id])
+    @list = @plan.lists.new
   end
 
   # POST /lists
   # POST /lists.json
   def create
-    @plan = Plan.find_by_ident(params[:plan_id])
+    @plan = current_user.plans.find_by_ident(params[:plan_id])
     @list = @plan.lists.new(list_params)
+    @list.user_id = current_user.id
 
     respond_to do |format|
       if @list.save
@@ -67,7 +53,7 @@ class ListsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_list
-      @list = List.find(params[:id])
+      @list = current_user.lists.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
