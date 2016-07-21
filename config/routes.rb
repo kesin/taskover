@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
-  root to: 'plans#index'
+  authenticated do
+    root to: 'plans#index'
+  end
+
+  root to: 'home#index'
 
   resources :plans, path: :p, only: [:new, :show, :create, :update, :destroy] do
     resources :lists, only: [:new, :create] do
