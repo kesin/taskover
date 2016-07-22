@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_plan, only: [:new, :create]
+  before_action :set_plan_list, only: [:new, :create]
   before_action :set_task, only: [:update, :action, :destroy]
 
   # GET /tasks/new
@@ -67,7 +67,7 @@ class TasksController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_plan
+    def set_plan_list
       @plan = current_user.plans.find_by_ident(params[:plan_id])
       @list = current_user.lists.find_by_id(params[:list_id])
       unless @plan && @list

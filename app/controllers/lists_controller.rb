@@ -62,7 +62,7 @@ class ListsController < ApplicationController
     end
 
     def set_list
-      @list = @plan.lists.find(params[:id])
+      @list = current_user.lists.find(params[:id])
       unless @list
         respond_to do |format|
           format.html { redirect_to root_url, alert: '此列表不存在' }
