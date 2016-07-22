@@ -28,6 +28,33 @@ class User < ApplicationRecord
   has_many :lists
   has_many :tasks
 
-  validates :ident, uniqueness: true, presence: true
+  ACCESSABLE_ATTRS = [:ident, :email, :password, :password_confirmation, :remember_me]
+  ALLOW_IDENT_CHARS_REGEXP = /\A[A-Za-z0-9\.\-\_]+\z/
+
+  validates :ident, format: { with: ALLOW_IDENT_CHARS_REGEXP, message: '只允许数字、大小写字母、中划线、和小数点' },
+                    length: { in: 3..20 },
+                    presence: true,
+                    uniqueness: { case_sensitive: true }
+
+  # Virtual attribute for authenticating by either username or email
+  # This is in addition to a real persisted field like 'username'
+  attr_accessor :login
+
+  def login=(login)
+    @login = login
+  end
+
+  def login
+    @login || self.ident || self.email
+  end
+
+  def self.find_for_database_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    if login = conditions.delete(:login)
+      where(conditions.to_h).where(["lower(ident) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+    elsif conditions.has_key?(:ident) || conditions.has_key?(:email)
+      where(conditions.to_h).first
+    end
+  end
 
 end
