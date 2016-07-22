@@ -8,6 +8,8 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  color_tag   :integer          default(0)
+#  ident       :string(255)      not null
+#  user_id     :integer          not null
 #
 
 class Plan < ActiveRecord::Base
@@ -16,7 +18,7 @@ class Plan < ActiveRecord::Base
   has_many :tasks
   belongs_to :user
 
-  validates_uniqueness_of :ident
+  validates :ident, uniqueness: true, presence: true
 
   def to_param
     ident

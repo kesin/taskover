@@ -10,6 +10,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  plan_id     :integer
+#  user_id     :integer          not null
 #
 
 require 'test_helper'

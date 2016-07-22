@@ -8,6 +8,8 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  color_tag   :integer          default(0)
+#  ident       :string(255)      not null
+#  user_id     :integer          not null
 #
 
 require 'test_helper'

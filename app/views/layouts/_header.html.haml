@@ -22,7 +22,7 @@
           - if user_signed_in?
             %li
               %a{:href => "#"}
-                = current_user.email
+                = current_user.ident
             %li
               = link_to destroy_user_session_path, method: :delete do
                 %i.icon-signout
