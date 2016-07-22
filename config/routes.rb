@@ -21,6 +21,8 @@ Rails.application.routes.draw do
       sign_in: 'login',
       sign_out: 'logout',
       sign_up: 'signup',
+  }, controllers: {
+      registrations: :registrations,
   }
 
   # The priority is based upon order of creation: first created -> highest priority.
