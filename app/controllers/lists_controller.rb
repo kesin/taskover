@@ -1,19 +1,16 @@
 class ListsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_plan, only: [:new, :create]
   before_action :set_list, only: [:update, :destroy]
 
   # GET /lists/new
   def new
-    @plan = current_user.plans.find_by_ident(params[:plan_id])
-    return redirect_to root_path, alert: '不存在此列表' unless @plan
     @list = @plan.lists.new
   end
 
   # POST /lists
   # POST /lists.json
   def create
-    @plan = current_user.plans.find_by_ident(params[:plan_id])
-    return redirect_to root_path, alert: '不存在此列表' unless @plan
     @list = @plan.lists.new(list_params)
     @list.user_id = current_user.id
 
@@ -54,9 +51,24 @@ class ListsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_plan
+      @plan = current_user.plans.find_by_ident(params[:plan_id])
+      unless @plan
+        respond_to do |format|
+          format.html { redirect_to root_url, alert: '此计划不存在' }
+          format.json { render json: {alert: '此计划不存在'} }
+        end
+      end
+    end
+
     def set_list
-      @list = current_user.lists.find(params[:id])
-      return redirect_to root_path, alert: '不存在此列表' unless @list
+      @list = @plan.lists.find(params[:id])
+      unless @list
+        respond_to do |format|
+          format.html { redirect_to root_url, alert: '此列表不存在' }
+          format.json { render json: {alert: '此列表不存在'} }
+        end
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

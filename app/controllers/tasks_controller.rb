@@ -1,22 +1,18 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_plan, only: [:new, :create]
   before_action :set_task, only: [:update, :action, :destroy]
 
   # GET /tasks/new
   def new
-    @list = current_user.lists.find_by_id(params[:list_id])
-    return redirect_to root_path, alert: '不存在此列表' unless @list
-    @plan = @list.plan
     @task = @list.tasks.new
   end
 
   # POST /tasks
   # POST /tasks.json
   def create
-    @plan = current_user.plans.find_by_ident(params[:plan_id])
-    return redirect_to root_path, alert: '不存在此计划' unless @plan
     @task = @plan.tasks.new(task_params)
-    @task.list_id = params[:list_id]
+    @task.list = @list
     @task.user_id = current_user.id
 
     respond_to do |format|
@@ -71,9 +67,25 @@ class TasksController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_plan
+      @plan = current_user.plans.find_by_ident(params[:plan_id])
+      @list = current_user.lists.find_by_id(params[:list_id])
+      unless @plan && @list
+        respond_to do |format|
+          format.html { redirect_to root_url, alert: '此计划或列表不存在' }
+          format.json { render json: {alert: '此计划或列表不存在'} }
+        end
+      end
+    end
+
     def set_task
       @task = current_user.tasks.find(params[:id])
-      return redirect_to root_path, alert: '不存在此任务' unless @task
+      unless @task
+        respond_to do |format|
+          format.html { redirect_to root_url, alert: '此任务不存在' }
+          format.json { render json: {alert: '此任务不存在'} }
+        end
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
