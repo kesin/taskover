@@ -11,19 +11,19 @@
             .form-group
               = f.label :ident, '用户名', class:'col-sm-3 control-label'
               .col-sm-9
-                = f.text_field :ident, autofocus: true, class: 'form-control'
+                = f.text_field :ident, placeholder: '支持大小写英文字母及数字', autofocus: true, class: 'form-control'
             .form-group
               = f.label :email, '邮箱', class:'col-sm-3 control-label'
               .col-sm-9
-                = f.email_field :email, class: 'form-control'
+                = f.email_field :email, placeholder: '请输入您的邮箱', class: 'form-control'
             .form-group
               = f.label :password, '密码', class:'col-sm-3 control-label'
               .col-sm-9
-                = f.password_field :password, class: 'form-control'
+                = f.password_field :password, placeholder: '密码不少于6位', class: 'form-control'
             .form-group
               = f.label :password_confirmation, '确认密码', class:'col-sm-3 control-label'
               .col-sm-9
-                = f.password_field :password_confirmation, class: 'form-control'
+                = f.password_field :password_confirmation, placeholder: '再次输入密码', class: 'form-control'
             .form-group
               .col-sm-offset-3.col-sm-9
                 = f.submit '注册 Taskile 账户', class: 'btn btn-success btn-sm width-btn'
