@@ -5,7 +5,12 @@ class PlansController < ApplicationController
   # GET /plans
   # GET /plans.json
   def index
-    @plans = current_user.plans
+    if params[:colortag].present? && Plan::COLOR_TAG.map{|k,v| v}.include?(params[:colortag].to_i)
+      @plans = current_user.plans.with_color_tag(params[:colortag].to_i)
+    else
+      @plans = current_user.plans
+      flash.now.notice = '不存在此分类' if params[:colortag].present? && !Plan::COLOR_TAG.map{|k,v| v}.include?(params[:colortag].to_i)
+    end
   end
 
   # GET /plans/1

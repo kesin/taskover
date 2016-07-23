@@ -18,7 +18,11 @@ class Plan < ActiveRecord::Base
   has_many :tasks
   belongs_to :user
 
+  COLOR_TAG = {'gray' => 0, 'blue' => 1, 'green' => 2, 'red' => 3, 'yellow' => 4, 'qing' => 5}
+
   validates :ident, uniqueness: true, presence: true
+
+  scope :with_color_tag, -> (color_tag) { where(color_tag: color_tag) }
 
   def to_param
     ident

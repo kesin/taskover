@@ -1,7 +1,7 @@
 #color_tag_field.col-md-5.navbar-collapse.collapse{"aria-expanded" => "false", :style => "height: 1px;"}
   .navbar-form.navbar-left.color_tag_filed
-    = link_to request.path, class: 'reset-icon' do
+    = link_to request.path, class: 'reset-icon', title: '重置分类' do
       %i.icon-circle-blank
-    - ['gray','blue','green','red','yellow','qing'].each do |color|
-      = link_to "#{request.path}?colortag=#{color}", class:"color-tag-#{color}" do
+    - Plan::COLOR_TAG.each do |key, value|
+      = link_to "#{request.path}?colortag=#{value}", class:"color-tag-#{key}" do
         %i.icon-circle

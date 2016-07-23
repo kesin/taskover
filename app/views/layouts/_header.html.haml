@@ -18,7 +18,7 @@
             %a{:href => "#"} 反馈
           - if user_signed_in?
             %li
-              %a{:href => "#"}
+              = link_to edit_user_registration_path do
                 = current_user.ident
             %li
               = link_to destroy_user_session_path, method: :delete do
