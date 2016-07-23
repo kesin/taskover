@@ -1,51 +1,52 @@
-%h5
-  欢迎来到Taskile 让我们来帮你高效管理和处理任务吧!
-%hr
-  = link_to '登录', user_session_path
-  或
-  = link_to '注册', new_user_registration_path
-%hr
-%h2 Log in
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .field
-    = f.label :login
-    %br/
-    = f.text_field :login, autofocus: true
-  .field
-    = f.label :password
-    %br/
-    = f.password_field :password, autocomplete: "off"
-  - if devise_mapping.rememberable?
-    .field
-      = f.check_box :remember_me
-      = f.label :remember_me
-  .actions
-    = f.submit "Log in"
-= render "devise/shared/links"
+.container
+  .row
+    .col-md-4.col-md-offset-7
+      .panel.panel-default.index-reg
+        .panel-heading
+          %i.icon-user
+          创建 Taskile 账户
+        .panel-body
+          = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'form-horizontal' }) do |f|
+            = devise_error_messages!
+            .form-group
+              = f.label :ident, '用户名', class:'col-sm-3 control-label'
+              .col-sm-9
+                = f.text_field :ident, autofocus: true, class: 'form-control'
+            .form-group
+              = f.label :email, '邮箱', class:'col-sm-3 control-label'
+              .col-sm-9
+                = f.email_field :email, class: 'form-control'
+            .form-group
+              = f.label :password, '密码', class:'col-sm-3 control-label'
+              .col-sm-9
+                = f.password_field :password, class: 'form-control'
+            .form-group
+              = f.label :password_confirmation, '确认密码', class:'col-sm-3 control-label'
+              .col-sm-9
+                = f.password_field :password_confirmation, class: 'form-control'
+            .form-group
+              .col-sm-offset-3.col-sm-9
+                = f.submit '注册 Taskile 账户', class: 'btn btn-success btn-sm width-btn'
+        .panel-footer
+          已有 Taskile 账户?
+          = link_to '登录', user_session_path
+:css
+  body{
+    background: url(https://assets-cdn.github.com/images/modules/site/home-hero.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
 
-%hr
-%h2 注册
-= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  = devise_error_messages!
-  .field
-    = f.label :ident
-    %br/
-    = f.text_field :ident, autofocus: true
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email
-  .field
-    = f.label :password
-    - if @minimum_password_length
-      %em
-        (#{@minimum_password_length} characters minimum)
-    %br/
-    = f.password_field :password, autocomplete: "off"
-  .field
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "off"
-  .actions
-    = f.submit "Sign up"
-= render "devise/shared/links"
+  .index-reg{
+    opacity: 0.9;
+    margin-top:100px;
+  }
+  .form-group:last-child{
+    margin-bottom:0px;
+  }
+
+  .width-btn{
+    width: 238px;
+  }

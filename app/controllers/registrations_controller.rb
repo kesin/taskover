@@ -4,10 +4,6 @@ class RegistrationsController < Devise::RegistrationsController
 
   before_action :config_permitted_parameters
 
-  def new
-    redirect_to root_path
-  end
-
   private
 
   def config_permitted_parameters
