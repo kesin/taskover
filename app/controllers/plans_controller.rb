@@ -17,7 +17,12 @@ class PlansController < ApplicationController
   # GET /plans/1.json
   def show
     # TODO sort task by status
-    @lists = @plan.lists.includes(:tasks)
+    if params[:colortag].present? && Plan::COLOR_TAG.map{|k,v| v}.include?(params[:colortag].to_i)
+      @lists = @plan.lists.with_color_tag(params[:colortag].to_i).includes(:tasks)
+    else
+      @lists = @plan.lists.includes(:tasks)
+      flash.now.notice = '不存在此分类' if params[:colortag].present? && !Plan::COLOR_TAG.map{|k,v| v}.include?(params[:colortag].to_i)
+    end
   end
 
   # GET /plans/new

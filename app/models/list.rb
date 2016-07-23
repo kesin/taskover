@@ -16,4 +16,6 @@ class List < ActiveRecord::Base
   has_many   :tasks
   belongs_to :plan
   belongs_to :user
+
+  scope :with_color_tag, -> (color_tag) { where(color_tag: color_tag) }
 end
