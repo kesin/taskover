@@ -1,0 +1,7 @@
+#color_tag_field.col-md-5.navbar-collapse.collapse{"aria-expanded" => "false", :style => "height: 1px;"}
+  .navbar-form.navbar-left.color_tag_filed
+    = link_to request.path, class: 'reset-icon' do
+      %i.icon-circle-blank
+    - ['gray','blue','green','red','yellow','qing'].each do |color|
+      = link_to "#{request.path}?colortag=#{color}", class:"color-tag-#{color}" do
+        %i.icon-circle

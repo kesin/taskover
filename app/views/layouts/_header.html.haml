@@ -8,11 +8,8 @@
           %span.icon-bar
           %span.icon-bar
         %a.navbar-brand{:href => "/"} Taskile
-      #color_tag_field.col-md-5.navbar-collapse.collapse{"aria-expanded" => "false", :style => "height: 1px;"}
-        .navbar-form.navbar-left.color_tag_filed
-          %i.icon-circle-blank.reset-icon
-          - ['gray','blue','green','red','yellow','qing'].each do |color|
-            %i.icon-circle{class:"color-tag-#{color}"}
+      - if controller_name == 'plans'
+        = render 'layouts/select_tag'
       #sign-form.col-md-5.navbar-collapse.collapse{"aria-expanded" => "false", :style => "height: 1px;"}
         %ul.nav.navbar-nav
           %li

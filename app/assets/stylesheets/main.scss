@@ -17,6 +17,10 @@
         color: #a9a3a5;
         margin-left: $ColorTagMarginLeft;
       }
+      &> a:hover{
+        background: none;
+        text-decoration: none;
+      }
     }
   }
 
