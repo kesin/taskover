@@ -17,12 +17,9 @@ Rails.application.routes.draw do
     resources :tasks, only: [:create]
   end
 
-  devise_for :users, path: '', path_names: {
-      sign_in: 'login',
-      sign_out: 'logout',
-      sign_up: 'signup',
-  }, controllers: {
+  devise_for :users, controllers: {
       registrations: :registrations,
+      sessions: :sessions
   }
 
   # The priority is based upon order of creation: first created -> highest priority.
