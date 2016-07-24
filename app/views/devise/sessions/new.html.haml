@@ -1,17 +1,28 @@
-%h2 Log in
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .field
-    = f.label :login
-    %br/
-    = f.text_field :login, autofocus: true
-  .field
-    = f.label :password
-    %br/
-    = f.password_field :password, autocomplete: "off"
-  - if devise_mapping.rememberable?
-    .field
-      = f.check_box :remember_me
-      = f.label :remember_me
-  .actions
-    = f.submit "Log in"
-= render "devise/shared/links"
+.container#login-content
+  .row
+    .col-md-4.col-md-offset-4
+      .panel.panel-default.index-reg
+        .panel-heading.text-center
+          %i.icon-user
+          登录 Taskile
+        .panel-body
+          = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'form-horizontal' }) do |f|
+            = devise_error_messages!
+            .form-group
+              = f.label :login, '用户名', class:'col-sm-3 control-label'
+              .col-sm-9
+                = f.text_field :login, placeholder: '用户名或邮箱', autofocus: true, class: 'form-control'
+            .form-group
+              = f.label :password, '密码', class:'col-sm-3 control-label'
+              .col-sm-9
+                = f.password_field :password, placeholder: '密码不少于6位', autocomplete: false, class: 'form-control'
+            - if devise_mapping.rememberable?
+              .form-group
+                .col-sm-offset-3.col-sm-9
+                  = f.check_box :remember_me
+                  = f.label :remember_me, '记住我'
+            .form-group
+              .col-sm-offset-3.col-sm-9
+                = f.submit '登录 Taskile', class: 'btn btn-success btn-sm width-btn'
+        .panel-footer.text-center
+          = render "devise/shared/links"
