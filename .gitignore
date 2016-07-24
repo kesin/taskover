@@ -30,3 +30,4 @@ db/data.yml
 .chef
 vendor/bundle/*
 public/assets
+config/environments/*.rb
