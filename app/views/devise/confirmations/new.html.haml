@@ -1,10 +1,20 @@
-%h2 Resend confirmation instructions
-= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
-  = devise_error_messages!
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email)
-  .actions
-    = f.submit "Resend confirmation instructions"
-= render "devise/shared/links"
+.container#reconfirm-content
+  .row
+    .col-md-4.col-md-offset-4
+      .panel.panel-default.index-reg
+        .panel-heading.text-center
+          %i.icon-refresh
+          重发激活邮件
+        .panel-body
+          = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { class: 'form-horizontal' }) do |f|
+            = devise_error_messages!
+            .form-group
+              = f.label :email, '邮箱', class:'col-sm-3 control-label'
+              .col-sm-9
+                = f.email_field :email, placeholder: '注册邮箱', autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: 'form-control'
+            .form-group
+              .col-sm-offset-3.col-sm-9
+                = f.submit '重发激活邮件', class: 'btn btn-success btn-sm width-btn'
+        .panel-footer.text-center
+          = render "devise/shared/links"
+
