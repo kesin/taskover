@@ -6,7 +6,33 @@
   .form-group:last-child{
     margin-bottom:0px;
   }
+  .width-btn{
+    width: 238px;
+    font-size: 16px;
+  }
+}
 
+#signup-content{
+  .index-reg{
+    margin-top:100px;
+  }
+  .form-group:last-child{
+    margin-bottom:0px;
+  }
+  .width-btn{
+    width: 238px;
+    font-size: 16px;
+  }
+}
+
+#signin-content{
+  .index-reg{
+    opacity: 0.9;
+    margin-top:100px;
+  }
+  .form-group:last-child{
+    margin-bottom:0px;
+  }
   .width-btn{
     width: 238px;
     font-size: 16px;
