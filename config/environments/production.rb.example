@@ -66,6 +66,18 @@ Rails.application.configure do
 
   # For having correct urls in mails
   config.action_mailer.default_url_options = { host: 'taskile.com' }
+  # use SASL send mail
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+      address:              '<host ip>',
+      port:                  25,
+      domain:               '<domain>',
+      user_name:            '<username>',
+      password:             '<password>',
+      authentication:       'plain',
+      enable_starttls_auto: true,
+      openssl_verify_mode: 'none'
+  }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
