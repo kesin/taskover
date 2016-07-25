@@ -13,10 +13,6 @@
     = f.label :title, :class => 'control-label'
     .controls
       = f.text_field :title, :class => 'form-control'
-  .control-group
-    = f.label :description, :class => 'control-label'
-    .controls
-      = f.text_field :description, :class => 'form-control'
   = f.submit nil, :class => 'btn btn-primary'
   = link_to t('.cancel', :default => t("helpers.links.cancel")),
     :back, :class => 'btn btn-default'
