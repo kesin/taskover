@@ -1,10 +1,11 @@
+- title '重新发送激活邮件'
 .container#reconfirm-content
   .row
     .col-md-4.col-md-offset-4
       .panel.panel-default.index-reg
         .panel-heading.text-center
           %i.icon-refresh
-          重发激活邮件
+          重新发送激活邮件
         .panel-body
           = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { class: 'form-horizontal' }) do |f|
             = devise_error_messages!
