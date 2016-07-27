@@ -7,7 +7,7 @@
     margin-bottom:0px;
   }
   .width-btn{
-    width: 238px;
+    width: 100%;
     font-size: 16px;
   }
 }
@@ -20,7 +20,7 @@
     margin-bottom:0px;
   }
   .width-btn{
-    width: 238px;
+    width: 100%;
     font-size: 16px;
   }
 }
@@ -33,7 +33,7 @@
     margin-bottom:0px;
   }
   .width-btn{
-    width: 238px;
+    width: 100%;
     font-size: 16px;
   }
 }
@@ -47,5 +47,11 @@
 #reconfirm-content{
   .index-reg{
     margin-top:60px;
+  }
+}
+
+#edit-profile{
+  .edit-padding-left{
+    padding-left:2%;
   }
 }
