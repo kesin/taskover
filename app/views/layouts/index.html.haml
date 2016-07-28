@@ -2,11 +2,7 @@
 %html{:lang => "zh-CN"}
   = render 'layouts/head'
   = yield
-
-  %script{:src => "/assets/jquery.easing.min.js"}
-  %script{:src => "/assets/scrollreveal.min.js"}
-  %script{:src => "/assets/jquery.magnific-popup.min.js"}
-  %script{:src => "/assets/creative.js"}
+  = javascript_include_tag 'index'
 
 :css
   html, body {
