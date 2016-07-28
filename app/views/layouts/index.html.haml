@@ -1,97 +1,14 @@
 !!!
 %html{:lang => "zh-CN"}
   = render 'layouts/head'
-  %body#page-top
-    %nav#mainNav.navbar.navbar-default.navbar-fixed-top
-      .container-fluid
-        / Brand and toggle get grouped for better mobile display
-        .navbar-header
-          %button.navbar-toggle.collapsed{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
-            %span.sr-only Toggle navigation
-            Menu
-            %i.fa.fa-bars
-          %a.navbar-brand.page-scroll{:href => "#page-top"} Start Bootstrap
-        / Collect the nav links, forms, and other content for toggling
-        #bs-example-navbar-collapse-1.collapse.navbar-collapse
-          %ul.nav.navbar-nav.navbar-right
-            %li
-              %a.page-scroll{:href => "#about"} About
-            %li
-              %a.page-scroll{:href => "#services"} Services
-            %li
-              %a.page-scroll{:href => "#portfolio"} Portfolio
-            %li
-              %a.page-scroll{:href => "#contact"} Contact
-    / /.navbar-collapse
-    / /.container-fluid
-    %header
-      .header-content
-        .header-content-inner
-          %h1#homeHeading Your Favorite Source of Free Bootstrap Themes
-          %hr/
-          %p Start Bootstrap can help you build better websites using the Bootstrap CSS framework! Just download your template and start going, no strings attached!
-          %a.btn.btn-primary.btn-xl.page-scroll{:href => "#about"} Find Out More
-    %section#about.bg-primary
-      .container
-        .row
-          .col-lg-8.col-lg-offset-2.text-center
-            %h2.section-heading We've got what you need!
-            %hr.light/
-            %p.text-faded Start Bootstrap has everything you need to get your new website up and running in no time! All of the templates and themes on Start Bootstrap are open source, free to download, and easy to use. No strings attached!
-            %a.page-scroll.btn.btn-default.btn-xl.sr-button{:href => "#services"} Get Started!
-    %section#services
-      .container
-        .row
-          .col-lg-12.text-center
-            %h2.section-heading At Your Service
-            %hr.primary/
-      .container
-        .row
-          .col-lg-3.col-md-6.text-center
-            .service-box
-              %i.icon-4x.icon-dashboard.text-primary.sr-icons
-              %h3 Sturdy Templates
-              %p.text-muted Our templates are updated regularly so they don't break.
-          .col-lg-3.col-md-6.text-center
-            .service-box
-              %i.icon-4x.icon-paperclip.text-primary.sr-icons
-              %h3 Ready to Ship
-              %p.text-muted You can use this theme as is, or you can make changes!
-          .col-lg-3.col-md-6.text-center
-            .service-box
-              %i.icon-4x.icon-download.text-primary.sr-icons
-              %h3 Up to Date
-              %p.text-muted We update dependencies to keep things fresh.
-          .col-lg-3.col-md-6.text-center
-            .service-box
-              %i.icon-4x.icon-heart.text-primary.sr-icons
-              %h3 Made with Love
-              %p.text-muted You have to make your websites with love these days!
-    %aside.bg-dark
-      .container.text-center
-        .call-to-action
-          %h2 Free Download at Start Bootstrap!
-          %a.btn.btn-default.btn-xl.sr-button{:href => "http://startbootstrap.com/template-overviews/creative/"} Download Now!
-    %section#contact
-      .container
-        .row
-          .col-lg-8.col-lg-offset-2.text-center
-            %h2.section-heading Let's Get In Touch!
-            %hr.primary/
-            %p Ready to start your next project with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!
-          .col-lg-4.col-lg-offset-2.text-center
-            %i.fa.fa-phone.fa-3x.sr-contact
-            %p 123-456-6789
-          .col-lg-4.text-center
-            %i.fa.fa-envelope-o.fa-3x.sr-contact
-            %p
-              %a{:href => "mailto:your-email@your-domain.com"} feedback@startbootstrap.com
-    / Plugin JavaScript
-    %script{:src => "/assets/jquery.easing.min.js"}
-    %script{:src => "/assets/scrollreveal.min.js"}
-    %script{:src => "/assets/jquery.magnific-popup.min.js"}
-    / Theme JavaScript
-    %script{:src => "/assets/creative.js"}
+  = yield
+
+  / Plugin JavaScript
+  %script{:src => "/assets/jquery.easing.min.js"}
+  %script{:src => "/assets/scrollreveal.min.js"}
+  %script{:src => "/assets/jquery.magnific-popup.min.js"}
+  / Theme JavaScript
+  %script{:src => "/assets/creative.js"}
 
 :css
   html, body {
