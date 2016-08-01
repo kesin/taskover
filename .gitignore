@@ -23,6 +23,7 @@ Vagrantfile
 .vagrant
 config/database.yml
 config/unicorn.rb
+config/puma.rb
 db/data.yml
 .idea
 *.iml
