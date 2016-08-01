@@ -1,13 +1,7 @@
-!!!
 %html{:lang => "zh-CN"}
   = render 'layouts/head'
-  = yield
-  = javascript_include_tag 'index'
-
-:css
-  html, body {
-    height: 100%;
-    width: 100%;
-    webkit-tap-highlight-color: #222222;
-    font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
-  }
+  %body
+    = render 'layouts/header'
+    .container-fluid
+      = render 'layouts/flash'
+      = yield

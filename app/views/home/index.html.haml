@@ -1,88 +1,40 @@
-%body#page-top
-  %nav#mainNav.navbar.navbar-default.navbar-fixed-top
-    .container-fluid
-      / Brand and toggle get grouped for better mobile display
-      .navbar-header
-        %button.navbar-toggle.collapsed{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
-          %span.sr-only Toggle navigation
-          Menu
-          %i.fa.fa-bars
-        %a.navbar-brand.page-scroll{:href => "#page-top"} Taskile
-      / Collect the nav links, forms, and other content for toggling
-      #bs-example-navbar-collapse-1.collapse.navbar-collapse
-        %ul.nav.navbar-nav.navbar-right
-          %li
-            %a.page-scroll{:href => "#about"} 功能
-          %li
-            %a.page-scroll{:href => "#services"} 使用
-          %li
-            %a.page-scroll{:href => "#download"} 下载
-          %li
-            %a.page-scroll{:href => "#contact"} 案例
-  / /.navbar-collapse
-  / /.container-fluid
-  %header
-    .header-content
-      .header-content-inner
-        %h1#homeHeading 优秀的个人任务管理工具
-        %hr/
-        %p Start Bootstrap can help you build better websites using the Bootstrap CSS framework! Just download your template and start going, no strings attached!
-        %a.btn.btn-primary.btn-xl.page-scroll{:href => "#about"} Find Out More
-  %section#about.bg-primary
-    .container
-      .row
-        .col-lg-8.col-lg-offset-2.text-center
-          %h2.section-heading We've got what you need!
-          %hr.light/
-          %p.text-faded Start Bootstrap has everything you need to get your new website up and running in no time! All of the templates and themes on Start Bootstrap are open source, free to download, and easy to use. No strings attached!
-          %a.page-scroll.btn.btn-default.btn-xl.sr-button{:href => "#services"} Get Started!
-  %section#services
-    .container
-      .row
-        .col-lg-12.text-center
-          %h2.section-heading At Your Service
-          %hr.primary/
-    .container
-      .row
-        .col-lg-3.col-md-6.text-center
-          .service-box
-            %i.icon-4x.icon-dashboard.text-primary.sr-icons
-            %h3 Sturdy Templates
-            %p.text-muted Our templates are updated regularly so they don't break.
-        .col-lg-3.col-md-6.text-center
-          .service-box
-            %i.icon-4x.icon-paperclip.text-primary.sr-icons
-            %h3 Ready to Ship
-            %p.text-muted You can use this theme as is, or you can make changes!
-        .col-lg-3.col-md-6.text-center
-          .service-box
-            %i.icon-4x.icon-download.text-primary.sr-icons
-            %h3 Up to Date
-            %p.text-muted We update dependencies to keep things fresh.
-        .col-lg-3.col-md-6.text-center
-          .service-box
-            %i.icon-4x.icon-heart.text-primary.sr-icons
-            %h3 Made with Love
-            %p.text-muted You have to make your websites with love these days!
-  %aside.bg-dark#download
-    .container.text-center
-      .call-to-action
-        %h2 Free Download at Start Bootstrap!
-        %a.btn.btn-default.btn-xl.sr-button{:href => "http://startbootstrap.com/template-overviews/creative/"} Download Now!
-  %section#contact
-    .container
-      .row
-        .col-lg-8.col-lg-offset-2.text-center
-          %h2.section-heading Let's Get In Touch!
-          %hr.primary/
-          %p Ready to start your next project with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!
-        .col-lg-4.col-lg-offset-2.text-center
-          %i.fa.fa-phone.fa-3x.sr-contact
-          %p 123-456-6789
-        .col-lg-4.text-center
-          %i.fa.fa-envelope-o.fa-3x.sr-contact
-          %p
-            %a{:href => "mailto:your-email@your-domain.com"} feedback@startbootstrap.com
-  %aside.bg-grey
-    .container
-      footer
+.container#index-content
+  .row
+    .col-md-4.col-md-offset-7
+      .panel.panel-default.index-reg
+        .panel-heading
+          %i.icon-user
+          创建 Taskile 账户
+        .panel-body
+          = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'form-horizontal' }) do |f|
+            = devise_error_messages!
+            .form-group
+              = f.label :ident, '用户名', class:'col-sm-3 control-label'
+              .col-sm-9
+                = f.text_field :ident, placeholder: '支持大小写英文字母及数字', autofocus: true, class: 'form-control'
+            .form-group
+              = f.label :email, '邮箱', class:'col-sm-3 control-label'
+              .col-sm-9
+                = f.email_field :email, placeholder: '请输入您的邮箱', class: 'form-control'
+            .form-group
+              = f.label :password, '密码', class:'col-sm-3 control-label'
+              .col-sm-9
+                = f.password_field :password, placeholder: '密码不少于6位', class: 'form-control'
+            .form-group
+              = f.label :password_confirmation, '确认密码', class:'col-sm-3 control-label'
+              .col-sm-9
+                = f.password_field :password_confirmation, placeholder: '再次输入密码', class: 'form-control'
+            .form-group
+              .col-sm-offset-3.col-sm-9
+                = f.submit '注册 Taskile 账户', class: 'btn btn-success btn-sm width-btn'
+        .panel-footer
+          已有 Taskile 账户?
+          = link_to '登录', user_session_path
+:css
+  body{
+    background: url(https://assets-cdn.github.com/images/modules/site/home-hero.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
