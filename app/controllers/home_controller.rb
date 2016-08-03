@@ -28,4 +28,5 @@ class HomeController < ApplicationController
     User
   end
   helper_method :resource_class
+
 end
