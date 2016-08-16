@@ -40,7 +40,7 @@ class PlansController < ApplicationController
 
     respond_to do |format|
       if @plan.save
-        format.html { redirect_to root_url, notice: 'Plan was successfully created.' }
+        format.html { redirect_to root_url, notice: '计划项已经成功创建 !' }
         format.json { render :show, status: :created, location: @plan }
       else
         format.html { render :new }
@@ -54,7 +54,7 @@ class PlansController < ApplicationController
   def update
     respond_to do |format|
       if @plan.update(plan_params)
-        format.html { redirect_to root_url, notice: 'Plan was successfully updated.' }
+        format.html { redirect_to root_url, notice: '计划项已经更新 !' }
         format.json { render :show, status: :ok, location: @plan }
       else
         format.html { render :edit }
@@ -68,7 +68,7 @@ class PlansController < ApplicationController
   def destroy
     @plan.destroy
     respond_to do |format|
-      format.html { redirect_to root_url, notice: 'Plan was successfully destroyed.' }
+      format.html { redirect_to root_url, notice: '计划项删除成功 !' }
       format.json { head :no_content }
     end
   end
