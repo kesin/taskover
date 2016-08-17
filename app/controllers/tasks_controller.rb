@@ -17,7 +17,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @plan, notice: 'Task was successfully created.' }
+        format.html { redirect_to @plan, notice: '成功创建任务!' }
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new }
@@ -33,10 +33,10 @@ class TasksController < ApplicationController
       when 'open'
         @task.open!
       else
-        return redirect_to :back, notice: 'Update status failed.'
+        return redirect_to :back, notice: '更改状态失败!'
     end
     respond_to do |format|
-      format.html { redirect_to :back, notice: 'Task was successfully updated.' }
+      format.html { redirect_to :back, notice: '更新任务状态成功!' }
       format.json { render :show, status: :ok, location: @task }
     end
   end
@@ -46,7 +46,7 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to @task, notice: 'Task was successfully updated.' }
+        format.html { redirect_to @task, notice: '更新任务成功!' }
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit }
@@ -60,7 +60,7 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
+      format.html { redirect_to tasks_url, notice: '任务已被删除!' }
       format.json { head :no_content }
     end
   end
