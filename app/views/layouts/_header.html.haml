@@ -7,7 +7,9 @@
           %span.icon-bar
           %span.icon-bar
           %span.icon-bar
-        %a.navbar-brand{:href => "/"} Taskile
+        %a.navbar-brand{:href => "/"}
+          %i.iconfont.zoker-taskile-pure
+          Taskile
       - if controller_name == 'plans'
         = render 'layouts/select_tag'
       #sign-form.col-md-3.navbar-collapse.collapse{"aria-expanded" => "false", :style => "height: 1px;"}
