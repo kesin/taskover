@@ -1,6 +1,14 @@
 // Site Header
 #navbar-area{
+  border-bottom: 1px solid #7c7c7c;
+  background-color: #4c4c4c;
   margin-bottom: 15px;
+  a{
+    color: #f7f7f7;
+  }
+  a:hover{
+    color: #c7c7c7;
+  }
   #color_tag_field{
     padding-top: 8px;
     .color_tag_filed{
