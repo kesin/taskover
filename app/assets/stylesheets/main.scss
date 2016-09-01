@@ -54,6 +54,34 @@
     float: right;
     padding-left: 15px;
     padding-right: 15px;
+    .login-btn{
+      a{
+        padding: 13px 5px 10px 20px;
+        &:hover{
+          color: #fff;
+        }
+      }
+      button{
+        padding: 2px 20px;
+        background-color: #4c4c4c;
+        border: 1px solid #ffffff;
+      }
+    }
+    .reg-btn{
+      a{
+        padding: 13px 5px 10px 10px;
+        &:hover{
+          color: #fff;
+        }
+      }
+      button{
+        padding: 2px 20px;
+        background-color: #49bcb5;
+      }
+    }
+    button:hover{
+      color: #fff;
+    }
   }
 }
 

@@ -15,10 +15,15 @@
         = render 'layouts/select_tag'
       #sign-form.col-md-3.navbar-collapse.collapse{"aria-expanded" => "false", :style => "height: 1px;"}
         %ul.nav.navbar-nav
-          %li
-            %a{:href => "#"} 帮助
-          %li
-            %a{:href => "#"} 反馈
+          - if controller_name == 'home'
+            %li
+              %a{:href => "#"} 功能
+            %li
+              %a{:href => "#"} 使用
+            %li
+              %a{:href => "#"} 反馈
+            %li
+              %a{:href => "#"} 下载
           - if user_signed_in?
             %li
               = link_to edit_user_registration_path do
@@ -27,7 +32,9 @@
               = link_to destroy_user_session_path, method: :delete do
                 %i.icon-signout
           - else
-            %li
-              = link_to '登录', user_session_path
-            %li
-              = link_to '注册', new_user_registration_path
+            %li.login-btn
+              = link_to user_session_path do
+                = button_tag '登录', class: 'btn'
+            %li.reg-btn
+              = link_to new_user_registration_path do
+                = button_tag '注册', class: 'btn'
