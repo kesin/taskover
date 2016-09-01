@@ -15,7 +15,7 @@
         = render 'layouts/select_tag'
       #sign-form.col-md-3.navbar-collapse.collapse{"aria-expanded" => "false", :style => "height: 1px;"}
         %ul.nav.navbar-nav
-          - if controller_name == 'home'
+          - if controller_name == 'home' && action_name == 'index'
             %li
               %a{:href => "#"} 功能
             %li
@@ -24,6 +24,11 @@
               %a{:href => "#"} 反馈
             %li
               %a{:href => "#"} 下载
+          - else
+            %li
+              %a{:href => "#"} 帮助
+            %li
+              %a{:href => "#"} 反馈
           - if user_signed_in?
             %li
               = link_to edit_user_registration_path do
