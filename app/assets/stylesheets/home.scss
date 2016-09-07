@@ -1,15 +1,12 @@
-#index-content{
-  .index-reg{
-    opacity: 0.9;
-    margin-top:100px;
-  }
-  .form-group:last-child{
-    margin-bottom:0px;
-  }
-  .width-btn{
-    width: 100%;
-    font-size: 16px;
-  }
+#page-header{
+  position: relative;
+  padding: 60px 15px;
+  text-align: center;
+  color: #ffffff;
+  font-size: 20px;
+  background-color: #4c4c4c;
+  background-size:150px;
+  background-image: url('headerbg.png');
 }
 
 #signup-content{
