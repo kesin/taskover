@@ -10,19 +10,39 @@
     color: #dfdfdf;
     padding-left: 40px;
     .des-title{
-      font-size: 55px;
+      font-size: 60px;
       line-height: 50px;
-      padding-bottom: 15px;
+      padding-top: 50px;
+      padding-bottom: 25px;
     }
     .short-des{
-      font-size: 25px;
+      font-size: 28px;
       line-height: 25px;
-      padding-bottom: 15px;
+      padding-bottom: 25px;
     }
     .full-des{
-      font-size: 15px;
-      line-height: 13px;
+      font-size: 18px;
+      line-height: 15px;
       letter-spacing: 2px;
+    }
+  }
+  .index-reg{
+    padding-left: 0px;
+    .reg-from{
+      width: 100%;
+      padding: 30px;
+      border: 1px solid #777777;
+      border-radius: 5px;
+      font-size: 13px;
+      line-height: 16px;
+      background: transparent;
+      box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.4);
+      .form-group{
+        margin: 0 0 20px 0;
+        input{
+          height: 40px;
+        }
+      }
     }
   }
 }
@@ -41,9 +61,6 @@
 }
 
 #login-content{
-  .index-reg{
-    margin-top:60px;
-  }
   .form-group:last-child{
     margin-bottom:0px;
   }
