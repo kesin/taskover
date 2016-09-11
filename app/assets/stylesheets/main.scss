@@ -1,3 +1,14 @@
+// Override bs css code
+
+.btn-success{
+  background-color: #49bcb5;
+  border-color: #47b0a9;
+}
+.btn-success:hover{
+  background-color: #44ada6;
+  border-color: #43aaa3;
+}
+
 // Site Header
 #navbar-area{
   border-bottom: 1px solid #7c7c7c;

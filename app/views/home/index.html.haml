@@ -23,7 +23,13 @@
             .form-group
               = f.password_field :password_confirmation, placeholder: '确认密码: 再次输入密码', class: 'form-control'
             .form-group
-              = f.submit '注册 Taskile 账户', class: 'btn btn-success btn-sm width-btn'
-            .panel-footer
+              = f.submit '注册 Taskile 账户', class: 'btn btn-success reg-btn-index'
+            %p.account-link
+              已有 Taskile 账户?
+              = link_to '登录', user_session_path
+            %p.account-link
+              已有 Taskile 账户?
+              = link_to '登录', user_session_path
+            %p.account-link
               已有 Taskile 账户?
               = link_to '登录', user_session_path

@@ -12,7 +12,7 @@
     .des-title{
       font-size: 60px;
       line-height: 50px;
-      padding-top: 50px;
+      padding-top: 80px;
       padding-bottom: 25px;
     }
     .short-des{
@@ -30,6 +30,7 @@
     padding-left: 0px;
     .reg-from{
       width: 100%;
+      max-width: 400px;
       padding: 30px;
       border: 1px solid #777777;
       border-radius: 5px;
@@ -42,6 +43,16 @@
         input{
           height: 40px;
         }
+        .reg-btn-index{
+          width: 100%;
+          font-size: 18px;
+        }
+      }
+      .account-link{
+        &:first-child{
+          margin-top: -10px;
+        }
+        color: #c4c4c4;
       }
     }
   }
