@@ -24,12 +24,9 @@
               = f.password_field :password_confirmation, placeholder: '确认密码: 再次输入密码', class: 'form-control'
             .form-group
               = f.submit '注册 Taskile 账户', class: 'btn btn-success reg-btn-index'
+            %p.terms-link
+              点击注册按钮之后，即代表您同意并遵守
+              = link_to '使用条款', user_session_path
             %p.account-link
-              已有 Taskile 账户?
-              = link_to '登录', user_session_path
-            %p.account-link
-              已有 Taskile 账户?
-              = link_to '登录', user_session_path
-            %p.account-link
-              已有 Taskile 账户?
+              已经注册？点击
               = link_to '登录', user_session_path

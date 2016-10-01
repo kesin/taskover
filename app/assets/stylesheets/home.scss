@@ -48,11 +48,21 @@
           font-size: 18px;
         }
       }
-      .account-link{
-        &:first-child{
-          margin-top: -10px;
+      .terms-link{
+        margin: -10px 0 5px 0;
+        color: #eeeeee;
+        &> a{
+          color: #4fdad3;
+          background-color: inherit;
         }
-        color: #c4c4c4;
+      }
+      .account-link{
+        margin: 0 0 5px 0;
+        color: #eeeeee;
+        &> a{
+          color: #dddddd;
+          background-color: inherit;
+        }
       }
     }
   }
@@ -72,6 +82,9 @@
 }
 
 #login-content{
+  .index-reg{
+    margin-top:60px;
+  }
   .form-group:last-child{
     margin-bottom:0px;
   }
