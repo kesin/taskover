@@ -3,9 +3,9 @@
   %meta{:charset => "utf-8"}/
   %meta{:content => "IE=Edge,chrome=1", "http-equiv" => "X-UA-Compatible"}/
   %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
-  %meta{name: 'Description',content: content_for?(:meta_description) ? yield(:meta_description) : 'Taskile 是一款优秀的个人任务管理工具，通过简单易用的任务归纳分类方式，用来帮助您高效的追踪管理各项任务，最大化的提升工作效率。'}
+  %meta{name: 'Description',content: content_for?(:meta_description) ? yield(:meta_description) : 'Taskover 是一款优秀的个人任务管理工具，通过简单易用的任务归纳分类方式，用来帮助您高效的追踪管理各项任务，最大化的提升工作效率。'}
   %meta{name: 'Keywords',content: content_for?(:meta_keywords) ? yield(:meta_keywords) : '任务管理,项目管理,团队管理,个人管理,在线办公'}
-  %title= content_for?(:title) ? "#{yield(:title)} - Taskile" : 'Taskile - 优秀的个人任务管理工具'
+  %title= content_for?(:title) ? "#{yield(:title)} - Taskover" : 'Taskover - 优秀的个人任务管理工具'
   = csrf_meta_tags
   / Le HTML5 shim, for IE6-8 support of HTML elements
   /[if lt IE 9]

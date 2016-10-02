@@ -5,7 +5,7 @@
       .panel.panel-default.index-reg
         .panel-heading.text-center
           %i.icon-user
-          登录 Taskile
+          登录 Taskover
         .panel-body
           = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'form-horizontal' }) do |f|
             = devise_error_messages!
@@ -24,6 +24,6 @@
                   = f.label :remember_me, '记住我'
             .form-group
               .col-sm-offset-3.col-sm-9
-                = f.submit '登录 Taskile', class: 'btn btn-success btn-sm width-btn'
+                = f.submit '登录 Taskover', class: 'btn btn-success btn-sm width-btn'
         .panel-footer.text-center
           = render "devise/shared/links"

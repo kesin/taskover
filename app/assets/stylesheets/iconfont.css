@@ -1,18 +1,20 @@
 
-@font-face {font-family: "taskile";
-  src: url('../fonts/iconfont.eot?t=1472293168'); /* IE9*/
-  src: url('../fonts/iconfont.eot?t=1472293168#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('../fonts/iconfont.woff?t=1472293168') format('woff'), /* chrome, firefox */
-  url('../fonts/iconfont.ttf?t=1472293168') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-  url('../fonts/iconfont.svg?t=1472293168#taskile') format('svg'); /* iOS 4.1- */
+@font-face {font-family: "taskover";
+  src: url('iconfont.eot?t=1477792933022'); /* IE9*/
+  src: url('iconfont.eot?t=1477792933022#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff?t=1477792933022') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf?t=1477792933022') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1477792933022#taskover') format('svg'); /* iOS 4.1- */
 }
 
-.taskile {
-  font-family:"taskile" !important;
+.taskover {
+  font-family:"taskover" !important;
   font-size:16px;
   font-style:normal;
   -webkit-font-smoothing: antialiased;
   -webkit-text-stroke-width: 0.2px;
   -moz-osx-font-smoothing: grayscale;
 }
-.taskile-logopure:before { content: "\e600"; }
+
+.taskover-logopure:before { content: "\e600"; }
+

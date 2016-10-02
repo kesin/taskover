@@ -9,19 +9,19 @@ default: &default
   encoding: utf8
   reconnect: false
   pool: 5
-  database: taskile
+  database: taskover
   username: root
   password: ""
   timeout: 5000
 
 development:
   <<: *default
-  database: taskile
+  database: taskover
 
 test:
   <<: *default
-  database: taskile_test
+  database: taskover_test
 
 production:
   <<: *default
-  database: taskile_production
+  database: taskover_production

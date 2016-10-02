@@ -1,9 +1,9 @@
 - if controller_name != 'sessions'
-  已有 Taskile 账户?
+  已有 Taskover 账户?
   = link_to "登录", new_session_path(resource_name)
   %br/
 - if devise_mapping.registerable? && controller_name != 'registrations'
-  还没有 Taskile 账户?
+  还没有 Taskover 账户?
   = link_to "注册", new_registration_path(resource_name)
   %br/
 - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
