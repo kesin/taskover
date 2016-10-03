@@ -15,6 +15,7 @@
 //= require turbolinks
 //= require bootstrap.min
 //= require bootstrap.js
+//= require bootstrap-notify.min
 //= require plans
 //= require lists
 //= require tasks

@@ -1,11 +1,9 @@
 - title @plan.title
 .page-header#plan-page-header
-  .row
-    .col-md-5
-      %span.plan_title
-        = @plan.title
-      %span.plan_description
-        = @plan.description
+  %span.plan_title
+    = @plan.title
+  %span.plan_description
+    = @plan.description
 .page-content#plan-page-content
   .row
     - @lists.each do |list|
@@ -14,13 +12,15 @@
           .panel-heading
             = list.title
           .panel-body
+            - if list.tasks.blank?
+              %p 暂无相关任务
             - list.tasks.each do |task|
               %p
                 %span{class: "#{task.closed? ? 'closed-task':''}"}
                   = task.title
                 = link_to "#{task.closed? ? 'Open':'Over'}",  action_plan_list_task_path(@plan, list, task, type: (task.closed? ? 'open' : 'close')), method: :put, class: 'task_operation'
-            %p
-              = link_to '添加任务...', new_plan_list_task_path(@plan, list)
+          .panel-footer
+            = link_to '添加任务...', new_plan_list_task_path(@plan, list)
     .col-md-3.new-list-button
       = link_to new_plan_list_path(@plan), title: '添加一个任务组' do
         .plan-list-add
