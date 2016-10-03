@@ -14,8 +14,8 @@
 
 class Plan < ActiveRecord::Base
 
-  has_many :lists
-  has_many :tasks
+  has_many :lists, -> { order('created_at DESC') }
+  has_many :tasks, -> { order('status DESC, updated_at DESC') }
   belongs_to :user
 
   COLOR_TAG = {'gray' => 0, 'blue' => 1, 'green' => 2, 'red' => 3, 'yellow' => 4, 'qing' => 5}
