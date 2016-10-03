@@ -68,20 +68,7 @@
   }
 }
 
-#signup-content{
-  .index-reg{
-    margin-top:60px;
-  }
-  .form-group:last-child{
-    margin-bottom:0px;
-  }
-  .width-btn{
-    width: 100%;
-    font-size: 16px;
-  }
-}
-
-#login-content{
+#signup-content, #login-content{
   .index-reg{
     margin-top:60px;
   }

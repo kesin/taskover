@@ -3,10 +3,18 @@
 .btn-success{
   background-color: #49bcb5;
   border-color: #47b0a9;
+  &:hover{
+    background-color: #44ada6;
+    border-color: #43aaa3;
+  }
+  &:active, &:focus, &:active:focus{
+    background-color: #439d96;
+    border-color: #43aaa3;
+  }
 }
-.btn-success:hover{
-  background-color: #44ada6;
-  border-color: #43aaa3;
+.btn-success[disabled]:hover {
+  background-color: #4bbeb7;
+  border-color: #4dc7c0;
 }
 
 // Site Header
