@@ -16,6 +16,7 @@
 //= require bootstrap.min
 //= require bootstrap.js
 //= require bootstrap-notify.min
+//= require vue.min
 //= require plans
 //= require lists
 //= require tasks
