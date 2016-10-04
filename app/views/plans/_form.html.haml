@@ -21,4 +21,4 @@
   .field
     = f.label :color_tag, class: 'control-label'
     .controls
-      = f.select :color_tag, options_for_select(options_for_color, '灰色(Grey)'), 'v-model' => 'plan.color_tag'
+      = f.select :color_tag, options_for_select(options_for_color, '灰色(Gray)'), {}, {'v-model' => 'plan.color_tag'}

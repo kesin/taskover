@@ -54,7 +54,15 @@
         xhr.send()
       },
       addPlan: function () {
-
+        var xhr = new XMLHttpRequest()
+        var self = this
+        xhr.open("POST", PlanUrl)
+        xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded")
+        xhr.onload = function () {
+          result = JSON.parse(xhr.responseText)
+          console.log(result)
+        }
+        xhr.send("plan[title]="+ this.plan.title + "&plan[description]=" + this.plan.description + "&plan[color_tag]=" + this.plan.color_tag + "&authenticity_token=" + $("input[name='authenticity_token']").val())
       }
     }
   })
