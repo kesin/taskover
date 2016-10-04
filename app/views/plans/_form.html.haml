@@ -10,17 +10,15 @@
         %ul
           - @plan.errors.full_messages.each do |msg|
             %li= msg
-  .form-group
+  .field
     = f.label :title, class: 'control-label'
     .controls
-      = f.text_field :title, class: 'form-control', required: true
-  .form-group
+      = f.text_field :title, class: 'form-control', required: true, 'v-model' => 'plan.title'
+  .field
     = f.label :description, class: 'control-label'
     .controls
-      = f.text_field :description, class: 'form-control', required: true
-  .form-group
+      = f.text_field :description, class: 'form-control', required: true, 'v-model' => 'plan.description'
+  .field
     = f.label :color_tag, class: 'control-label'
     .controls
-      = f.select :color_tag, options_for_select(options_for_color, '灰色(Grey)')
-  = f.submit nil,class: 'btn btn-primary'
-  = link_to t('.cancel', :default => t("helpers.links.cancel")), root_path, :class => 'btn btn-default'
+      = f.select :color_tag, options_for_select(options_for_color, '灰色(Grey)'), 'v-model' => 'plan.color_tag'

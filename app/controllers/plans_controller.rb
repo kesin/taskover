@@ -2,6 +2,10 @@ class PlansController < ApplicationController
   before_action :authenticate_user!
   before_action :set_plan, only: [:show, :update, :destroy]
 
+  def dashboard
+
+  end
+
   # GET /plans
   # GET /plans.json
   def index

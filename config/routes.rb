@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
 
   authenticated do
-    root to: 'plans#index'
+    root to: 'plans#dashboard'
   end
 
   root to: 'home#index'
 
-  resources :plans, path: :p, only: [:new, :show, :create, :update, :destroy] do
+  resources :plans, path: :p do
     resources :lists, only: [:new, :create, :update] do
       resources :tasks, only: [:new, :create, :update] do
         member do
