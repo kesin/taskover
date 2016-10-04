@@ -41,15 +41,8 @@ class PlansController < ApplicationController
     @plan = Plan.new(plan_params)
     @plan.add_ident
     @plan.user_id = current_user.id
-
-    respond_to do |format|
-      if @plan.save
-        format.html { redirect_to root_url, notice: '计划项已经成功创建 !' }
-        format.json { render :show, status: :created, location: @plan }
-      else
-        format.html { render :new }
-        format.json { render json: @plan.errors, status: :unprocessable_entity }
-      end
+    unless @plan.save
+      render json: {status: 'failed', message: @plan.errors}
     end
   end
 

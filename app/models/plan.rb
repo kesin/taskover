@@ -20,6 +20,7 @@ class Plan < ActiveRecord::Base
 
   COLOR_TAG = {'gray' => 0, 'blue' => 1, 'green' => 2, 'red' => 3, 'yellow' => 4, 'qing' => 5}
 
+  validates :title, presence: true, allow_blank: false
   validates :ident, uniqueness: true, presence: true
 
   scope :with_color_tag, -> (color_tag) { where(color_tag: color_tag) }
