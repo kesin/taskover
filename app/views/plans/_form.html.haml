@@ -7,21 +7,9 @@
   .field
     .color-select-feild
       = f.collection_radio_buttons :color_tag, options_for_color, :last, :first do |b|
-        %i.icon-circle{class: 'color-circle', style: "color: #{b.text}", id: "color_tag_#{b.value}", :onclick => "checkColor(this.id)"}
+        %i.icon-circle{class: 'color-circle', style: "color: #{b.text}", id: "color_tag_#{b.value}", 'v-on:click' => "selectColor(#{b.value})"}
         .hidden
-          = b.radio_button
+          = b.radio_button({'v-model' => 'plan.color_tag'})
     .add-plan-buttons
-      %button.btn.btn-sm.btn-default{ :type => "button" } 取消
+      %button.btn.btn-sm.btn-default{ :type => "button", 'v-on:click' => 'cancelPlan()' } 取消
       %button.btn.btn-sm.btn-primary{ :type => "button", 'v-on:click' => 'addPlan()' } 提交
-:javascript
-  function checkColor(id) {
-    var colorCircle = $('.color-circle')
-    for (var i = 0; i < colorCircle.length; i++) {
-      if (colorCircle[i].id == id) {
-        $("#plan_" + id).attr("checked","checked");
-        $('#add-plan-field').css({'border-left-color':$('#' + id).css('color')})
-      }else {
-        $("#plan_color_tag_" + i).removeAttr("checked");
-      }
-    }
-  }

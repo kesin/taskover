@@ -9,11 +9,11 @@
           %p
             {{plan.description}}
 
-  .col-md-3
+  .col-md-3{ 'v-show' => 'newPlanField' }
     .bs-callout.bs-callout-add#add-plan-field
       = render 'plans/form'
-  .col-md-3
-    .bs-callout.bs-callout-add#add-plan-entry
+  .col-md-3{ 'v-show' => '!!!newPlanField' }
+    .bs-callout.bs-callout-add#add-plan-entry{ 'v-on:click' => 'newPlan()' }
       %i.icon-plus.bs-callout-add-icon
 
 :javascript
@@ -24,9 +24,10 @@
       plan: {
         title: '',
         description: '',
-        color_tag: '',
+        color_tag: 0
       },
-      plans: null
+      plans: null,
+      newPlanField: false
     },
     created: function () {
       this.fetchData()
@@ -41,6 +42,16 @@
         }
         xhr.send()
       },
+      newPlan: function () {
+        this.newPlanField = true
+      },
+      cancelPlan: function () {
+        this.newPlanField = false
+      },
+      selectColor: function (value){
+        this.plan.color_tag = value
+        $('#add-plan-field').css({'border-left-color':$('#color_tag_' + value).css('color')})
+      },
       addPlan: function () {
         var xhr = new XMLHttpRequest()
         var self = this
@@ -49,7 +60,7 @@
         xhr.onload = function () {
           result = JSON.parse(xhr.responseText)
           self.plans.push(result)
-          $('#addPlan').modal('hide')
+          self.newPlanField = false
           notifyTop('计划项 ' + self.plan.title + ' 创建成功!')
           self.plan.title = ''
           self.plan.description = ''
