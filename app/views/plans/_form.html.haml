@@ -10,6 +10,3 @@
         %i.icon-circle{class: 'color-circle', style: "color: #{b.text}", id: "color_tag_#{b.value}", 'v-on:click' => "selectColor(#{b.value})"}
         .hidden
           = b.radio_button({'v-model' => 'plan.color_tag'})
-    .add-plan-buttons
-      %button.btn.btn-sm.btn-default{ :type => "button", 'v-on:click' => 'cancelPlan()' } 取消
-      %button.btn.btn-sm.btn-primary{ :type => "button", 'v-on:click' => 'addPlan()' } 提交

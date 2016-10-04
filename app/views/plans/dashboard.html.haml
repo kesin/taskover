@@ -12,6 +12,9 @@
   .col-md-3{ 'v-show' => 'newPlanField' }
     .bs-callout.bs-callout-add#add-plan-field
       = render 'plans/form'
+    .add-plan-buttons
+      %button.btn.btn-sm.btn-default{ :type => "button", 'v-on:click' => 'cancelPlan()' } 取消
+      %button.btn.btn-sm.btn-primary{ :type => "button", 'v-on:click' => 'addPlan()' } 提交
   .col-md-3{ 'v-show' => '!!!newPlanField' }
     .bs-callout.bs-callout-add#add-plan-entry{ 'v-on:click' => 'newPlan()' }
       %i.icon-plus.bs-callout-add-icon
