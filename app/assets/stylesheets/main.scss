@@ -1,6 +1,6 @@
 // Override bs css code
 
-.btn-success{
+.btn-primary{
   background-color: #49bcb5;
   border-color: #47b0a9;
   &:hover{
@@ -12,13 +12,17 @@
     border-color: #43aaa3;
   }
 }
-.btn-success[disabled]:hover {
+.btn-primary[disabled]:hover {
   background-color: #4bbeb7;
   border-color: #4dc7c0;
 }
 
 .alert{
   padding: 6px;
+}
+
+.modal-dialog{
+  padding: 60px 0px;
 }
 
 .modal.fade .modal-dialog {

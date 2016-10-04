@@ -23,7 +23,7 @@
         %h4#addPlanLabel.modal-title
           新建计划项
       .modal-body
-        计划项表单
+        = render 'plans/form'
       .modal-footer
         %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 取消
-        %button.btn.btn-success{:type => "button"} 提交
+        %button.btn.btn-primary{:type => "button"} 提交

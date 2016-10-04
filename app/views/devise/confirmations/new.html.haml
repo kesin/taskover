@@ -15,7 +15,7 @@
                 = f.email_field :email, placeholder: '注册邮箱', autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: 'form-control'
             .form-group
               .col-sm-offset-3.col-sm-9
-                = f.submit '重发激活邮件', class: 'btn btn-success btn-sm width-btn'
+                = f.submit '重发激活邮件', class: 'btn btn-primary btn-sm width-btn'
         .panel-footer.text-center
           = render "devise/shared/links"
 
