@@ -19,7 +19,7 @@ gem 'jquery-rails'
 gem 'jbuilder'
 
 # Use turbolinks
-gem 'turbolinks', '~> 5.0.0'
+# gem 'turbolinks', '~> 5.0.0'
 
 # Use therubyracer
 gem 'therubyracer'
