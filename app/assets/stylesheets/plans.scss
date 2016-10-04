@@ -31,6 +31,25 @@
     font-size: 50px;
     color: #bbbbbb;
   }
+
+  #add-plan-field{
+    background-color: #f9f9f9;
+    border-left: 5px solid #777;
+    height: 150px;
+    padding: 10px;
+    line-height: 50px;
+    .color-select-feild{
+      float: left;
+    }
+    .add-plan-buttons{
+      float: right;
+    }
+    .color-circle{
+      cursor: pointer;
+      padding-right: 10px;
+      font-size: 21px;
+    }
+  }
 }
 
 #plan-page-header{

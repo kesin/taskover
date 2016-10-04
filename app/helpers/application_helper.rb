@@ -9,7 +9,7 @@ module ApplicationHelper
   end
 
   def options_for_color
-    [['灰色(Gray)','0'],['蓝色(Blue)','1'],['绿色(Green)','2'],['红色(Red)','3'],['黄色(Yellow)','4'],['青色(Qing)','5']]
+    [['#777777','0'],['#428bca','1'],['#5cb85c','2'],['#d9534f','3'],['#f0ad4e','4'],['#5bc0de','5']]
   end
 
 

@@ -3,30 +3,18 @@
   %template{'v-for' => 'plan in plans'}
     .col-md-3
       %a{':href' => 'plan.path'}
-        .bs-callout#callout-helper-pull-navbar{':class' => 'plan.color_tag'}
+        .bs-callout{':class' => 'plan.color_tag'}
           %h4
             {{plan.title}}
           %p
             {{plan.description}}
 
   .col-md-3
-    .bs-callout.bs-callout-add#callout-helper-pull-navbar{"data-target" => "#addPlan", "data-toggle" => "modal"}
+    .bs-callout.bs-callout-add#add-plan-field
+      = render 'plans/form'
+  .col-md-3
+    .bs-callout.bs-callout-add#add-plan-entry
       %i.icon-plus.bs-callout-add-icon
-
-  #addPlan.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "addPlanLabel", :role => "dialog", :tabindex => "-1"}
-    .modal-dialog
-      .modal-content
-        .modal-header
-          %button.close{"data-dismiss" => "modal", :type => "button"}
-            %span{"aria-hidden" => "true"}
-              %i.icon-remove
-          %h4#addPlanLabel.modal-title
-            新建计划项
-        .modal-body
-          = render 'plans/form'
-        .modal-footer
-          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 取消
-          %button.btn.btn-primary{:type => "button", 'v-on:click' => 'addPlan()'} 提交
 
 :javascript
   var PlanUrl = '/p.json'
