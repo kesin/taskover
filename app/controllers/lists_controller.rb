@@ -8,20 +8,13 @@ class ListsController < ApplicationController
     @list = @plan.lists.new
   end
 
-  # POST /lists
   # POST /lists.json
   def create
     @list = @plan.lists.new(list_params)
     @list.user_id = current_user.id
 
-    respond_to do |format|
-      if @list.save
-        format.html { redirect_to @plan, notice: '列表已经成功创建!' }
-        format.json { render :show, status: :created, location: @list }
-      else
-        format.html { render :new }
-        format.json { render json: @list.errors, status: :unprocessable_entity }
-      end
+    unless @list.save
+      render json: {status: 'failed', message: '创建失败，请稍后重试 !'}
     end
   end
 

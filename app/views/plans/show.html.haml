@@ -20,7 +20,7 @@
         = render 'lists/form'
       .add-list-buttons
         %button.btn.btn-sm.btn-default{ :type => "button", 'v-on:click' => 'cancelList()' } 取消
-        %button.btn.btn-sm.btn-primary{ :type => "button", 'v-on:click' => 'addPlan()' } 提交
+        %button.btn.btn-sm.btn-primary{ :type => "button", 'v-on:click' => 'addList()' } 提交
     .col-md-3#new-list-button{ 'v-show' => '!!!newListField' }
       %a{'v-on:click' => 'newList()'}
         .plan-list-add
@@ -28,7 +28,7 @@
           添加一个任务组
 
 :javascript
-  var PlanShowUrl = '/p/Le2FadAV.json'
+  var PlanShowUrl = '/p/#{params[:id]}.json'
   var lists_tasks = new Vue({
     el: '#app',
     data: {
@@ -77,8 +77,20 @@
       selectColor: function (color){
         $('#new_list_field').css({'border-top-color':color})
       },
-      addPlan: function () {
-        alert('createList')
+      addList: function () {
+        var xhr = new XMLHttpRequest()
+        var self = this
+        var addListUrl = this.plan.new_list_path
+        xhr.open("POST", addListUrl)
+        xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded")
+        xhr.onload = function () {
+          result = JSON.parse(xhr.responseText)
+          self.plan.lists.push(result)
+          self.newListField = false
+          notifyTop('列表 ' + result.title + ' 创建成功!')
+          self.list.title = ''
+        }
+        xhr.send( "list[title]="+ this.list.title + "&list[color_tag]=" + this.list.color_tag )
       }
     }
   })
