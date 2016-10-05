@@ -3,7 +3,7 @@
   %template{'v-for' => 'plan in filterData'}
     .col-md-3
       %a{':href' => 'plan.path'}
-        .bs-callout{':class' => 'plan.color_tag'}
+        .bs-callout{':class' => 'plan.color_tag_class'}
           %h4
             {{plan.title}}
           %p
@@ -45,7 +45,7 @@
           return data
         }else{
           for (var i = 0; i < data.length; i++){
-            if ( data[i].color_tag_id == filterStr ){
+            if ( data[i].color_tag == filterStr ){
               filterArray.push(data[i])
             }
           }
