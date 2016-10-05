@@ -1,6 +1,6 @@
 - title '我的计划项'
 .row#plans-list
-  %template{'v-for' => 'plan in plans'}
+  %template{'v-for' => 'plan in filterData'}
     .col-md-3
       %a{':href' => 'plan.path'}
         .bs-callout{':class' => 'plan.color_tag'}
@@ -35,6 +35,23 @@
     },
     created: function () {
       this.fetchData()
+    },
+    computed: {
+      filterData: function() {
+        var data = this.plans
+        var filterArray = []
+        var filterStr = this.colorFilter
+        if ( filterStr == ''){
+          return data
+        }else{
+          for (var i = 0; i < data.length; i++){
+            if ( data[i].color_tag_id == filterStr ){
+              filterArray.push(data[i])
+            }
+          }
+          return filterArray
+        }
+      }
     },
     methods: {
       fetchData: function () {
