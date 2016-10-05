@@ -13,7 +13,8 @@
             %p{'v-if' => 'list.tasks.length == 0'} 暂无相关任务
             %template{'v-for' => 'task in list.tasks'}
               %p
-                {{task.title}}
+                %span{':class' => 'task.status_class'}
+                  {{task.title}}
     .col-md-3.new-list-button
       %a{':href' => 'plan.new_list_path'}
         .plan-list-add
@@ -35,7 +36,9 @@
           color_tag_class: '',
           new_task_path:'',
           tasks: [{
-            title: ''
+            title: '',
+            status: '',
+            status_class: ''
           }]
         }],
       },
