@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   authenticated do
-    root to: 'plans#dashboard'
+    root to: 'plans#index'
   end
 
   root to: 'home#index'

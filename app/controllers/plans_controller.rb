@@ -2,18 +2,14 @@ class PlansController < ApplicationController
   before_action :authenticate_user!
   before_action :set_plan, only: [:show, :update, :destroy]
 
-  def dashboard
-
-  end
-
-  # GET /plans.json
+  # GET /p.json
   def index
-    @plans = current_user.plans
+    @plans = current_user.plans if json_request?
   end
 
-  # GET /plans/1.json
+  # GET /p/ScAJJIBl.json
   def show
-    @lists = @plan.lists.includes(:tasks)
+    @lists = @plan.lists.includes(:tasks) if json_request?
   end
 
   # GET /plans/new
@@ -22,13 +18,13 @@ class PlansController < ApplicationController
   end
 
   # TODO catch uniqueness exception and redo
-  # POST /plans.json
+  # POST /p.json
   def create
     @plan = Plan.new(plan_params)
     @plan.add_ident
     @plan.user_id = current_user.id
     unless @plan.save
-      render json: {status: 'failed', message: @plan.errors}
+      render json: {status: 'failed', message: '创建失败，请稍后重试 !'}
     end
   end
 
@@ -59,13 +55,9 @@ class PlansController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_plan
+      return unless json_request?
       @plan = current_user.plans.find_by_ident(params[:id])
-      unless @plan
-        respond_to do |format|
-          format.html { redirect_to root_url, alert: '此计划不存在' }
-          format.json { render json: {alert: '此计划不存在'} }
-        end
-      end
+      return render json: { status: 'failed', alert: '此计划不存在' } unless @plan
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
