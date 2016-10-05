@@ -22,7 +22,7 @@
 :javascript
   var PlanUrl = '/p.json'
   var planslist = new Vue({
-    el: '#plans-list',
+    el: '#app',
     data: {
       plan: {
         title: '',
@@ -30,7 +30,8 @@
         color_tag: 0
       },
       plans: null,
-      newPlanField: false
+      newPlanField: false,
+      colorFilter: ''
     },
     created: function () {
       this.fetchData()

@@ -2,7 +2,8 @@
 %html{:lang => "zh-CN"}
   = render 'layouts/head'
   %body
-    = render 'layouts/header'
-    .container-fluid
-      = render 'layouts/flash'
-      = yield
+    #app
+      = render 'layouts/header'
+      .container-fluid
+        = render 'layouts/flash'
+        = yield

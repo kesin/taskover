@@ -74,22 +74,11 @@
   #color_tag_field{
     padding-top: 8px;
     .color_tag_filed{
-      $ColorTagMarginLeft: 15px;
-      font-size: 20px;
-      $color-tag-lists: (-gray: #777, -green: #5cb85c, -blue: #428bca, -red: #d9534f, -yellow: #f0ad4e, -qing: #5bc0de );
-      @each $color-key, $Color in $color-tag-lists {
-        &>.color-tag#{$color-key}{
-          color: $Color;
-          margin-left: $ColorTagMarginLeft;
+      .color-radio {
+        & + label {
+          margin-right: 12px !important;
+          border: none !important;
         }
-      }
-      &>.reset-icon{
-        color: #a9a3a5;
-        margin-left: $ColorTagMarginLeft;
-      }
-      &> a:hover{
-        background: none;
-        text-decoration: none;
       }
     }
   }
