@@ -17,7 +17,6 @@
   }
 
   .bs-callout-add {
-    cursor: pointer;
     line-height: 125px;
     text-align: center;
     padding: 0px;
@@ -30,6 +29,10 @@
   .bs-callout-add-icon{
     font-size: 50px;
     color: #bbbbbb;
+  }
+
+  #add-plan-entry{
+    cursor: pointer;
   }
 
   #add-plan-field{

@@ -51,9 +51,8 @@
       cancelPlan: function () {
         this.newPlanField = false
       },
-      selectColor: function (value){
-        this.plan.color_tag = value
-        $('#add-plan-field').css({'border-left-color':$('#color_tag_' + value).css('color')})
+      selectColor: function (color){
+        $('#add-plan-field').css({'border-left-color':color})
       },
       addPlan: function () {
         var xhr = new XMLHttpRequest()

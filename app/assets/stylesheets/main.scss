@@ -166,11 +166,32 @@ $callout-lists: (-gray: #777, -green: #5cb85c, -blue: #428bca, -red: #d9534f, -y
   }
 }
 
-// flash area
-#taskover_alert{
-  cursor: pointer;
-  .flash-remove{
-    float: right;
+// color select radio
+.color-radio {
+  display: none;
+  & + label {
+    border-radius: 50px;
+    display: inline-block;
+    position: relative;
+    margin-right: 10px;
+    border: 1px solid #f9f9f9;
+  }
+  &:checked + label:after {
+    content: ' ';
+    border-radius: 50px;
+    position: absolute;
+    border: 2px solid #cccccc;
+  }
+}
+.selected-radio{
+  & + label {
+    padding: 10px;
+  }
+  &:checked + label:after {
+    width: 26px;
+    height: 26px;
+    left: -3px;
+    top: -3px;
   }
 }
 
