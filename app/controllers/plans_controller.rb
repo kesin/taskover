@@ -6,27 +6,14 @@ class PlansController < ApplicationController
 
   end
 
-  # GET /plans
   # GET /plans.json
   def index
-    if params[:colortag].present? && Plan::COLOR_TAG.map{|k,v| v}.include?(params[:colortag].to_i)
-      @plans = current_user.plans.with_color_tag(params[:colortag].to_i)
-    else
-      @plans = current_user.plans
-      flash.now.notice = '不存在此分类' if params[:colortag].present? && !Plan::COLOR_TAG.map{|k,v| v}.include?(params[:colortag].to_i)
-    end
+    @plans = current_user.plans
   end
 
-  # GET /plans/1
   # GET /plans/1.json
   def show
-    # TODO sort task by status
-    if params[:colortag].present? && Plan::COLOR_TAG.map{|k,v| v}.include?(params[:colortag].to_i)
-      @lists = @plan.lists.with_color_tag(params[:colortag].to_i).includes(:tasks)
-    else
-      @lists = @plan.lists.includes(:tasks)
-      flash.now.notice = '不存在此分类' if params[:colortag].present? && !Plan::COLOR_TAG.map{|k,v| v}.include?(params[:colortag].to_i)
-    end
+    @lists = @plan.lists.includes(:tasks)
   end
 
   # GET /plans/new
@@ -35,7 +22,6 @@ class PlansController < ApplicationController
   end
 
   # TODO catch uniqueness exception and redo
-  # POST /plans
   # POST /plans.json
   def create
     @plan = Plan.new(plan_params)

@@ -26,3 +26,75 @@
         .plan-list-add
           %i.icon-plus
           添加一个任务组
+
+
+:javascript
+  var PlanUrl = '/p/#{params[:id]}.json'
+  var lists_tasks = new Vue({
+    el: '#app',
+    data: {
+      plan: {
+        title: '',
+        description: '',
+        color_tag: 0
+      },
+      plans: null,
+      newPlanField: false,
+      colorFilter: ''
+    },
+    created: function () {
+      this.fetchData()
+    },
+    computed: {
+      filterData: function() {
+        var data = this.plans
+        var filterArray = []
+        var filterStr = this.colorFilter
+        if ( filterStr == ''){
+          return data
+        }else{
+          for (var i = 0; i < data.length; i++){
+            if ( data[i].color_tag == filterStr ){
+              filterArray.push(data[i])
+            }
+          }
+          return filterArray
+        }
+      }
+    },
+    methods: {
+      fetchData: function () {
+        var xhr = new XMLHttpRequest()
+        var self = this
+        xhr.open('GET', PlanUrl)
+        xhr.onload = function () {
+          self.plans = JSON.parse(xhr.responseText)
+        }
+        xhr.send()
+      },
+      newPlan: function () {
+        this.newPlanField = true
+      },
+      cancelPlan: function () {
+        this.newPlanField = false
+      },
+      selectColor: function (color){
+        $('#add-plan-field').css({'border-left-color':color})
+      },
+      addPlan: function () {
+        var xhr = new XMLHttpRequest()
+        var self = this
+        xhr.open("POST", PlanUrl)
+        xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded")
+        xhr.onload = function () {
+          result = JSON.parse(xhr.responseText)
+          self.plans.push(result)
+          self.newPlanField = false
+          notifyTop('计划项 ' + self.plan.title + ' 创建成功!')
+          self.plan.title = ''
+          self.plan.description = ''
+        }
+        xhr.send( "plan[title]="+ this.plan.title + "&plan[description]=" + this.plan.description + "&plan[color_tag]=" + this.plan.color_tag )
+      }
+    }
+  })
