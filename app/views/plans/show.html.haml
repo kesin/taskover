@@ -1,100 +1,58 @@
-- title @plan.title
-.page-header#plan-page-header
-  %span.plan_title
-    = @plan.title
-  %span.plan_description
-    = @plan.description
+-#- title @plan.title
+.page-header#plan-page-header{'v-if' => 'plan != null'}
+  %span.plan_title{'v-text' => 'plan.title'}
+  %span.plan_description{'v-text' => 'plan.description'}
 .page-content#plan-page-content
   .row
-    - @lists.each do |list|
+    %template{'v-for' => 'list in plan.lists'}
       .col-md-3
-        .panel{class: "#{color_tag_class('panel-' ,list.color_tag)}"}
+        .panel{':class' => 'list.color_tag_class'}
           .panel-heading
-            = list.title
+            {{list.title}}
           .panel-body
-            - if list.tasks.blank?
-              %p 暂无相关任务
-            - list.tasks.each do |task|
+            %p{'v-if' => 'list.tasks.length == 0'} 暂无相关任务
+            %template{'v-for' => 'task in list.tasks'}
               %p
-                %span{class: "#{task.closed? ? 'closed-task':''}"}
-                  = task.title
-                = link_to "#{task.closed? ? 'Open':'Over'}",  action_plan_list_task_path(@plan, list, task, type: (task.closed? ? 'open' : 'close')), method: :put, class: 'task_operation'
-          .panel-footer
-            = link_to '添加任务...', new_plan_list_task_path(@plan, list)
+                {{task.title}}
     .col-md-3.new-list-button
-      = link_to new_plan_list_path(@plan), title: '添加一个任务组' do
+      %a{':href' => 'plan.new_list_path'}
         .plan-list-add
           %i.icon-plus
           添加一个任务组
 
-
 :javascript
-  var PlanUrl = '/p/#{params[:id]}.json'
+  var PlanShowUrl = '/p/ScAJJIBl.json'
   var lists_tasks = new Vue({
     el: '#app',
     data: {
       plan: {
         title: '',
         description: '',
-        color_tag: 0
+        new_list_path: '',
+        lists: [{
+          title: '',
+          color_tag: '',
+          color_tag_class: '',
+          new_task_path:'',
+          tasks: [{
+            title: ''
+          }]
+        }],
       },
-      plans: null,
-      newPlanField: false,
       colorFilter: ''
     },
     created: function () {
       this.fetchData()
     },
-    computed: {
-      filterData: function() {
-        var data = this.plans
-        var filterArray = []
-        var filterStr = this.colorFilter
-        if ( filterStr == ''){
-          return data
-        }else{
-          for (var i = 0; i < data.length; i++){
-            if ( data[i].color_tag == filterStr ){
-              filterArray.push(data[i])
-            }
-          }
-          return filterArray
-        }
-      }
-    },
     methods: {
       fetchData: function () {
         var xhr = new XMLHttpRequest()
         var self = this
-        xhr.open('GET', PlanUrl)
+        xhr.open('GET', PlanShowUrl)
         xhr.onload = function () {
-          self.plans = JSON.parse(xhr.responseText)
+          self.plan = JSON.parse(xhr.responseText)
         }
         xhr.send()
       },
-      newPlan: function () {
-        this.newPlanField = true
-      },
-      cancelPlan: function () {
-        this.newPlanField = false
-      },
-      selectColor: function (color){
-        $('#add-plan-field').css({'border-left-color':color})
-      },
-      addPlan: function () {
-        var xhr = new XMLHttpRequest()
-        var self = this
-        xhr.open("POST", PlanUrl)
-        xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded")
-        xhr.onload = function () {
-          result = JSON.parse(xhr.responseText)
-          self.plans.push(result)
-          self.newPlanField = false
-          notifyTop('计划项 ' + self.plan.title + ' 创建成功!')
-          self.plan.title = ''
-          self.plan.description = ''
-        }
-        xhr.send( "plan[title]="+ this.plan.title + "&plan[description]=" + this.plan.description + "&plan[color_tag]=" + this.plan.color_tag )
-      }
     }
   })
