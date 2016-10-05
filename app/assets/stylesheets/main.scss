@@ -173,7 +173,7 @@ $callout-lists: (-gray: #777, -green: #5cb85c, -blue: #428bca, -red: #d9534f, -y
     border-radius: 50px;
     display: inline-block;
     position: relative;
-    margin-right: 10px;
+    margin-right: 6px;
     border: 1px solid #f9f9f9;
   }
   &:checked + label:after {
@@ -186,6 +186,7 @@ $callout-lists: (-gray: #777, -green: #5cb85c, -blue: #428bca, -red: #d9534f, -y
 .selected-radio{
   & + label {
     padding: 10px;
+    cursor: pointer;
   }
   &:checked + label:after {
     width: 26px;
