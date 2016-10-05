@@ -1,22 +1,8 @@
-= form_for [@plan, @list], :html => { :class => "form-horizontal list" } do |f|
-  - if @list.errors.any?
-    #error_expl.panel.panel-danger
-      .panel-heading
-        %h3.panel-title
-          = pluralize(@list.errors.count, "error")
-          prohibited this task from being saved:
-      .panel-body
-        %ul
-          - @list.errors.full_messages.each do |msg|
-            %li= msg
-  .control-group
-    = f.label :title, :class => 'control-label'
-    .controls
-      = f.text_field :title, :class => 'form-control'
-  .control-group
-    = f.label :color_tag, class: 'control-label'
-    .controls
-      = f.select :color_tag, options_for_select(options_for_color, '灰色(Gray)')
-  = f.submit '创建任务组', :class => 'btn btn-primary'
-  = link_to '取消',
-    :back, :class => 'btn btn-default'
+%form.form.form-horizontal.plan#new_list
+  .field
+    = text_field_tag :title, nil, class: 'form-control', required: true, 'v-model' => 'list.title', placeholder: '名称'
+  .field
+    .color-select-feild
+      = collection_radio_buttons :color_tag, nil, options_for_color, :last, :first do |b|
+        = b.radio_button({class: 'color-radio selected-radio', 'v-model' => 'list.color_tag'})
+        = label_tag "color_tag__#{b.value}", '', style: "background-color: #{b.text}", 'v-on:click' => "selectColor('#{b.text}')"

@@ -132,6 +132,7 @@
     background-color: #777;
   }
   .plan-list-add {
+    cursor: pointer;
     line-height: 40px;
     color: #888;
     text-align: center;
@@ -154,8 +155,28 @@
     vertical-align:top;
     padding-right: 0px;
   }
-  .new-list-button{
+  #new-list-button{
     padding-right: 15px !important;
+  }
+  #new_list{
+    padding-bottom: 20px;
+  }
+  #new_list_field{
+    height: 100px;
+    border: 1px solid #eee;
+    border-top: 5px solid #b6b6b6;
+    border-radius: 3px;
+    padding: 15px 12px;
+    #new_list{
+      .field:first-child{
+        margin-bottom: 12px;
+      }
+    }
+  }
+  .add-list-buttons{
+    float: right;
+    position: relative;
+    top: 10px;
   }
   .closed-task{
     text-decoration: line-through;

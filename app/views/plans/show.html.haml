@@ -15,14 +15,20 @@
               %p
                 %span{':class' => 'task.status_class'}
                   {{task.title}}
-    .col-md-3.new-list-button
-      %a{':href' => 'plan.new_list_path'}
+    .col-md-3#new_list{ 'v-show' => 'newListField' }
+      #new_list_field
+        = render 'lists/form'
+      .add-list-buttons
+        %button.btn.btn-sm.btn-default{ :type => "button", 'v-on:click' => 'cancelList()' } 取消
+        %button.btn.btn-sm.btn-primary{ :type => "button", 'v-on:click' => 'addPlan()' } 提交
+    .col-md-3#new-list-button{ 'v-show' => '!!!newListField' }
+      %a{'v-on:click' => 'newList()'}
         .plan-list-add
           %i.icon-plus
           添加一个任务组
 
 :javascript
-  var PlanShowUrl = '/p/ScAJJIBl.json'
+  var PlanShowUrl = '/p/Le2FadAV.json'
   var lists_tasks = new Vue({
     el: '#app',
     data: {
@@ -42,7 +48,12 @@
           }]
         }],
       },
-      colorFilter: ''
+      list:{
+        title: '',
+        color_tag: 0
+      },
+      colorFilter: '',
+      newListField: false
     },
     created: function () {
       this.fetchData()
@@ -57,5 +68,17 @@
         }
         xhr.send()
       },
+      newList: function () {
+        this.newListField = true
+      },
+      cancelList: function () {
+        this.newListField = false
+      },
+      selectColor: function (color){
+        $('#new_list_field').css({'border-top-color':color})
+      },
+      addPlan: function () {
+        alert('createList')
+      }
     }
   })
