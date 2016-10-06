@@ -1,2 +1,2 @@
-json.extract! @plan, :title, :status
+json.extract! @task, :title, :status
 json.status_class ''

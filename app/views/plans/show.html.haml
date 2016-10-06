@@ -11,10 +11,9 @@
             %span
               {{list.title}}
             .operation-icons
-              %i.icon-plus{'v-show' => '!!!newTaskField', 'v-on:click' => 'newTask()'}
-              %i.icon-plus{'v-show' => 'newTaskField', 'v-on:click' => 'cancelTask()'}
+              %i.icon-plus{'v-on:click' => 'newTask'}
           .panel-body
-            .add-task-field{'v-show' => 'newTaskField'}
+            .add-task-field
               = render 'tasks/form'
             %p{'v-if' => 'list.tasks.length == 0'} 暂无相关任务
             %template{'v-for' => 'task in list.tasks'}
@@ -62,8 +61,7 @@
         title: '',
       },
       colorFilter: '',
-      newListField: false,
-      newTaskField: false
+      newListField: false
     },
     created: function () {
       this.fetchData()
@@ -102,10 +100,10 @@
         this.newListField = false
       },
       newTask: function () {
-        this.newTaskField = true
+        $(event.currentTarget).closest('.panel').find('.add-task-field').show()
       },
       cancelTask: function () {
-        this.newTaskField = false
+        $(event.currentTarget).closest('.add-task-field').hide()
       },
       selectColor: function (color){
         $('#new_list_field').css({'border-top-color':color})
@@ -129,6 +127,34 @@
           $('#list_title').css({'border-color':'#ccc'})
         }
         xhr.send( "list[title]="+ this.list.title + "&list[color_tag]=" + this.list.color_tag )
-      }
+      },
+      addTask: function () {
+        var xhr = new XMLHttpRequest()
+        var self = this
+        var addTaskUrl = $(event.currentTarget).closest('#new_task').find('#new_task_path').val()
+        var taskInput = $(event.currentTarget).closest('#new_task').find('#task_title')
+        var list = false
+        var data = self.plan.lists
+        for (var i = 0; i < data.length; i++){
+          if ( data[i].new_task_path == addTaskUrl ){
+            list = data[i]
+          }
+        }
+        if (this.task.title == ''){
+          taskInput.css({'border-color':'#d9534f'})
+          return notifyTop('任务名称不能为空', 'warning');
+        } else if (!list) {
+          return notifyTop('列表不存在', 'warning');
+        }
+        xhr.open("POST", addTaskUrl)
+        xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded")
+        xhr.onload = function () {
+          result = JSON.parse(xhr.responseText)
+          list.tasks.push(result)
+          notifyTop('列表 ' + result.title + ' 创建成功!')
+          self.task.title = ''
+        }
+        xhr.send( "task[title]="+ this.task.title )
+      },
     }
   })
