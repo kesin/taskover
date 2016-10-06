@@ -4,7 +4,7 @@
   %span.plan_description{'v-text' => 'plan.description'}
 .page-content#plan-page-content
   .row
-    %template{'v-for' => 'list in plan.lists'}
+    %template{'v-for' => 'list in filterListData'}
       .col-md-3
         .panel{':class' => 'list.color_tag_class'}
           .panel-heading
@@ -57,6 +57,23 @@
     },
     created: function () {
       this.fetchData()
+    },
+    computed: {
+      filterListData: function() {
+        var data = this.plan.lists
+        var filterArray = []
+        var filterStr = this.colorFilter
+        if ( filterStr == ''){
+          return data
+        }else{
+          for (var i = 0; i < data.length; i++){
+            if ( data[i].color_tag == filterStr ){
+              filterArray.push(data[i])
+            }
+          }
+          return filterArray
+        }
+      }
     },
     methods: {
       fetchData: function () {
