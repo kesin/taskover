@@ -3,7 +3,7 @@
   %span.plan_title{'v-text' => 'plan.title'}
   %span.plan_description{'v-text' => 'plan.description'}
 .page-content#plan-page-content
-  .row
+  .row#list-content
     %template{'v-for' => 'list in filterListData'}
       .col-md-3
         .panel{':class' => 'list.color_tag_class'}
@@ -120,7 +120,7 @@
         xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded")
         xhr.onload = function () {
           result = JSON.parse(xhr.responseText)
-          self.plan.lists.push(result)
+          self.plan.lists.unshift(result)
           self.newListField = false
           notifyTop('列表 ' + result.title + ' 创建成功!')
           self.list.title = ''
@@ -150,8 +150,8 @@
         xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded")
         xhr.onload = function () {
           result = JSON.parse(xhr.responseText)
-          list.tasks.push(result)
-          notifyTop('列表 ' + result.title + ' 创建成功!')
+          list.tasks.unshift(result)
+          notifyTop('任务 ' + result.title + ' 创建成功!')
           self.task.title = ''
         }
         xhr.send( "task[title]="+ this.task.title )
