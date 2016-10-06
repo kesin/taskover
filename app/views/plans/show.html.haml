@@ -15,7 +15,7 @@
               %p
                 %span{':class' => 'task.status_class'}
                   {{task.title}}
-    .col-md-3#new_list{ 'v-show' => 'newListField' }
+    .col-md-3#new_list_area{ 'v-show' => 'newListField' }
       #new_list_field
         = render 'lists/form'
       .add-list-buttons
