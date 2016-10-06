@@ -8,8 +8,14 @@
       .col-md-3
         .panel{':class' => 'list.color_tag_class'}
           .panel-heading
-            {{list.title}}
+            %span
+              {{list.title}}
+            .operation-icons
+              %i.icon-plus{'v-show' => '!!!newTaskField', 'v-on:click' => 'newTask()'}
+              %i.icon-plus{'v-show' => 'newTaskField', 'v-on:click' => 'cancelTask()'}
           .panel-body
+            .add-task-field{'v-show' => 'newTaskField'}
+              = render 'tasks/form'
             %p{'v-if' => 'list.tasks.length == 0'} 暂无相关任务
             %template{'v-for' => 'task in list.tasks'}
               %p
@@ -48,12 +54,16 @@
           }]
         }],
       },
-      list:{
+      list: {
         title: '',
         color_tag: 0
       },
+      task: {
+        title: '',
+      },
       colorFilter: '',
-      newListField: false
+      newListField: false,
+      newTaskField: false
     },
     created: function () {
       this.fetchData()
@@ -90,6 +100,12 @@
       },
       cancelList: function () {
         this.newListField = false
+      },
+      newTask: function () {
+        this.newTaskField = true
+      },
+      cancelTask: function () {
+        this.newTaskField = false
       },
       selectColor: function (color){
         $('#new_list_field').css({'border-top-color':color})

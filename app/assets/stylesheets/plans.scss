@@ -186,5 +186,23 @@
     float: right;
     font-style: italic;
   }
-
+  .operation-icons{
+    float: right;
+    color: #888;
+    i {
+      cursor: pointer;
+    }
+  }
+  .add-task-field{
+    height: 100px;
+    border: 1px solid #aaa;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  #new_task {
+    .add-task-buttons{
+      float: right;
+    }
+  }
 }
