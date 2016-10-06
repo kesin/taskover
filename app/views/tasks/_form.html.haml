@@ -1,6 +1,7 @@
-%form.form.form-horizontal.plan#new_task
+.form.form-horizontal.plan#new_task
   .field
-    = text_field_tag :task_title, nil, class: 'form-control', required: true, 'v-model' => 'task.title', placeholder: '任务名称'
+    = text_field_tag :task_title, nil, class: 'form-control', required: true, placeholder: '任务名称',
+                     'v-model' => 'task.title', 'v-on:keyup.enter' => 'addTask'
     = hidden_field_tag :new_task_path, nil, ':value' => 'list.new_task_path'
   .field.add-task-buttons
     %button.btn.btn-sm.btn-default{ :type => "button", 'v-on:click' => 'cancelTask' } 取消
