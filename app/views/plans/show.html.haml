@@ -57,9 +57,6 @@
         title: '',
         color_tag: 0
       },
-      task: {
-        title: '',
-      },
       colorFilter: '',
       newListField: false
     },
@@ -133,6 +130,7 @@
         var self = this
         var addTaskUrl = $(event.currentTarget).closest('#new_task').find('#new_task_path').val()
         var taskInput = $(event.currentTarget).closest('#new_task').find('#task_title')
+        var task = taskInput.val()
         var list = false
         var data = self.plan.lists
         for (var i = 0; i < data.length; i++){
@@ -140,7 +138,7 @@
             list = data[i]
           }
         }
-        if (this.task.title == ''){
+        if (task == ''){
           taskInput.css({'border-color':'#d9534f'})
           return notifyTop('任务名称不能为空', 'warning');
         } else if (!list) {
@@ -152,9 +150,9 @@
           result = JSON.parse(xhr.responseText)
           list.tasks.unshift(result)
           notifyTop('任务 ' + result.title + ' 创建成功!')
-          self.task.title = ''
+          taskInput.val('')
         }
-        xhr.send( "task[title]="+ this.task.title )
+        xhr.send( "task[title]="+ task )
       },
     }
   })
