@@ -8,21 +8,14 @@ class TasksController < ApplicationController
     @task = @list.tasks.new
   end
 
-  # POST /tasks
   # POST /tasks.json
   def create
     @task = @plan.tasks.new(task_params)
     @task.list = @list
     @task.user_id = current_user.id
 
-    respond_to do |format|
-      if @task.save
-        format.html { redirect_to @plan, notice: '成功创建任务!' }
-        format.json { render :show, status: :created, location: @task }
-      else
-        format.html { render :new }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
+    unless @task.save
+      render json: {status: 'failed', message: '创建失败，请稍后重试 !'}
     end
   end
 
