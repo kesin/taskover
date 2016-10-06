@@ -81,6 +81,10 @@
       addPlan: function () {
         var xhr = new XMLHttpRequest()
         var self = this
+        if (this.plan.title == ''){
+          $('#title').css({'border-color':'#d9534f'})
+          return notifyTop('计划项名称不能为空', 'warning');
+        }
         xhr.open("POST", PlanUrl)
         xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded")
         xhr.onload = function () {
@@ -90,6 +94,7 @@
           notifyTop('计划项 ' + self.plan.title + ' 创建成功!')
           self.plan.title = ''
           self.plan.description = ''
+          $('#title').css({'border-color':'#ccc'})
         }
         xhr.send( "plan[title]="+ this.plan.title + "&plan[description]=" + this.plan.description + "&plan[color_tag]=" + this.plan.color_tag )
       }

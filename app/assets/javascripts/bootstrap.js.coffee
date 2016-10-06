@@ -1,10 +1,10 @@
 jQuery ->
   $("a[rel~=popover], .has-popover").popover()
   $("a[rel~=tooltip], .has-tooltip").tooltip()
-window.notifyTop = (message) ->
+window.notifyTop = (message, type) ->
   $.notify { message: message },
     element: 'body'
-    type: 'info'
+    type: type
     placement:
       from: 'top'
       align: 'center'

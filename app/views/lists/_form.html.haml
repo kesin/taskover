@@ -1,8 +1,8 @@
 %form.form.form-horizontal.plan#new_list
   .field
-    = text_field_tag :title, nil, class: 'form-control', required: true, 'v-model' => 'list.title', placeholder: '名称'
+    = text_field_tag :list_title, nil, class: 'form-control', required: true, 'v-model' => 'list.title', placeholder: '名称'
   .field
     .color-select-feild
-      = collection_radio_buttons :color_tag, nil, options_for_color, :last, :first do |b|
+      = collection_radio_buttons :list_color_tag, nil, options_for_color, :last, :first do |b|
         = b.radio_button({class: 'color-radio selected-radio', 'v-model' => 'list.color_tag'})
-        = label_tag "color_tag__#{b.value}", '', style: "background-color: #{b.text}", 'v-on:click' => "selectColor('#{b.text}')"
+        = label_tag "list_color_tag__#{b.value}", '', style: "background-color: #{b.text}", 'v-on:click' => "selectColor('#{b.text}')"

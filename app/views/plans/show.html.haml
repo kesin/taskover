@@ -81,6 +81,10 @@
         var xhr = new XMLHttpRequest()
         var self = this
         var addListUrl = this.plan.new_list_path
+        if (this.list.title == ''){
+          $('#list_title').css({'border-color':'#d9534f'})
+          return notifyTop('列表名称不能为空', 'warning');
+        }
         xhr.open("POST", addListUrl)
         xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded")
         xhr.onload = function () {
@@ -89,6 +93,7 @@
           self.newListField = false
           notifyTop('列表 ' + result.title + ' 创建成功!')
           self.list.title = ''
+          $('#list_title').css({'border-color':'#ccc'})
         }
         xhr.send( "list[title]="+ this.list.title + "&list[color_tag]=" + this.list.color_tag )
       }
