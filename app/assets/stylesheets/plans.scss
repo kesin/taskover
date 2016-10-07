@@ -70,6 +70,15 @@
   .plan_description{
     font-size: 12px;
   }
+  .plan-operations{
+    display: inline;
+    font-size: 14px;
+    padding: 1px 10px;
+    color: #a5a5a5;
+    i {
+      cursor: pointer;
+    }
+  }
 }
 
 #plan-page-content{

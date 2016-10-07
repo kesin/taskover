@@ -2,6 +2,24 @@
 .page-header#plan-page-header{'v-if' => 'plan != null'}
   %span.plan_title{'v-text' => 'plan.title'}
   %span.plan_description{'v-text' => 'plan.description'}
+  .plan-operations
+    %i.icon-trash.has-tooltip{ title: '删除此计划项', 'data-toggle' => 'tooltip', 'data-placement' => 'bottom',
+                               'data-toggle' => 'modal', 'data-target' => '.delete_plan_modal' }
+  .delete_plan_modal.modal.fade{'aria-hidden' => 'true', :role => 'dialog', :tabindex => '-1'}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{'data-dismiss' => 'modal', :type => 'button'}
+            %span{'aria-hidden' => 'true'}
+              %i.icon-remove
+          %h4.modal-title
+            确认删除 {{plan.title}} ？
+        .modal-body
+          所属的任务组和任务都会被删除，且无法恢复，请谨慎操作。
+        .modal-footer
+          %button.btn.btn-default{'data-dismiss' => 'modal', :type => 'button'} 取消
+          %button.btn.btn-danger{:type => 'button', 'v-on:click' => 'deletePlan'} 确认删除
+
 .page-content#plan-page-content
   .row#list-content
     %template{'v-for' => 'list in filterListData'}
@@ -33,7 +51,7 @@
           添加一个任务组
 
 :javascript
-  var PlanShowUrl = '/p/' + gon.plan_ident + '.json'
+  var PlanUrl = '/p/' + gon.plan_ident + '.json'
   var lists_tasks = new Vue({
     el: '#app',
     data: {
@@ -84,11 +102,12 @@
       fetchData: function () {
         var xhr = new XMLHttpRequest()
         var self = this
-        xhr.open('GET', PlanShowUrl)
+        xhr.open('GET', PlanUrl)
         xhr.onload = function () {
           result = JSON.parse(xhr.responseText)
           if (result.status == 'failed') {
-            notifyTop(result.alert, 'danger')
+            notifyTop(result.alert + '，正在返回首页...', 'danger')
+            setTimeout(function(){window.location="/";}, 2000);
           } else {
             self.plan = result
           }
@@ -109,6 +128,18 @@
       },
       selectColor: function (color){
         $('#new_list_field').css({'border-top-color':color})
+      },
+      deletePlan: function() {
+        var xhr = new XMLHttpRequest()
+        xhr.open("DELETE", PlanUrl)
+        xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded")
+        xhr.onload = function () {
+          result = JSON.parse(xhr.responseText)
+          $('.delete_plan_modal').modal('hide')
+          notifyTop(result.message)
+          setTimeout(function(){window.location="/";}, 2000);
+        }
+        xhr.send()
       },
       addList: function () {
         var xhr = new XMLHttpRequest()

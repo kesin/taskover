@@ -43,14 +43,10 @@ class PlansController < ApplicationController
     end
   end
 
-  # DELETE /plans/1
   # DELETE /plans/1.json
   def destroy
     @plan.destroy
-    respond_to do |format|
-      format.html { redirect_to root_url, notice: '计划项删除成功 !' }
-      format.json { head :no_content }
-    end
+    render json: {status: 'success', message: '删除成功，正在返回首页...'}
   end
 
   private
