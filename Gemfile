@@ -14,6 +14,7 @@ gem 'coffee-rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'gon'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder'
@@ -60,5 +61,6 @@ group :development do
   gem 'guard-livereload'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'rack-mini-profiler'
 end
 

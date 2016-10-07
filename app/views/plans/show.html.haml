@@ -33,7 +33,7 @@
           添加一个任务组
 
 :javascript
-  var PlanShowUrl = '/p/#{params[:id]}.json'
+  var PlanShowUrl = '/p/' + gon.plan_ident + '.json'
   var lists_tasks = new Vue({
     el: '#app',
     data: {

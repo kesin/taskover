@@ -9,6 +9,7 @@ class PlansController < ApplicationController
 
   # GET /p/ScAJJIBl.json
   def show
+    gon.plan_ident = params[:id]
     @lists = @plan.lists.includes(:tasks) if json_request?
   end
 
