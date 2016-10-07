@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resources :plans, path: :p do
-    resources :lists, only: [:new, :create, :update] do
-      resources :tasks, only: [:new, :create, :update] do
+    resources :lists, only: [:new, :create, :update, :destroy] do
+      resources :tasks, only: [:new, :create, :update, :destroy] do
         member do
           put 'action'
         end

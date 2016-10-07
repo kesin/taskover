@@ -124,6 +124,12 @@
     font-weight: bold;
     background-color: #f8f8f8;
     border-color: #f8f8f8;
+    .list-limit-operations{
+      display: none;
+    }
+    &:hover .list-limit-operations{
+      display: inline;
+    }
   }
   .panel-heading .badge {
     color: #999;
@@ -191,15 +197,15 @@
   .closed-task{
     text-decoration: line-through;
   }
-  .task_operation{
+  .list-operations{
     float: right;
-    font-style: italic;
-  }
-  .operation-icons{
-    float: right;
-    color: #888;
+    color: #a5a5a5;
+    .add-task-plus{
+      color: #888888;
+    }
     i {
       cursor: pointer;
+      padding: 3px;
     }
   }
   .add-task-field{

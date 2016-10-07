@@ -32,14 +32,10 @@ class ListsController < ApplicationController
     end
   end
 
-  # DELETE /lists/1
   # DELETE /lists/1.json
   def destroy
     @list.destroy
-    respond_to do |format|
-      format.html { redirect_to lists_url, notice: '列表删除成功!' }
-      format.json { head :no_content }
-    end
+    render json: {status: 'success', message: '删除列表成功!'}
   end
 
   private
