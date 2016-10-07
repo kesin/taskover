@@ -86,7 +86,12 @@
         var self = this
         xhr.open('GET', PlanShowUrl)
         xhr.onload = function () {
-          self.plan = JSON.parse(xhr.responseText)
+          result = JSON.parse(xhr.responseText)
+          if (result.status == 'failed') {
+            notifyTop(result.alert, 'danger')
+          } else {
+            self.plan = result
+          }
         }
         xhr.send()
       },

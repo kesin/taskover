@@ -13,7 +13,7 @@
 
 class List < ActiveRecord::Base
 
-  has_many   :tasks, -> { order('status DESC, updated_at DESC') }
+  has_many   :tasks, -> { order('status DESC, updated_at DESC') }, dependent: :destroy
   belongs_to :plan
   belongs_to :user
 
