@@ -2,6 +2,8 @@
 %html{:lang => "zh-CN"}
   = render 'layouts/head'
   %body
+    - if controller_name == 'plans'
+      .overlay-loading
     #app
       = render 'layouts/header'
       .container-fluid

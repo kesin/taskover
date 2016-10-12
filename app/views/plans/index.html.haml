@@ -42,6 +42,9 @@
     created: function () {
       this.fetchData()
     },
+    beforeUpdate: function () {
+      $('.overlay-loading').hide()
+    },
     computed: {
       filterData: function() {
         var data = this.plans

@@ -99,6 +99,9 @@
     created: function () {
       this.fetchData()
     },
+    beforeUpdate: function () {
+      $('.overlay-loading').hide()
+    },
     computed: {
       filterListData: function() {
         var data = this.plan.lists
