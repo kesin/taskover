@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_plan_list, only: [:new, :create]
+  before_action :set_plan_list, only: [:new, :create, :update]
   before_action :set_task, only: [:update, :action, :destroy]
 
   # GET /tasks/new
@@ -34,17 +34,10 @@ class TasksController < ApplicationController
     end
   end
 
-  # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
-    respond_to do |format|
-      if @task.update(task_params)
-        format.html { redirect_to @task, notice: '更新任务成功!' }
-        format.json { render :show, status: :ok, location: @task }
-      else
-        format.html { render :edit }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
+    unless @task.update(task_params)
+      render json: {status: 'failed', message: '任务更新失败, 请稍后重试 !'}
     end
   end
 

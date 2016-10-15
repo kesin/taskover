@@ -48,20 +48,23 @@
                   .modal-footer
                     %button.btn.btn-default{'data-dismiss' => 'modal', :type => 'button'} 取消
                     %button.btn.btn-danger{:type => 'button', 'v-on:click' => 'deleteList'} 确认删除
+
           .panel-body
             .add-task-field
               = render 'tasks/form'
             %p{'v-if' => 'list.tasks.length == 0'} 暂无相关任务
+
             %template{'v-for' => 'task in list.tasks'}
               .task-field
                 %span.task-item{':class' => 'task.status_class'}
                   {{task.title}}
                 .task-operations
-                  .non-group
+                  = hidden_field_tag :task_path, nil, 'v-model' => 'task.path'
+                  .non-group{'v-show' => 'task.status == 1'}
                     %i.icon-pencil
                   .non-group
                     %i.icon-remove
-                  %button.btn.btn-primary.btn-xs
+                  %button.btn.btn-primary.btn-xs{'v-on:click' => 'updateTask', 'v-show' => 'task.status == 1'}
                     over
     .col-md-3#new_list_area{ 'v-show' => 'newListField' }
       #new_list_field
@@ -90,6 +93,7 @@
           color_tag_class: '',
           path:'',
           tasks: [{
+            path: '',
             title: '',
             status: '',
             status_class: ''
@@ -189,6 +193,35 @@
         }
         xhr.send()
         $(event.currentTarget).closest('.delete_list_modal').modal('hide')
+      },
+      updateTask: function() {
+        var xhr = new XMLHttpRequest()
+        var data = this.plan.lists
+        var listPath = $(event.currentTarget).closest('.panel').find('#new_task_path').val()
+        var path = $(event.currentTarget).parent().find('#task_path').val()
+        var list = false
+        var task = false
+        for (var i = 0; i < data.length; i++){
+          if ( data[i].path == listPath ){
+            list = data[i]
+          }
+        }
+        xhr.open("PUT", path + '.json')
+        xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded")
+        xhr.onload = function () {
+          result = JSON.parse(xhr.responseText)
+          if (result.status == 'failed') {
+            notifyTop(result.message, 'danger')
+          } else {
+            for (var i = 0; i < list.tasks.length; i++){
+              if ( list.tasks[i].path == path ){
+                list.tasks.splice(i, 1, result)
+              }
+            }
+            notifyTop('任务更新成功 !')
+          }
+        }
+        xhr.send('task[status]=0')
       },
       addList: function () {
         var xhr = new XMLHttpRequest()
