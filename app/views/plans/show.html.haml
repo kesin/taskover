@@ -213,11 +213,18 @@
           if (result.status == 'failed') {
             notifyTop(result.message, 'danger')
           } else {
+            var closePos = 0
+            var taskPos = 0
             for (var i = 0; i < list.tasks.length; i++){
-              if ( list.tasks[i].path == path ){
-                list.tasks.splice(i, 1, result)
+              if ( list.tasks[i].status == 1 ){
+                closePos += 1
+              }
+              if (list.tasks[i].path == path) {
+                taskPos = i
               }
             }
+            list.tasks.splice(taskPos, 1)
+            list.tasks.splice(closePos - 1, 0, result)
             notifyTop('任务更新成功 !')
           }
         }
