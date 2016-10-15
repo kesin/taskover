@@ -53,9 +53,16 @@
               = render 'tasks/form'
             %p{'v-if' => 'list.tasks.length == 0'} 暂无相关任务
             %template{'v-for' => 'task in list.tasks'}
-              %p
-                %span{':class' => 'task.status_class'}
+              .task-field
+                %span.task-item{':class' => 'task.status_class'}
                   {{task.title}}
+                .task-operations
+                  .non-group
+                    %i.icon-pencil
+                  .non-group
+                    %i.icon-remove
+                  %button.btn.btn-primary.btn-xs
+                    over
     .col-md-3#new_list_area{ 'v-show' => 'newListField' }
       #new_list_field
         = render 'lists/form'

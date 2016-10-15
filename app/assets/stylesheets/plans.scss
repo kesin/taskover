@@ -196,6 +196,7 @@
   }
   .closed-task{
     text-decoration: line-through;
+    color: #888888;
   }
   .list-operations{
     float: right;
@@ -219,6 +220,28 @@
   #new_task {
     .add-task-buttons{
       float: right;
+    }
+  }
+  .task-field{
+    line-height: 26px;
+    .task-operations{
+      float: right;
+      display: inline;
+    }
+    .btn-xs{
+      font-size: 11px;
+      line-height: 1.2;
+      display: none;
+    }
+    .non-group{
+      color: #a5a5a5;
+      display: none;
+    }
+    &:hover .btn-xs{
+      display: inline;
+    }
+    &:hover .non-group{
+      display: inline;
     }
   }
 }
