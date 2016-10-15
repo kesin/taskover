@@ -194,10 +194,6 @@
     position: relative;
     top: 10px;
   }
-  .closed-task{
-    text-decoration: line-through;
-    color: #888888;
-  }
   .list-operations{
     float: right;
     color: #a5a5a5;
@@ -224,6 +220,7 @@
   }
   .task-field{
     line-height: 26px;
+    font-size: 14px;
     .task-operations{
       float: right;
       display: inline;
@@ -242,6 +239,28 @@
     }
     &:hover .non-group{
       display: inline;
+    }
+    @keyframes closed-task{
+      0%   { width : 0; }
+      100% { width: 100%; }
+    }
+    .closed-task{
+      position: relative;
+      color: #888888;
+    }
+    .closed-task:after {
+      content: ' ';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: #888888;
+      animation-name: closed-task;
+      animation-duration: 0.3s;
+      animation-timing-function: linear;
+      animation-iteration-count: 1;
+      animation-fill-mode: forwards;
     }
   }
 }
