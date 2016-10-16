@@ -3,8 +3,8 @@
   %span.plan_title{'v-text' => 'plan.title'}
   %span.plan_description{'v-text' => 'plan.description'}
   .plan-operations
-    %i.icon-trash.has-tooltip{ title: '删除此计划项', 'data-toggle' => 'tooltip', 'data-placement' => 'right',
-                               'data-toggle' => 'modal', 'data-target' => '.delete_plan_modal' }
+    %i.icon-trash.has-tooltip.danger-opeartion{ title: '删除此计划项', 'data-toggle' => 'tooltip', 'data-placement' => 'right',
+                                                'data-toggle' => 'modal', 'data-target' => '.delete_plan_modal' }
   .delete_plan_modal.modal.fade{'aria-hidden' => 'true', :role => 'dialog', :tabindex => '-1'}
     .modal-dialog
       .modal-content

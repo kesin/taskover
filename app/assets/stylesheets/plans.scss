@@ -78,6 +78,12 @@
     i {
       cursor: pointer;
     }
+    .danger-opeartion{
+      display: none;
+    }
+  }
+  &:hover .danger-opeartion{
+    display: inline;
   }
 }
 
