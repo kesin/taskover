@@ -143,6 +143,10 @@
   }
   .panel-body {
     border-top-color: $NormalBorderColor;
+    height: calc(100vh - 170px);
+    overflow-x: hidden;
+    white-space: nowrap;
+    overflow-y: scroll;
   }
   .panel-footer {
     border-bottom-color: $NormalBorderColor;
