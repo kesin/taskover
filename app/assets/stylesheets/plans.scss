@@ -218,12 +218,18 @@
   .add-task-field{
     display: none;
     height: 100px;
-    border: 1px solid #aaa;
+    box-shadow: 0 0 5px #bbb;
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 10px;
   }
   #new_task {
+    .enter-notice{
+      line-height: 30px;
+      color: #888;
+      font-size: 12px;
+      font-style: italic;
+    }
     .add-task-buttons{
       float: right;
     }
