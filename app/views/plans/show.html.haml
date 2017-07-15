@@ -54,7 +54,7 @@
               = render 'tasks/form'
             %p{'v-if' => 'list.tasks.length == 0'} 暂无相关任务
 
-            %template{'v-for' => 'task in list.tasks'}
+            %template{'v-for' => '(task, index) in list.tasks'}
               .task-field
                 %span.task-item{':class' => 'task.status_class'}
                   {{task.title}}
@@ -63,7 +63,7 @@
                   .non-group{'v-show' => 'task.status == 1'}
                     %i.icon-pencil
                   .non-group
-                    %i.icon-remove
+                    %i.icon-remove{'@click' => 'removeTask(index)'}
                   %button.btn.btn-primary.btn-xs{'v-on:click' => 'updateTask', 'v-show' => 'task.status == 1'}
                     over
     .col-md-3#new_list_area{ 'v-show' => 'newListField' }
@@ -193,6 +193,26 @@
         }
         xhr.send()
         $(event.currentTarget).closest('.delete_list_modal').modal('hide')
+      },
+      removeTask: function(index) {
+        var $currentTarget = $(event.currentTarget)
+        var data = this.plan.lists
+        var path = $currentTarget.closest('.task-operations').find('#task_path').val()
+        var listPath = $(event.currentTarget).closest('.panel').find('#new_task_path').val()
+        for (var i = 0; i < data.length; i++){
+          if ( data[i].path == listPath ){
+            list = data[i]
+          }
+        }
+        this.$http.delete(path).then(
+          response => {
+            list.tasks.splice(index, 1)
+            notifyTop('任务删除成功!')
+          },
+          response => {
+            notifyTop(result.alert)
+          }
+        )
       },
       updateTask: function() {
         var xhr = new XMLHttpRequest()
