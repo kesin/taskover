@@ -237,9 +237,20 @@
   .task-field{
     line-height: 26px;
     font-size: 14px;
-    .task-operations{
+    position: relative;
+    .task-operations, .confirm-delete{
       float: right;
       display: inline;
+      position: absolute;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0px 0px 20px #fff;
+      padding: 0px 10px;
+      right: -20px;
+      top: 0px;
+    }
+    .confirm-delete{
+      display: none;
     }
     .btn-xs{
       font-size: 11px;
@@ -249,6 +260,7 @@
     .non-group{
       color: #a5a5a5;
       display: none;
+      cursor: pointer;
     }
     &:hover .btn-xs{
       display: inline;

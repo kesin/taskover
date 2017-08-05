@@ -58,12 +58,17 @@
               .task-field
                 %span.task-item{':class' => 'task.status_class'}
                   {{task.title}}
+                .confirm-delete
+                  %button.btn.btn-danger.btn-xs{'v-on:click' => 'removeTask(index)'}
+                    确认删除
+                  %button.btn.btn-default.btn-xs{'v-on:click' => 'removeConfirm'}
+                    取消
                 .task-operations
                   = hidden_field_tag :task_path, nil, 'v-model' => 'task.path'
                   .non-group{'v-show' => 'task.status == 1'}
                     %i.icon-pencil
                   .non-group
-                    %i.icon-remove{'@click' => 'removeTask(index)'}
+                    %i.icon-remove{'@click' => 'showConfirm'}
                   %button.btn.btn-primary.btn-xs{'v-on:click' => 'updateTask', 'v-show' => 'task.status == 1'}
                     over
     .col-md-3#new_list_area{ 'v-show' => 'newListField' }
@@ -158,6 +163,14 @@
       cancelTask: function () {
         $(event.currentTarget).closest('.add-task-field').hide()
       },
+      showConfirm: function() {
+        $(event.currentTarget).closest('.task-operations').hide()
+        $(event.currentTarget).closest('.task-field').find('.confirm-delete').show()
+      },
+      removeConfirm: function() {
+        $(event.currentTarget).closest('.task-field').find('.task-operations').show()
+        $(event.currentTarget).closest('.confirm-delete').hide()
+      },
       selectColor: function (color){
         $('#new_list_field').css({'border-top-color':color})
       },
@@ -197,7 +210,7 @@
       removeTask: function(index) {
         var $currentTarget = $(event.currentTarget)
         var data = this.plan.lists
-        var path = $currentTarget.closest('.task-operations').find('#task_path').val()
+        var path = $currentTarget.closest('.task-field').find('#task_path').val()
         var listPath = $(event.currentTarget).closest('.panel').find('#new_task_path').val()
         for (var i = 0; i < data.length; i++){
           if ( data[i].path == listPath ){
@@ -207,6 +220,8 @@
         this.$http.delete(path).then(
           response => {
             list.tasks.splice(index, 1)
+            $currentTarget.closest('.task-field').find('.task-operations').show()
+            $currentTarget.closest('.confirm-delete').hide()
             notifyTop('任务删除成功!')
           },
           response => {
