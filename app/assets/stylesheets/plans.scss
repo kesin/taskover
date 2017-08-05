@@ -215,7 +215,7 @@
       padding: 3px;
     }
   }
-  .add-task-field{
+  .add-task-field, .update-task{
     display: none;
     height: 100px;
     box-shadow: 0 0 5px #bbb;
@@ -223,7 +223,10 @@
     border-radius: 5px;
     margin-bottom: 10px;
   }
-  #new_task {
+  .update-task{
+    margin-top: 10px;
+  }
+  #new_task, #edit_task {
     .enter-notice{
       line-height: 30px;
       color: #888;
@@ -290,6 +293,9 @@
       animation-timing-function: linear;
       animation-iteration-count: 1;
       animation-fill-mode: forwards;
+    }
+    .update-task{
+      display: none;
     }
   }
 }
