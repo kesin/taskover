@@ -38,6 +38,4 @@
   .edit-padding-left
     %h3 注销我的账户
     %p
-      用的不开心? 向产品经理吐槽 ->
       #{button_to "注销我的账户", registration_path(resource_name), data: { confirm: "注销后所有的此用户的资源将被释放, 确定要注销账户? " }, method: :delete, class: 'btn btn-danger btn-sm width-btn'}
-    = link_to "取消", :back
