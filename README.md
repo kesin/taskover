@@ -49,3 +49,9 @@
 3. 提交更改 (`git commit -am 'Add some feature'`)
 4. 推送到分支 (`git push origin my-new-feature`)
 5. 创建一个 Pull Request
+
+#### 贡献者
+
+[@Zoker](https://zoker.io)
+
+[@Frech](https://gitee.com/frech)
