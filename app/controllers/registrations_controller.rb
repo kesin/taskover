@@ -4,6 +4,11 @@ class RegistrationsController < Devise::RegistrationsController
 
   before_action :config_permitted_parameters
 
+  def edit
+    return redirect_to root_path, alert: '当前用户不允许修改账户信息！' if current_user.ident == 'demo'
+    super
+  end
+
   private
 
   def config_permitted_parameters
