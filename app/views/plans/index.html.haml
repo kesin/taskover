@@ -2,6 +2,7 @@
 .row#plans-list
   %template{'v-for' => 'plan in filterData'}
     .col-md-3
+      %span.hidden.plan-sort{':sort' => 'plan.id'}
       %a{':href' => 'plan.path'}
         .bs-callout{':class' => 'plan.color_tag_class'}
           %h4
@@ -103,3 +104,8 @@
       }
     }
   })
+  var el = document.getElementById('plans-list');
+  Sortable.create(el, {
+    handle: '.bs-callout',
+    animation: 150
+  });

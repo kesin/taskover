@@ -126,6 +126,21 @@
         var data = this.plan.lists
         var filterArray = []
         var filterStr = this.colorFilter
+        this.$nextTick(function () {
+          var el = document.getElementById('list-content');
+          Sortable.create(el, {
+            handle: '.panel-heading',
+            animation: 150
+          });
+          var task = $('.panel-body');
+          $(task).each(function (i,e) {
+            Sortable.create(e, {
+                animation: 150,
+                handle: '.task-field',
+                group: 'tasks'
+            });
+          })
+        })
         if ( filterStr == ''){
           return data
         }else{
