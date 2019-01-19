@@ -14,7 +14,7 @@
 
 class Plan < ActiveRecord::Base
 
-  has_many :lists, -> { order('created_at DESC') }, dependent: :destroy
+  has_many :lists, dependent: :destroy
   has_many :tasks, -> { order('status DESC, updated_at DESC') }, dependent: :destroy
   belongs_to :user
   has_one  :list_sort, class_name: 'Sort', as: :sortable, dependent: :destroy
@@ -47,14 +47,20 @@ class Plan < ActiveRecord::Base
 
   def add_sort
     plan_sort = user.plan_sort
-    plan_sort = user.build_plan_sort if plan_sort.nil?
-    plan_sort.sort.push(id)
+    if plan_sort.nil?
+      plan_sort = user.build_plan_sort
+      plan_sort.sort = user.plans.pluck(:id)
+    else
+      plan_sort.sort.push(id)
+    end
     plan_sort.save
   end
 
   def delete_sort
     plan_sort = user.plan_sort
-    plan_sort.sort.delete(id)
-    plan_sort.save
+    if plan_sort.present?
+      plan_sort.sort.delete(id)
+      plan_sort.save
+    end
   end
 end

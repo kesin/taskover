@@ -5,7 +5,7 @@ class PlansController < ApplicationController
   # GET /p.json
   def index
     if json_request?
-      sort = current_user.plan_sort.sort
+      sort = current_user.plan_sort.nil? ? current_user.plans.pluck(:id) : current_user.plan_sort.sort
       @plans = current_user.plans.sort_by{|e| sort.index(e.id)}
     end
   end
@@ -13,7 +13,10 @@ class PlansController < ApplicationController
   # GET /p/ScAJJIBl.json
   def show
     gon.plan_ident = params[:id]
-    @lists = @plan.lists.includes(:tasks) if json_request?
+    if json_request?
+      sort = @plan.list_sort.nil? ? @plan.lists.pluck(:id) : @plan.list_sort.sort
+      @lists = @plan.lists.includes(:tasks).sort_by{|e| sort.index(e.id)}
+    end
   end
 
   # GET /plans/new

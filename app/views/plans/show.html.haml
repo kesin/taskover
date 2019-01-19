@@ -22,58 +22,59 @@
 
 .page-content#plan-page-content
   .row#list-content
-    %template{'v-for' => 'list in filterListData'}
-      .col-md-3
-        .panel{':class' => 'list.color_tag_class'}
-          .panel-heading
-            %span
-              {{list.title}}
-            .list-operations
-              .list-limit-operations
-                %i.icon-trash{title: '删除此任务组', 'v-on:click' => 'deleteListModal', 'data-toggle' => 'tooltip',
-                              'data-placement' => 'left', onmouseover: "$(this).tooltip('show')"}
-              %i.icon-plus.add-task-plus{title: '添加任务', 'v-on:click' => 'newTask', 'data-toggle' => 'tooltip',
-                                         'data-placement' => 'left', onmouseover: "$(this).tooltip('show')"}
-            .delete_list_modal.modal.fade{'aria-hidden' => 'true', :role => 'dialog', :tabindex => '-1'}
-              .modal-dialog
-                .modal-content
-                  .modal-header
-                    %button.close{'data-dismiss' => 'modal', :type => 'button'}
-                      %span{'aria-hidden' => 'true'}
-                        %i.icon-remove
-                    %h4.modal-title
-                      确认删除 {{list.title}} ？
-                  .modal-body
-                    所属的任务都会被删除，且无法恢复，请谨慎操作。
-                  .modal-footer
-                    %button.btn.btn-default{'data-dismiss' => 'modal', :type => 'button'} 取消
-                    %button.btn.btn-danger{:type => 'button', 'v-on:click' => 'deleteList'} 确认删除
+    %draggable{':list' => "filterListData", ':options' => "{ animation: 150 }", '@update' => 'updateListSort', class: 'draggable-class'}
+      %list-template{'v-for' => 'list in filterListData'}
+        .col-md-3
+          .panel{':class' => 'list.color_tag_class'}
+            .panel-heading
+              %span
+                {{list.title}}
+              .list-operations
+                .list-limit-operations
+                  %i.icon-trash{title: '删除此任务组', 'v-on:click' => 'deleteListModal', 'data-toggle' => 'tooltip',
+                                'data-placement' => 'left', onmouseover: "$(this).tooltip('show')"}
+                %i.icon-plus.add-task-plus{title: '添加任务', 'v-on:click' => 'newTask', 'data-toggle' => 'tooltip',
+                                           'data-placement' => 'left', onmouseover: "$(this).tooltip('show')"}
+              .delete_list_modal.modal.fade{'aria-hidden' => 'true', :role => 'dialog', :tabindex => '-1'}
+                .modal-dialog
+                  .modal-content
+                    .modal-header
+                      %button.close{'data-dismiss' => 'modal', :type => 'button'}
+                        %span{'aria-hidden' => 'true'}
+                          %i.icon-remove
+                      %h4.modal-title
+                        确认删除 {{list.title}} ？
+                    .modal-body
+                      所属的任务都会被删除，且无法恢复，请谨慎操作。
+                    .modal-footer
+                      %button.btn.btn-default{'data-dismiss' => 'modal', :type => 'button'} 取消
+                      %button.btn.btn-danger{:type => 'button', 'v-on:click' => 'deleteList'} 确认删除
 
-          .panel-body
-            .add-task-field
-              = render 'tasks/form', type: 'new'
-            %p{'v-if' => 'list.tasks.length == 0'} 暂无相关任务
+            .panel-body
+              .add-task-field
+                = render 'tasks/form', type: 'new'
+              %p{'v-if' => 'list.tasks.length == 0'} 暂无相关任务
 
-            %template{'v-for' => '(task, index) in list.tasks'}
-              .task-field
-                .update-task
-                  = hidden_field_tag :task_value, '{{task.title}}', 'v-model' => 'task.title'
-                  = render 'tasks/form', type: 'edit'
-                %span.task-item{':class' => 'task.status_class'}
-                  {{task.title}}
-                .confirm-delete
-                  %button.btn.btn-danger.btn-xs{'v-on:click' => 'removeTask(index)'}
-                    确认删除
-                  %button.btn.btn-default.btn-xs{'v-on:click' => 'removeConfirm'}
-                    取消
-                .task-operations
-                  = hidden_field_tag :task_path, nil, 'v-model' => 'task.path'
-                  .non-group{'v-show' => 'task.status == 1', 'v-on:click' => 'showEdit'}
-                    %i.icon-pencil
-                  .non-group
-                    %i.icon-remove{'@click' => 'showConfirm'}
-                  %button.btn.btn-primary.btn-xs{'v-on:click' => "updateTask('delete')", 'v-show' => 'task.status == 1'}
-                    over
+              %template{'v-for' => '(task, index) in list.tasks'}
+                .task-field
+                  .update-task
+                    = hidden_field_tag :task_value, '{{task.title}}', 'v-model' => 'task.title'
+                    = render 'tasks/form', type: 'edit'
+                  %span.task-item{':class' => 'task.status_class'}
+                    {{task.title}}
+                  .confirm-delete
+                    %button.btn.btn-danger.btn-xs{'v-on:click' => 'removeTask(index)'}
+                      确认删除
+                    %button.btn.btn-default.btn-xs{'v-on:click' => 'removeConfirm'}
+                      取消
+                  .task-operations
+                    = hidden_field_tag :task_path, nil, 'v-model' => 'task.path'
+                    .non-group{'v-show' => 'task.status == 1', 'v-on:click' => 'showEdit'}
+                      %i.icon-pencil
+                    .non-group
+                      %i.icon-remove{'@click' => 'showConfirm'}
+                    %button.btn.btn-primary.btn-xs{'v-on:click' => "updateTask('delete')", 'v-show' => 'task.status == 1'}
+                      over
     .col-md-3#new_list_area{ 'v-show' => 'newListField' }
       #new_list_field
         = render 'lists/form'
@@ -96,6 +97,7 @@
         description: '',
         new_list_path: '',
         lists: [{
+          id: '',
           title: '',
           color_tag: '',
           color_tag_class: '',
@@ -317,7 +319,7 @@
         xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded")
         xhr.onload = function () {
           result = JSON.parse(xhr.responseText)
-          self.plan.lists.unshift(result)
+          self.plan.lists.push(result)
           self.newListField = false
           notifyTop('列表 ' + result.title + ' 创建成功!')
           self.list.title = ''
@@ -355,5 +357,13 @@
         }
         xhr.send( "task[title]="+ task )
       },
+      updateListSort: function() {
+        var updateListSortUrl = '/p/' + gon.plan_ident + '/lists/update_sort.json'
+        var xhr = new XMLHttpRequest()
+        var sort = this.plan.lists.map(function(item) {return item.id})
+        xhr.open("PUT", updateListSortUrl)
+        xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded")
+        xhr.send( "sort=" + sort )
+      }
     }
   })

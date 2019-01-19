@@ -1,6 +1,6 @@
 class ListsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_plan, only: [:new, :create]
+  before_action :set_plan, only: [:new, :create, :update_sort]
   before_action :set_list, only: [:update, :destroy]
 
   # GET /lists/new
@@ -29,6 +29,16 @@ class ListsController < ApplicationController
         format.html { render :edit }
         format.json { render json: @list.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  # PATCH/PUT /p/update_sort.json
+  def update_sort
+    list_sort = @plan.list_sort
+    list_sort = @plan.build_list_sort if list_sort.nil?
+    list_sort.sort = params[:sort].split(',').map(&:to_i)
+    unless list_sort.save
+      render json: {status: 'failed', message: '更新失败，请稍后重试 !'}
     end
   end
 
