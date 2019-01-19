@@ -20,7 +20,7 @@ class List < ActiveRecord::Base
 
   scope :with_color_tag, -> (color_tag) { where(color_tag: color_tag) }
 
-  after_save :add_sort
+  after_create :add_sort
   after_destroy :delete_sort
 
   def add_sort

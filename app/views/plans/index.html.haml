@@ -1,14 +1,13 @@
 - title '我的计划项'
 .row#plans-list
   %draggable{':list' => "filterData", ':options' => "{ animation: 150 }", '@update' => 'updateSort'}
-    %plan-template{'v-for' => 'plan in filterData'}
-      .col-md-3
-        %a{':href' => 'plan.path'}
-          .bs-callout{':class' => 'plan.color_tag_class'}
-            %h4
-              {{plan.title}}
-            %p
-              {{plan.description}}
+    .col-md-3{'v-for' => 'plan in filterData', ':key'=> 'plan.id'}
+      %a{':href' => 'plan.path'}
+        .bs-callout{':class' => 'plan.color_tag_class'}
+          %h4
+            {{plan.title}}
+          %p
+            {{plan.description}}
 
   .col-md-3{ 'v-show' => 'newPlanField' }
     .bs-callout.bs-callout-add#add-plan-field

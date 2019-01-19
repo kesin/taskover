@@ -1,6 +1,6 @@
 class PlansController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_plan, only: [:show, :update, :destroy]
+  before_action :set_plan, only: [:show, :update, :destroy, :update_task_sort]
 
   # GET /p.json
   def index
@@ -15,7 +15,7 @@ class PlansController < ApplicationController
     gon.plan_ident = params[:id]
     if json_request?
       sort = @plan.list_sort.nil? ? @plan.lists.pluck(:id) : @plan.list_sort.sort
-      @lists = @plan.lists.includes(:tasks).sort_by{|e| sort.index(e.id)}
+      @lists = @plan.lists.includes(:tasks, :task_sort).sort_by{|e| sort.index(e.id)}
     end
   end
 
@@ -41,6 +41,25 @@ class PlansController < ApplicationController
     plan_sort = current_user.build_plan_sort if plan_sort.nil?
     plan_sort.sort = params[:sort].split(',').map(&:to_i)
     unless plan_sort.save
+      render json: {status: 'failed', message: '更新失败，请稍后重试 !'}
+    end
+  end
+
+  # PATCH/PUT /p/xxxx/update_sort.json
+  def update_task_sort
+    to_list = @plan.lists.find(params['to_list_id'])
+    to_list_sort = to_list.task_sort
+    to_list_sort = to_list.build_task_sort if to_list_sort.nil?
+    to_list_sort.sort = params[:to_sort].split(',').map(&:to_i)
+    if params['from_list_id'].present?
+      task = @plan.tasks.find(params['task_id'])
+      task.update_column(:list_id, params['to_list_id'])
+      from_list = @plan.lists.find(params['from_list_id'])
+      from_list_sort = from_list.task_sort
+      from_list_sort = from_list.build_task_sort if from_list_sort.nil?
+      from_list_sort.sort = params[:from_sort].split(',').map(&:to_i)
+    end
+    unless to_list_sort.save && (from_list_sort.present? && from_list_sort.save)
       render json: {status: 'failed', message: '更新失败，请稍后重试 !'}
     end
   end

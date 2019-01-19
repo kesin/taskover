@@ -19,6 +19,10 @@ class Task < ActiveRecord::Base
   belongs_to :list
   belongs_to :user
 
+  after_create :add_sort
+  after_destroy :delete_sort
+
+
   def closed?
     self.status == 0
   end
@@ -36,6 +40,25 @@ class Task < ActiveRecord::Base
   def open!
     self.transaction do
       update_attributes(status: 1)
+    end
+  end
+
+  def add_sort
+    task_sort = list.task_sort
+    if task_sort.nil?
+      task_sort = list.build_task_sort
+      task_sort.sort = list.tasks.pluck(:id)
+    else
+      task_sort.sort.unshift(id)
+    end
+    task_sort.save
+  end
+
+  def delete_sort
+    task_sort = list.task_sort
+    if task_sort.present?
+      task_sort.sort.delete(id)
+      task_sort.save
     end
   end
 
