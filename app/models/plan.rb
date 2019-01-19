@@ -26,6 +26,9 @@ class Plan < ActiveRecord::Base
 
   scope :with_color_tag, -> (color_tag) { where(color_tag: color_tag) }
 
+  after_save :add_sort
+  after_destroy :delete_sort
+
   def to_param
     ident
   end
@@ -40,5 +43,18 @@ class Plan < ActiveRecord::Base
     result = ''
     8.times { result << chars[rand(62)] }
     result
+  end
+
+  def add_sort
+    plan_sort = user.plan_sort
+    plan_sort = user.build_plan_sort if plan_sort.nil?
+    plan_sort.sort.push(id)
+    plan_sort.save
+  end
+
+  def delete_sort
+    plan_sort = user.plan_sort
+    plan_sort.sort.delete(id)
+    plan_sort.save
   end
 end
