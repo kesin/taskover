@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resources :plans, path: :p do
+    collection do
+      put 'update_sort'
+    end
     resources :lists, only: [:new, :create, :update, :destroy] do
       resources :tasks, only: [:new, :create, :update, :destroy] do
         member do

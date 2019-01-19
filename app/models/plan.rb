@@ -17,6 +17,7 @@ class Plan < ActiveRecord::Base
   has_many :lists, -> { order('created_at DESC') }, dependent: :destroy
   has_many :tasks, -> { order('status DESC, updated_at DESC') }, dependent: :destroy
   belongs_to :user
+  has_one  :list_sort, class_name: 'Sort', as: :sortable, dependent: :destroy
 
   COLOR_TAG = {'gray' => 0, 'blue' => 1, 'green' => 2, 'red' => 3, 'yellow' => 4, 'qing' => 5}
 

@@ -31,6 +31,7 @@ class User < ApplicationRecord
   has_many :plans
   has_many :lists
   has_many :tasks
+  has_one  :plan_sort, class_name: 'Sort', as: :sortable, dependent: :destroy
 
   ACCESSABLE_ATTRS = [:ident, :email, :password, :password_confirmation, :remember_me]
   ALLOW_IDENT_CHARS_REGEXP = /\A[A-Za-z0-9\.\-\_]+\z/

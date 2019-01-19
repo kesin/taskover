@@ -1,14 +1,14 @@
 - title '我的计划项'
 .row#plans-list
-  %template{'v-for' => 'plan in filterData'}
-    .col-md-3
-      %span.hidden.plan-sort{':sort' => 'plan.id'}
-      %a{':href' => 'plan.path'}
-        .bs-callout{':class' => 'plan.color_tag_class'}
-          %h4
-            {{plan.title}}
-          %p
-            {{plan.description}}
+  %draggable{':list' => "filterData", ':options' => "{ animation: 150 }", '@update' => 'updateSort'}
+    %plan-template{'v-for' => 'plan in filterData'}
+      .col-md-3
+        %a{':href' => 'plan.path'}
+          .bs-callout{':class' => 'plan.color_tag_class'}
+            %h4
+              {{plan.title}}
+            %p
+              {{plan.description}}
 
   .col-md-3{ 'v-show' => 'newPlanField' }
     .bs-callout.bs-callout-add#add-plan-field
@@ -101,11 +101,14 @@
           $('#title').css({'border-color':'#ccc'})
         }
         xhr.send( "plan[title]="+ this.plan.title + "&plan[description]=" + this.plan.description + "&plan[color_tag]=" + this.plan.color_tag )
+      },
+      updateSort: function() {
+        var updateSortUrl = '/p/update_sort.json'
+        var xhr = new XMLHttpRequest()
+        var sort = this.plans.map(function(item) {return item.id})
+        xhr.open("PUT", updateSortUrl)
+        xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded")
+        xhr.send( "sort=" + sort )
       }
     }
   })
-  var el = document.getElementById('plans-list');
-  Sortable.create(el, {
-    handle: '.bs-callout',
-    animation: 150
-  });

@@ -2,7 +2,7 @@ source 'https://gems.ruby-china.com'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.0.0'
+gem 'rails', '5.2.2'
 # Use mysql2 as the database for Active Record
 gem 'mysql2'
 # Use SCSS for stylesheets
@@ -48,7 +48,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'rspec-rails'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'database_cleaner'
   gem 'letter_opener'
 end
@@ -61,6 +61,5 @@ group :development do
   gem 'guard-livereload'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  gem 'rack-mini-profiler'
 end
 

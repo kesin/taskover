@@ -4,7 +4,10 @@ class PlansController < ApplicationController
 
   # GET /p.json
   def index
-    @plans = current_user.plans if json_request?
+    if json_request?
+      sort = current_user.plan_sort.sort
+      @plans = current_user.plans.sort_by{|e| sort.index(e.id)}
+    end
   end
 
   # GET /p/ScAJJIBl.json
@@ -29,6 +32,16 @@ class PlansController < ApplicationController
     end
   end
 
+  # PATCH/PUT /p/update_sort.json
+  def update_sort
+    plan_sort = current_user.plan_sort
+    plan_sort = current_user.build_plan_sort if plan_sort.nil?
+    plan_sort.sort = params[:sort].split(',').map(&:to_i)
+    unless plan_sort.save
+      render json: {status: 'failed', message: '更新失败，请稍后重试 !'}
+    end
+  end
+
   # PATCH/PUT /plans/1
   # PATCH/PUT /plans/1.json
   def update
@@ -42,6 +55,7 @@ class PlansController < ApplicationController
       end
     end
   end
+
 
   # DELETE /plans/1.json
   def destroy

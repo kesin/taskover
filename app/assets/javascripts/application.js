@@ -18,6 +18,7 @@
 //= require vue.min
 //= require vue-resource.min
 //= require Sortable.min
+//= require vuedraggable.min
 //= require plans
 //= require lists
 //= require tasks

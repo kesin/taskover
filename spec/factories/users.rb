@@ -22,7 +22,7 @@
 #  unconfirmed_email      :string(255)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :user do
     
   end
