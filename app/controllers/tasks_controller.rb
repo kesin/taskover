@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_plan_list, only: [:new, :create, :update]
-  before_action :set_task, only: [:update, :action, :destroy]
+  before_action :set_plan_list, only: [:new, :create, :update, :update_sort]
+  before_action :set_task, only: [:update, :destroy]
 
   # GET /tasks/new
   def new
@@ -19,25 +19,20 @@ class TasksController < ApplicationController
     end
   end
 
-  def action
-    case params[:type]
-      when 'close'
-        @task.close!
-      when 'open'
-        @task.open!
-      else
-        return redirect_to :back, notice: '更改状态失败!'
-    end
-    respond_to do |format|
-      format.html { redirect_to :back, notice: '更新任务状态成功!' }
-      format.json { render :show, status: :ok, location: @task }
-    end
-  end
-
   # PATCH/PUT /tasks/1.json
   def update
     unless @task.update(task_params)
       render json: {status: 'failed', message: '任务更新失败, 请稍后重试 !'}
+    end
+  end
+
+  # PATCH/PUT /tasks/update_sort.json
+  def update_sort
+    list_sort = @list.task_sort
+    list_sort = @list.build_task_sort if list_sort.nil?
+    list_sort.sort = params[:sort].split(',').map(&:to_i)
+    unless list_sort.save
+      render json: {status: 'failed', message: '更新失败，请稍后重试 !'}
     end
   end
 

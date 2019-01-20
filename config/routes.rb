@@ -18,8 +18,8 @@ Rails.application.routes.draw do
         put 'update_sort'
       end
       resources :tasks, only: [:new, :create, :update, :destroy] do
-        member do
-          put 'action'
+        collection do
+          put 'update_sort'
         end
       end
     end

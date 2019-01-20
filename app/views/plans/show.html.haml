@@ -305,6 +305,12 @@
               $currentTarget.closest('.task-field').find('.task-item, .task-operations').show()
             }
             notifyTop('任务更新成功 !')
+            if (item != 'edit'){
+              sort = $.merge(list.tasks.map(function(item) {return item.id}), list.over_tasks.map(function(item) {return item.id}))
+              xhr.open("PUT", list.path + '/tasks/update_sort.json')
+              xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded")
+              xhr.send('sort=' + sort)
+            }
           }
         }
         if (item == 'over') {

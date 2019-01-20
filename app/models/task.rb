@@ -31,18 +31,6 @@ class Task < ActiveRecord::Base
     self.status == 1
   end
 
-  def close!
-    self.transaction do
-      update_attributes(status: 0)
-    end
-  end
-
-  def open!
-    self.transaction do
-      update_attributes(status: 1)
-    end
-  end
-
   def add_sort
     task_sort = list.task_sort
     if task_sort.nil?
