@@ -237,65 +237,74 @@
       float: right;
     }
   }
-  .task-field{
-    line-height: 26px;
-    font-size: 14px;
-    position: relative;
-    .task-operations, .confirm-delete{
-      float: right;
-      display: inline;
-      position: absolute;
-      background-color: #fff;
-      border-radius: 5px;
-      box-shadow: 0px 0px 20px #fff;
-      padding: 0px 10px;
-      right: -20px;
-      top: 0px;
+  .task-lists {
+    padding: 10px 0;
+    .empty-holder {
+      &:after{
+        content: "暂无相关任务"
+      }
     }
-    .confirm-delete{
-      display: none;
-    }
-    .btn-xs{
-      font-size: 11px;
-      line-height: 1.2;
-      display: none;
-    }
-    .non-group{
-      color: #a5a5a5;
-      display: none;
-      cursor: pointer;
-    }
-    &:hover .btn-xs{
-      display: inline;
-    }
-    &:hover .non-group{
-      display: inline;
-    }
-    @keyframes closed-task{
-      0%   { width : 0; }
-      100% { width: 100%; }
-    }
-    .closed-task{
+    .task-field{
+      line-height: 26px;
+      font-size: 14px;
       position: relative;
-      font-style: italic;
-      color: #888888;
-    }
-    .closed-task:after {
-      content: ' ';
-      position: absolute;
-      top: 50%;
-      left: 5px;
-      width: 100%;
-      height: 1px;
-      background: #777777;
-      animation-name: closed-task;
-      animation-duration: 0.3s;
-      animation-timing-function: linear;
-      animation-iteration-count: 1;
-      animation-fill-mode: forwards;
-    }
-    .update-task{
-      display: none;
+      padding: 0px 20px;
+      .task-operations, .confirm-delete{
+        float: right;
+        display: inline;
+        position: absolute;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0px 0px 20px #fff;
+        padding: 0px 10px;
+        right: 5px;
+        top: 0px;
+      }
+      .confirm-delete{
+        display: none;
+      }
+      .btn-xs{
+        font-size: 11px;
+        line-height: 1.2;
+        display: none;
+      }
+      .non-group{
+        color: #a5a5a5;
+        display: none;
+        cursor: pointer;
+      }
+      &:hover .btn-xs{
+        display: inline;
+      }
+      &:hover .non-group{
+        display: inline;
+      }
+      @keyframes closed-task{
+        0%   { width : 0; }
+        100% { width: 100%; }
+      }
+      .closed-task{
+        position: relative;
+        font-style: italic;
+        color: #888888;
+      }
+      .closed-task:after {
+        content: ' ';
+        position: absolute;
+        top: 50%;
+        left: 5px;
+        width: 100%;
+        height: 1px;
+        background: #777777;
+        animation-name: closed-task;
+        animation-duration: 0.3s;
+        animation-timing-function: linear;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+      }
+      .update-task{
+        display: none;
+      }
     }
   }
 }
