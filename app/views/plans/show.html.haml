@@ -74,6 +74,8 @@
                     %i.icon-remove{'@click' => 'showConfirm'}
                   %button.btn.btn-primary.btn-xs{'v-on:click' => "updateTask('over')", 'v-show' => 'task.status == 1'}
                     over
+                  %button.btn.btn-xs{'v-on:click' => "updateTask('reopen')", 'v-show' => 'task.status == 0'}
+                    reopen
             %draggable{':list' => "list.over_tasks", ':options' => "{ animation: 150, group: 'over_tasks' }",
             '@end' => 'changeList', class: 'draggable-class'}
               .task-field{'v-for' => 'task in list.over_tasks', ':task_id'=> 'task.id', ':key'=> 'task.id'}
@@ -93,8 +95,10 @@
                     %i.icon-pencil
                   .non-group
                     %i.icon-remove{'@click' => 'showConfirm'}
-                  %button.btn.btn-primary.btn-xs{'v-on:click' => "updateTask('delete')", 'v-show' => 'task.status == 1'}
+                  %button.btn.btn-primary.btn-xs{'v-on:click' => "updateTask('over')", 'v-show' => 'task.status == 1'}
                     over
+                  %button.btn.btn-default.btn-xs{'v-on:click' => "updateTask('reopen')", 'v-show' => 'task.status == 0'}
+                    reopen
     .col-md-3#new_list_area{ 'v-show' => 'newListField' }
       #new_list_field
         = render 'lists/form'
@@ -135,8 +139,8 @@
             title: '',
             status: '',
             status_class: ''
-          }],
-        }],
+          }]
+        }]
       },
       list: {
         title: '',
@@ -250,28 +254,16 @@
         xhr.send()
         $(event.currentTarget).closest('.delete_list_modal').modal('hide')
       },
-      removeTask: function(index) {
+      removeTask: function(id) {
         var $currentTarget = $(event.currentTarget)
         var data = this.plan.lists
         var path = $currentTarget.closest('.task-field').find('#task_path').val()
-        var listPath = $(event.currentTarget).closest('.panel').find('#new_task_path').val()
-        for (var i = 0; i < data.length; i++){
-          if ( data[i].path == listPath ){
-            list = data[i]
-          }
-        }
+        var listId = $(event.currentTarget).closest('.col-md-3').attr('list_id')
+        list = handleItemById(data, listId, 'get')
         this.$http.delete(path).then(
           response => {
-            for (var i = 0; i < list.tasks.length; i++){
-              if ( list.tasks[i].id == index ){
-                list.tasks.splice(i, 1)
-              }
-            }
-            for (var i = 0; i < list.over_tasks.length; i++){
-              if ( list.over_tasks[i].id == index ){
-                list.over_tasks.splice(i, 1)
-              }
-            }
+            handleItemById(list.tasks, id, 'remove')
+            handleItemById(list.over_tasks, id, 'remove')
             $currentTarget.closest('.task-field').find('.task-operations').show()
             $currentTarget.closest('.confirm-delete').hide()
             notifyTop('任务删除成功!')
@@ -285,15 +277,11 @@
         var xhr = new XMLHttpRequest()
         var data = this.plan.lists
         var $currentTarget = $(event.currentTarget)
-        var listPath = $currentTarget.closest('.panel').find('#new_task_path').val()
+        var listId = $(event.currentTarget).closest('.col-md-3').attr('list_id')
         var path = $currentTarget.closest('.task-field').find('#task_path').val()
         var task_value = $currentTarget.closest('#edit_task').find('#task_title').val()
-        var list = false
-        for (var i = 0; i < data.length; i++){
-          if ( data[i].path == listPath ){
-            list = data[i]
-          }
-        }
+        var list = handleItemById(data, listId, 'get')
+        var task = false
         xhr.open("PUT", path + '.json')
         xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded")
         xhr.onload = function () {
@@ -301,14 +289,18 @@
           if (result.status == 'failed') {
             notifyTop(result.message, 'danger')
           } else {
-            for (var i = 0; i < list.tasks.length; i++){
-              if ( list.tasks[i].id == result.id ){
-                list.tasks.splice(i, 1)
-              }
+            task = handleItemById(list.tasks, result.id, 'get')
+            if (task == false){
+              task = handleItemById(list.over_tasks, result.id, 'get')
             }
-            list.over_tasks.unshift(result)
-            if (item != 'over') {
-              list.tasks[taskPos].title = task_value
+            if (item == 'over') {
+              list.tasks.splice($.inArray(task,list.tasks), 1)
+              list.over_tasks.unshift(result)
+            } else if ((item == 'reopen')) {
+              list.over_tasks.splice($.inArray(task,list.over_tasks), 1)
+              list.tasks.unshift(result)
+            } else {
+              task.title = task_value
               $currentTarget.closest('.update-task').hide()
               $currentTarget.closest('.task-field').find('.task-item, .task-operations').show()
             }
@@ -316,10 +308,13 @@
           }
         }
         if (item == 'over') {
-          xhr.send('task[status]=0')
+          urlParams = 'task[status]=0'
+        } else if (item == 'reopen') {
+          urlParams = 'task[status]=1'
         } else {
-          xhr.send('task[title]=' + task_value)
+          urlParams = 'task[title]=' + task_value
         }
+        xhr.send(urlParams)
       },
       addList: function () {
         var xhr = new XMLHttpRequest()
@@ -345,16 +340,12 @@
         var xhr = new XMLHttpRequest()
         var self = this
         var listPath = $(event.currentTarget).closest('#new_task').find('#new_task_path').val()
+        var listId = $(event.currentTarget).closest('.col-md-3').attr('list_id')
         var addTaskUrl = listPath + '/tasks.json'
         var taskInput = $(event.currentTarget).closest('#new_task').find('#task_title')
         var task = taskInput.val()
-        var list = false
         var data = self.plan.lists
-        for (var i = 0; i < data.length; i++){
-          if ( data[i].path == listPath ){
-            list = data[i]
-          }
-        }
+        var list = handleItemById(data, listId, 'get')
         if (task == ''){
           taskInput.css({'border-color':'#d9534f'})
           return notifyTop('任务名称不能为空', 'warning');
@@ -386,19 +377,11 @@
         var toListId = $(evt.to).closest('.col-md-3').attr('list_id')
         var fromListId = $(evt.from).closest('.col-md-3').attr('list_id')
         var taskId = $(evt.item).attr('task_id')
-        for (var i = 0; i < data.length; i++){
-          if ( data[i].id == toListId ){
-            toList = data[i]
-          }
-        }
+        toList = handleItemById(data, toListId, 'get')
         toSort = $.merge(toList.tasks.map(function(item) {return item.id}), toList.over_tasks.map(function(item) {return item.id}))
         params = 'to_sort=' + toSort + '&to_list_id=' + toListId + '&task_id=' + taskId
         if ( toListId != fromListId ){
-          for (var i = 0; i < data.length; i++){
-            if ( data[i].id == fromListId ){
-              fromList = data[i]
-            }
-          }
+          fromList = handleItemById(data, fromListId, 'get')
           fromSort = $.merge(fromList.tasks.map(function(item) {return item.id}), fromList.over_tasks.map(function(item) {return item.id}))
           params += '&from_sort=' + fromSort + '&from_list_id=' + fromListId
         }
@@ -407,7 +390,19 @@
         xhr.open("PUT", updateTaskSortUrl)
         xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded")
         xhr.send( params )
-        test = evt
       }
     }
   })
+  function handleItemById(data, id, action) {
+    var item = false
+    for (var i = 0; i < data.length; i++){
+      if ( data[i].id == id ){
+        if (action == 'get'){
+          item = data[i]
+        } else if (action == 'remove'){
+          data.splice(i, 1)
+        }
+      }
+    }
+    return item
+  }
