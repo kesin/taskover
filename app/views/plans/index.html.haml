@@ -1,14 +1,17 @@
 - title '我的计划项'
 .row#plans-list
-  %draggable{':list' => "filterData", ':options' => "{ animation: 150 }", '@update' => 'updateSort'}
-    .col-md-3{'v-for' => 'plan in filterData', ':key'=> 'plan.id'}
-      %a{':href' => 'plan.path'}
-        .bs-callout{':class' => 'plan.color_tag_class'}
-          %h4
-            {{plan.title}}
-          %p
-            {{plan.description}}
-
+  %draggable{':list' => "filterData", ':options' => "{ animation: 150, 'handle': '.plan-item' }", '@update' => 'updateSort'}
+    .col-md-3{'v-for' => 'plan in filterData', ':key'=> 'plan.ident'}
+      .plan-item{':value' => 'plan.path'}
+        %a{':href' => 'plan.path'}
+          .bs-callout{':class' => 'plan.color_tag_class'}
+            %h4
+              {{plan.title}}
+            %p
+              {{plan.description}}
+        %i.icon-pencil.has-tooltip.modify-plan{ title: '修改此计划项', 'v-on:click' => 'editPlan()' }
+      .bs-callout.edit-plan{':class' => 'plan.color_tag_class', ':value' => 'plan.color_tag'}
+        = render 'plans/edit_form'
   .col-md-3{ 'v-show' => 'newPlanField' }
     .bs-callout.bs-callout-add#add-plan-field
       = render 'plans/form'
@@ -30,11 +33,13 @@
         color_tag: 0
       },
       plans: [{
+        id: '',
+        ident: '',
+        title: '',
+        description: '',
         color_tag: '',
         color_tag_class: '',
-        description: '',
-        path: '',
-        title: ''
+        path: ''
       }],
       newPlanField: false,
       colorFilter: ''
@@ -78,8 +83,51 @@
       cancelPlan: function () {
         this.newPlanField = false
       },
-      selectColor: function (color){
-        $('#add-plan-field').css({'border-left-color':color})
+      editPlan: function () {
+        $(event.currentTarget).closest('.col-md-3').find('.plan-item').hide()
+        $(event.currentTarget).closest('.col-md-3').find('.edit-plan').show()
+      },
+      cancelEdit: function () {
+        $(event.currentTarget).closest('.edit-plan').hide()
+        $(event.currentTarget).closest('.col-md-3').find('.plan-item').show()
+      },
+      selectColor: function (color, action){
+        var fieldBorder;
+        if (action == 'new') {
+          fieldBorder = $('#add-plan-field')
+        }else{
+          fieldBorder = $(event.currentTarget).closest('.edit-plan')
+          evt = $(event.currentTarget)
+          evt.closest('.edit-plan').attr('value', evt.attr('value'))
+        }
+        fieldBorder.css({'border-left-color':color})
+      },
+      submitEditPlan: function(ident) {
+        var xhr = new XMLHttpRequest()
+        var titleInput = $(event.currentTarget).closest('.plan').find('.edit-plan-title').val()
+        var self = this
+        evt = $(event.currentTarget)
+        if (titleInput == ''){
+          return notifyTop('计划项名称不能为空', 'warning');
+        }
+        var titleDesc = $(event.currentTarget).closest('.plan').find('.edit-plan-description').val()
+        var colorTag = evt.closest('.edit-plan').attr('value')
+
+        var url = '/p/' + ident + '.json'
+        xhr.open("PUT", url)
+        xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded")
+        xhr.onload = function () {
+          result = JSON.parse(xhr.responseText)
+          evt.closest('.col-md-3').find('.plan-item').show()
+          evt.closest('.edit-plan').hide()
+          notifyTop('计划项修改成功!')
+          for (var i = 0; i < self.plans.length; i++){
+            if ( self.plans[i].ident == ident ){
+              self.plans.splice(i,1,result)
+            }
+          }
+        }
+        xhr.send( "plan[title]="+ titleInput + "&plan[description]=" + titleDesc + "&plan[color_tag]=" + colorTag )
       },
       addPlan: function () {
         var xhr = new XMLHttpRequest()

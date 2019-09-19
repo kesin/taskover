@@ -87,6 +87,68 @@
   }
 }
 
+#plans-list {
+  .modify-plan {
+    position: absolute;
+    top: 30px;
+    right: 25px;
+    cursor: pointer;
+    padding: 5px;
+    display: none;
+  }
+  .plan-item {
+    &:hover .modify-plan {
+      display: inline;
+    }
+  }
+  .edit-plan {
+    display: none;
+    background-color: #f9f9f9;
+    padding: 10px;
+    .edit-plan-buttons {
+      display: inline;
+      float: right;
+      a {
+        cursor: pointer;
+        &:hover {
+          background-color: #f9f9f9;
+        }
+      }
+      .cancel {
+        color: #b9b9b9;
+        margin-right: 10px;
+        &:hover {
+          color: #a7a7a7;
+        }
+      }
+      .update {
+        color: #49bcb5;
+        &:hover {
+          color: #44a8a1;
+        }
+      }
+    }
+    .mini-input {
+      border: none;
+      border-bottom: 1px solid #e8e8e8;
+      border-radius: 0;
+      padding: 0;
+      height: 20px;
+      box-shadow: none;
+      background-color: #f9f9f9;
+    }
+    .color-select-feild {
+      .selected-radio {
+        & + label {
+          padding: 7px;
+          margin-bottom: 0;
+          margin-right: 2px;
+        }
+      }
+    }
+  }
+}
+
 #plan-page-content{
   .col-md-3{
 
@@ -240,6 +302,7 @@
   .task-lists {
     padding: 10px 0;
     .empty-holder {
+      padding: 0px 20px;
       &:after{
         content: "暂无相关任务"
       }

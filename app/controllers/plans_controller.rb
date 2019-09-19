@@ -67,14 +67,8 @@ class PlansController < ApplicationController
   # PATCH/PUT /plans/1
   # PATCH/PUT /plans/1.json
   def update
-    respond_to do |format|
-      if @plan.update(plan_params)
-        format.html { redirect_to root_url, notice: '计划项已经更新 !' }
-        format.json { render :show, status: :ok, location: @plan }
-      else
-        format.html { render :edit }
-        format.json { render json: @plan.errors, status: :unprocessable_entity }
-      end
+    unless @plan.update(plan_params)
+      render json: {status: 'failed', message: '更新失败，请稍后重试 !'}
     end
   end
 
