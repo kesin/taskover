@@ -277,6 +277,44 @@
       padding: 3px;
     }
   }
+  .edit-list-area {
+    display: none;
+  }
+  #edit_list {
+    .edit-list-buttons {
+      float: right;
+      a {
+        cursor: pointer;
+        font-weight: normal;
+        &:hover {
+          background: none;
+        }
+      }
+      .cancel {
+        color: #b9b9b9;
+        &:hover {
+          color: #a7a7a7;
+        }
+      }
+      .update {
+        color: #49bcb5;
+        &:hover {
+          color: #44a8a1;
+        }
+      }
+    }
+    .selected-radio{
+      & + label {
+        padding: 8px;
+      }
+      &:checked + label:after {
+        width: 22px;
+        height: 22px;
+        left: -3px;
+        top: -3px;
+      }
+    }
+  }
   .add-task-field, .update-task{
     display: none;
     height: 100px;

@@ -13,7 +13,7 @@
             %span{'aria-hidden' => 'true'}
               %i.icon-remove
           %h4.modal-title
-            确认删除 {{plan.title}} ？
+            确认删除 「{{plan.title}}」 ？
         .modal-body
           所属的任务组和任务都会被删除，且无法恢复，请谨慎操作。
         .modal-footer
@@ -24,16 +24,21 @@
   .row#list-content
     %draggable{':list' => "filterListData", ':options' => "{ animation: 150, handle: '.panel-heading' }", '@update' => 'updateListSort', class: 'draggable-class'}
       .col-md-3{'v-for' => 'list in filterListData', ':list_id' => 'list.id', ':key'=> 'list.id'}
-        .panel{':class' => 'list.color_tag_class'}
+        .panel.list-item{':class' => 'list.color_tag_class', ':value' => 'list.color_tag'}
           .panel-heading
-            %span
-              {{list.title}}
-            .list-operations
-              .list-limit-operations
-                %i.icon-trash{title: '删除此任务组', 'v-on:click' => 'deleteListModal', 'data-toggle' => 'tooltip',
-                              'data-placement' => 'left', onmouseover: "$(this).tooltip('show')"}
-              %i.icon-plus.add-task-plus{title: '添加任务', 'v-on:click' => 'newTask', 'data-toggle' => 'tooltip',
-                                         'data-placement' => 'left', onmouseover: "$(this).tooltip('show')"}
+            .list-title-area
+              %span
+                {{list.title}}
+              .list-operations
+                .list-limit-operations
+                  %i.icon-pencil{title: '编辑', 'v-on:click' => 'editList()', 'data-toggle' => 'tooltip',
+                                'data-placement' => 'left', onmouseover: "$(this).tooltip('show')"}
+                  %i.icon-trash{title: '删除此任务组', 'v-on:click' => 'deleteListModal', 'data-toggle' => 'tooltip',
+                                'data-placement' => 'left', onmouseover: "$(this).tooltip('show')"}
+                %i.icon-plus.add-task-plus{title: '添加任务', 'v-on:click' => 'newTask', 'data-toggle' => 'tooltip',
+                                           'data-placement' => 'left', onmouseover: "$(this).tooltip('show')"}
+            .edit-list-area
+              = render 'lists/edit_form'
             .delete_list_modal.modal.fade{'aria-hidden' => 'true', :role => 'dialog', :tabindex => '-1'}
               .modal-dialog
                 .modal-content
@@ -42,7 +47,7 @@
                       %span{'aria-hidden' => 'true'}
                         %i.icon-remove
                     %h4.modal-title
-                      确认删除 {{list.title}} ？
+                      确认删除 「{{list.title}}」 ？
                   .modal-body
                     所属的任务都会被删除，且无法恢复，请谨慎操作。
                   .modal-footer
@@ -193,6 +198,14 @@
       cancelList: function () {
         this.newListField = false
       },
+      editList: function () {
+        $(event.currentTarget).closest('.list-title-area').hide()
+        $(event.currentTarget).closest('.panel-heading').find('.edit-list-area').show()
+      },
+      cancelEditList: function () {
+        $(event.currentTarget).closest('.edit-list-area').hide()
+        $(event.currentTarget).closest('.panel-heading').find('.list-title-area').show()
+      },
       newTask: function () {
         $(event.currentTarget).closest('.panel').find('.add-task-field').show()
       },
@@ -217,8 +230,16 @@
         $(event.currentTarget).closest('.update-task').hide()
         $(event.currentTarget).closest('.task-field').find('.task-item, .task-operations').show()
       },
-      selectColor: function (color){
-        $('#new_list_field').css({'border-top-color':color})
+      selectColor: function (color, action){
+        var fieldBorder;
+        if (action == 'new') {
+          fieldBorder = $('#new_list_field')
+        }else{
+          evt = $(event.currentTarget)
+          fieldBorder = evt.closest('.list-item')
+          evt.closest('.list-item').attr('value', evt.attr('value'))
+        }
+        fieldBorder.css({'border-top-color': color})
       },
       deletePlan: function() {
         var xhr = new XMLHttpRequest()
@@ -321,6 +342,33 @@
           urlParams = 'task[title]=' + task_value
         }
         xhr.send(urlParams)
+      },
+      submitEditList: function(id) {
+        var xhr = new XMLHttpRequest()
+        evt = $(event.currentTarget)
+        var titleInput = evt.closest('#edit_list').find('#list_title').val()
+        var self = this
+        if (titleInput == ''){
+          return notifyTop('任务组名称不能为空', 'warning');
+        }
+        var colorTag = evt.closest('.list-item').attr('value')
+        var url = evt.closest('.panel').find('#new_task_path').val() + '.json'
+        xhr.open("PUT", url)
+        xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded")
+        xhr.onload = function () {
+          result = JSON.parse(xhr.responseText)
+          evt.closest('.edit-list-area').hide()
+          evt.closest('.panel-heading').find('.list-title-area').show()
+          notifyTop('任务组修改成功!')
+          for (var i = 0; i < self.plan.lists.length; i++){
+            if ( self.plan.lists[i].id == id ){
+              self.plan.lists[i].title = result.title
+              self.plan.lists[i].color_tag = result.color_tag
+              self.plan.lists[i].color_tag_class = result.color_tag_class
+            }
+          }
+        }
+        xhr.send( "list[title]="+ titleInput + "&list[color_tag]=" + colorTag )
       },
       addList: function () {
         var xhr = new XMLHttpRequest()

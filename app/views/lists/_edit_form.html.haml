@@ -1,0 +1,12 @@
+.form.form-horizontal.plan#edit_list
+  .field
+    = text_field_tag :list_title, nil, class: 'form-control', required: true, placeholder: '名称',
+                     'v-model' => 'list.title'
+  .field
+    .color-select-feild
+      = collection_radio_buttons :edit_list_color_tag, nil, options_for_color, :last, :first do |b|
+        = b.radio_button({class: 'color-radio selected-radio', 'v-model' => 'list.color_tag'})
+        = label_tag '', '', style: "background-color: #{b.text}", 'v-on:click' => "selectColor('#{b.text}', 'edit')", value: b.value
+      .edit-list-buttons
+        %a.cancel{'v-on:click' => 'cancelEditList()'} 取消
+        %a.update{'v-on:click' => 'submitEditList(list.id)'} 更新

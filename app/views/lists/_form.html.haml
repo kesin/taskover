@@ -6,4 +6,4 @@
     .color-select-feild
       = collection_radio_buttons :list_color_tag, nil, options_for_color, :last, :first do |b|
         = b.radio_button({class: 'color-radio selected-radio', 'v-model' => 'list.color_tag'})
-        = label_tag "list_color_tag__#{b.value}", '', style: "background-color: #{b.text}", 'v-on:click' => "selectColor('#{b.text}')"
+        = label_tag "list_color_tag__#{b.value}", '', style: "background-color: #{b.text}", 'v-on:click' => "selectColor('#{b.text}', 'new')"

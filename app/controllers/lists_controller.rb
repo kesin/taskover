@@ -1,6 +1,6 @@
 class ListsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_plan, only: [:new, :create, :update_sort]
+  before_action :set_plan, only: [:new, :create, :update_sort, :update]
   before_action :set_list, only: [:update, :destroy]
 
   # GET /lists/new
@@ -21,14 +21,8 @@ class ListsController < ApplicationController
   # PATCH/PUT /lists/1
   # PATCH/PUT /lists/1.json
   def update
-    respond_to do |format|
-      if @list.update(list_params)
-        format.html { redirect_to @list, notice: '列表已经成功更新!' }
-        format.json { render :show, status: :ok, location: @list }
-      else
-        format.html { render :edit }
-        format.json { render json: @list.errors, status: :unprocessable_entity }
-      end
+    unless @list.update(list_params)
+      render json: {status: 'failed', message: '更新失败，请稍后重试 !'}
     end
   end
 
