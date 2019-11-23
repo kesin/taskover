@@ -35,6 +35,9 @@
           background-color: transparent;
         }
       }
+      &:last-child{
+        margin-top: 10px;
+      }
     }
   }
   .index-reg{
@@ -79,7 +82,7 @@
   }
 }
 
-.demo-first{
+.demo-first, .demo-third{
   background-color: #f7f7f7;
 }
 .home-footer{
