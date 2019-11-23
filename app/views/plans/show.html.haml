@@ -22,7 +22,7 @@
 
 .page-content#plan-page-content
   .row#list-content
-    %draggable{':list' => "filterListData", ':options' => "{ animation: 150, handle: '.panel-heading' }", '@update' => 'updateListSort', class: 'draggable-class'}
+    %draggable{':list' => "filterListData", ':options' => "{ animation: 150, handle: '.list-title-area' }", '@update' => 'updateListSort', class: 'draggable-class'}
       .col-md-3{'v-for' => 'list in filterListData', ':list_id' => 'list.id', ':key'=> 'list.id'}
         .panel.list-item{':class' => 'list.color_tag_class', ':value' => 'list.color_tag'}
           .panel-heading
@@ -57,13 +57,13 @@
           .panel-body.task-lists
             .add-task-field
               = render 'tasks/form', type: 'new'
-            %draggable{':list' => "list.tasks", ':options' => "{ animation: 150, group: 'tasks', ghostClass: 'on-holder' }",
+            %draggable{':list' => "list.tasks", ':options' => "{ animation: 150, group: 'tasks', ghostClass: 'on-holder', handle: '.task-item' }",
             '@end' => 'changeList', 'v-bind:class' => "{ 'empty-holder': list.tasks.length + list.over_tasks.length == 0}"}
               .task-field{'v-for' => 'task in list.tasks', ':task_id'=> 'task.id', ':key'=> 'task.id'}
                 .update-task
                   = hidden_field_tag :task_value, '{{task.title}}', 'v-model' => 'task.title'
                   = render 'tasks/form', type: 'edit'
-                %span.task-item{':class' => 'task.status_class'}
+                .task-item{':class' => 'task.status_class'}
                   {{task.title}}
                 .confirm-delete
                   %button.btn.btn-danger.btn-xs{'v-on:click' => 'removeTask(task.id)'}

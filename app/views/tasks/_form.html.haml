@@ -2,7 +2,7 @@
 .form.form-horizontal.plan{id: new_form ? 'new_task' : 'edit_task'}
   .field
     = text_field_tag :task_title, nil, class: 'form-control', required: true, placeholder: '任务名称',
-                     'v-on:keyup.enter' => 'addTask'
+                     'v-on:keypress.enter' => new_form ? 'addTask' : "updateTask('edit')"
     = hidden_field_tag :new_task_path, nil, 'v-model' => 'list.path'
   %span.enter-notice
     可按回车(Enter)提交
