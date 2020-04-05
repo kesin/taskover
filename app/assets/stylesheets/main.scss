@@ -131,11 +131,14 @@
 .bs-callout h4 {
   margin-top: 0;
   margin-bottom: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .bs-callout p:last-child {
   padding-top: 5px;
   margin-bottom: 0;
-  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .bs-callout code {
   border-radius: 3px;
