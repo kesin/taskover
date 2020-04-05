@@ -31,13 +31,13 @@
 
 #### 使用
 
-项目基于 `Ruby 2.3.1` 及以上
+项目基于 `Ruby 2.3.8` 及以上
 
 1. git clone https://gitee.com/kesin/taskover
-2. bundle install
-3. cp database.yml.example database.yml  #修改数据库配置
-4. cp puma.rb.example puma.rb
-5. cd taskover
+2. cd taskover
+3. bundle install
+4. cp database.yml.example database.yml  #修改数据库配置
+5. cp puma.rb.example puma.rb
 6. bundle exec rake db:migrate
 7. cp development.rb.example development.rb
 8. bundle exec puma
